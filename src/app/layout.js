@@ -16,12 +16,17 @@ export default function Layout({ children }) {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"></link>
       </head>
       <body className="min-h-full flex flex-col">
-        <Image src={`/images/logo.png`} width={253} height={33} alt="Logo Abricot" />
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-        </nav>
+        <header>
+          <Image src={`/images/logo.png`} width={253} height={33} alt="Logo Abricot" loading="eager" />
+          <nav>
+            <Link className="underline mr-4" href="/">Tableau de bord</Link>
+            <Link className="underline mr-4" href="/projects">Projets</Link>
+            <Link className="underline mr-4" href="/account">Mon compte</Link>
+          </nav>
+          <hr />
+        </header>
         {children}
+        <footer><hr />Made with &hearts; by Abricot &copy; 2026</footer>
       </body>
     </html>
   );
