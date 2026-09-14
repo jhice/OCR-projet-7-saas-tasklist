@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abricot – Connexion</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#d3590b",
+              dark: "#b0480a",
+            },
+            ink: "#1f1f1f",
+          },
+          fontFamily: {
+            heading: ['"Manrope"', "Arial", "sans-serif"],
+            sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body class="bg-gray-50 text-ink">
+  <div class="auth-shell">
+    <!-- Panneau formulaire -->
+    <div class="auth-panel px-8 py-10 sm:px-16 sm:py-12">
+      <header>
+        <img src="assets/images/logo.png" alt="Logo Abricot" width="253" height="33" class="h-9 w-auto" />
+      </header>
+
+      <main class="flex flex-1 flex-col justify-center py-12">
+        <div class="mx-auto w-full max-w-xs">
+          <h1 class="font-heading text-4xl font-bold text-brand text-center mb-8">Connexion</h1>
+
+          <form class="space-y-6">
+            <div>
+              <label for="email" class="auth-label">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required class="auth-input" />
+            </div>
+
+            <div>
+              <label for="password" class="auth-label">Mot de passe</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required class="auth-input" />
+            </div>
+
+            <div class="flex flex-col items-center gap-4 pt-2">
+              <button type="submit" class="auth-button">Se connecter</button>
+              <a href="#" class="auth-link text-sm">Mot de passe oublié?</a>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <footer class="text-center text-sm text-gray-700">
+        Pas encore de compte&nbsp;? <a href="sign-in.html" class="auth-link">Créer un compte</a>
+      </footer>
+    </div>
+
+    <!-- Panneau photo -->
+    <div class="auth-photo">
+      <img src="assets/images/auth-login.jpg" alt="" />
+    </div>
+  </div>
+</body>
+</html>
