@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abricot – Nom du projet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#d3590b",
+              dark: "#b0480a",
+              100: "#ffe8d9",
+            },
+            ink: "#1f1f1f",
+            todo: { bg: "#ffe0e0", text: "#ef4444" },
+            progress: { bg: "#fff0d7", text: "#e8a636" },
+            done: { bg: "#f1fff7", text: "#28ae73" },
+          },
+          fontFamily: {
+            heading: ['"Manrope"', "Arial", "sans-serif"],
+            sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body class="app-shell text-ink">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a href="dashboard.html" class="app-logo">
+        <img src="assets/images/logo.png" alt="Logo Abricot" width="253" height="33" class="h-6 w-auto" />
+      </a>
+
+      <nav class="app-nav">
+        <a href="dashboard.html" class="nav-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+            <path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM11 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V4zM3 11a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H4a1 1 0 01-1-1v-5zM11 9a1 1 0 00-1 1v6a1 1 0 001 1h4a1 1 0 001-1v-6a1 1 0 00-1-1h-4z" />
+          </svg>
+          Tableau de bord
+        </a>
+        <a href="projects.html" class="nav-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+            <path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+          </svg>
+          Projets
+        </a>
+      </nav>
+
+      <a href="account.html" class="avatar">AD</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-1">
+    <div class="page-container">
+      <!-- En-tête projet -->
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div class="flex items-start gap-4">
+          <a href="projects.html" class="icon-btn shrink-0" aria-label="Retour aux projets">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+              <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h1 class="font-heading text-2xl font-bold text-ink">Nom du projet</h1>
+              <a href="#" class="auth-link text-sm">Modifier</a>
+            </div>
+            <p class="mt-2 text-gray-500">Développement de la nouvelle version de l'API REST avec authentification JWT</p>
+          </div>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-3">
+          <a href="task.html" class="btn-dark">Créer une tâche</a>
+          <button type="button" class="btn-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+              <path d="M10 2c.4 2.4 1.5 3.9 4 4.3-2.5.4-3.6 1.9-4 4.3-.4-2.4-1.5-3.9-4-4.3 2.5-.4 3.6-1.9 4-4.3z" />
+              <path d="M15.5 12c.24 1.36.86 2.2 2.3 2.43-1.44.23-2.06 1.07-2.3 2.43-.24-1.36-.86-2.2-2.3-2.43 1.44-.23 2.06-1.07 2.3-2.43z" />
+            </svg>
+            IA
+          </button>
+        </div>
+      </div>
+
+      <!-- Contributeurs -->
+      <div class="contributors-panel mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <span class="font-semibold text-ink">Contributeurs</span>
+          <span class="ml-2 text-sm text-gray-500">3 personnes</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center">
+            <span class="avatar-sm brand">AD</span>
+            <span class="name-pill brand">Propriétaire</span>
+          </span>
+          <span class="inline-flex items-center">
+            <span class="avatar-sm">BD</span>
+            <span class="name-pill">Bertrand Dupont</span>
+          </span>
+          <span class="inline-flex items-center">
+            <span class="avatar-sm">AD</span>
+            <span class="name-pill">Anne Dupont</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Tâches -->
+      <section class="panel mt-6 p-6 sm:p-8">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-ink">Tâches</h2>
+            <p class="text-sm text-gray-500">Par ordre de priorité</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="segmented" role="tablist">
+              <button type="button" class="segmented-btn active" role="tab" aria-selected="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                </svg>
+                Liste
+              </button>
+              <button type="button" class="segmented-btn" role="tab" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clip-rule="evenodd" />
+                </svg>
+                Calendrier
+              </button>
+            </div>
+
+            <div class="select-wrap">
+              <select class="select-field">
+                <option value="">Statut</option>
+                <option value="todo">À faire</option>
+                <option value="progress">En cours</option>
+                <option value="done">Terminée</option>
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="select-caret h-4 w-4">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
+              </svg>
+            </div>
+
+            <div class="search-input-wrap w-full sm:w-64">
+              <input type="search" placeholder="Rechercher une tâche" class="search-input" />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="search-icon h-4 w-4">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-4">
+          <!-- Tâche (répétée) -->
+          <article class="task-card">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="font-semibold text-ink">Authentification JWT</h3>
+                  <span class="badge badge-todo">À faire</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
+              </div>
+              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="task-meta mt-4">
+              <span>Échéance :</span>
+              <span class="task-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clip-rule="evenodd" /></svg>
+                9 mars
+              </span>
+            </div>
+
+            <div class="task-meta mt-3">
+              <span>Assigné à :</span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">BD</span>
+                <span class="name-pill">Bertrand Dupont</span>
+              </span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">AD</span>
+                <span class="name-pill">Anne Dupont</span>
+              </span>
+            </div>
+
+            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
+              Commentaires (1)
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
+                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="font-semibold text-ink">Authentification JWT</h3>
+                  <span class="badge badge-progress">En cours</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
+              </div>
+              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="task-meta mt-4">
+              <span>Échéance :</span>
+              <span class="task-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clip-rule="evenodd" /></svg>
+                9 mars
+              </span>
+            </div>
+
+            <div class="task-meta mt-3">
+              <span>Assigné à :</span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">BD</span>
+                <span class="name-pill">Bertrand Dupont</span>
+              </span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">AD</span>
+                <span class="name-pill">Anne Dupont</span>
+              </span>
+            </div>
+
+            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
+              Commentaires (1)
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
+                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="font-semibold text-ink">Authentification JWT</h3>
+                  <span class="badge badge-done">Terminée</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
+              </div>
+              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="task-meta mt-4">
+              <span>Échéance :</span>
+              <span class="task-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clip-rule="evenodd" /></svg>
+                9 mars
+              </span>
+            </div>
+
+            <div class="task-meta mt-3">
+              <span>Assigné à :</span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">BD</span>
+                <span class="name-pill">Bertrand Dupont</span>
+              </span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">AD</span>
+                <span class="name-pill">Anne Dupont</span>
+              </span>
+            </div>
+
+            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
+              Commentaires (1)
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
+                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="font-semibold text-ink">Authentification JWT</h3>
+                  <span class="badge badge-todo">À faire</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
+              </div>
+              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="task-meta mt-4">
+              <span>Échéance :</span>
+              <span class="task-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clip-rule="evenodd" /></svg>
+                9 mars
+              </span>
+            </div>
+
+            <div class="task-meta mt-3">
+              <span>Assigné à :</span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">BD</span>
+                <span class="name-pill">Bertrand Dupont</span>
+              </span>
+              <span class="inline-flex items-center">
+                <span class="avatar-sm">AD</span>
+                <span class="name-pill">Anne Dupont</span>
+              </span>
+            </div>
+
+            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
+              Commentaires (1)
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
+                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="app-footer-inner">
+      <img src="assets/images/logo-black.png" alt="Logo Abricot" width="253" height="33" class="h-4 w-auto" />
+      <span>Abricot 2025</span>
+    </div>
+  </footer>
+</body>
+</html>
