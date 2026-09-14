@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abricot – Mon compte</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#d3590b",
+              dark: "#b0480a",
+              100: "#ffe8d9",
+            },
+            ink: "#1f1f1f",
+            todo: { bg: "#ffe0e0", text: "#ef4444" },
+            progress: { bg: "#fff0d7", text: "#e8a636" },
+            done: { bg: "#f1fff7", text: "#28ae73" },
+          },
+          fontFamily: {
+            heading: ['"Manrope"', "Arial", "sans-serif"],
+            sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body class="app-shell text-ink">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a href="dashboard.html" class="app-logo">
+        <img src="assets/images/logo.png" alt="Logo Abricot" width="253" height="33" class="h-6 w-auto" />
+      </a>
+
+      <nav class="app-nav">
+        <a href="dashboard.html" class="nav-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+            <path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM11 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V4zM3 11a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H4a1 1 0 01-1-1v-5zM11 9a1 1 0 00-1 1v6a1 1 0 001 1h4a1 1 0 001-1v-6a1 1 0 00-1-1h-4z" />
+          </svg>
+          Tableau de bord
+        </a>
+        <a href="projects.html" class="nav-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+            <path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+          </svg>
+          Projets
+        </a>
+      </nav>
+
+      <a href="account.html" class="avatar active">AD</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-1">
+    <div class="page-container">
+      <section class="panel p-6 sm:p-10">
+        <h1 class="font-heading text-2xl font-bold text-ink">Mon compte</h1>
+        <p class="mt-1 text-gray-500">Amélie Dupont</p>
+
+        <form class="mt-8 flex max-w-2xl flex-col gap-6">
+          <div>
+            <label for="lastname" class="auth-label">Nom</label>
+            <input id="lastname" name="lastname" type="text" placeholder="Amélie" class="auth-input" />
+          </div>
+
+          <div>
+            <label for="firstname" class="auth-label">Prénom</label>
+            <input id="firstname" name="firstname" type="text" placeholder="Amélie" class="auth-input" />
+          </div>
+
+          <div>
+            <label for="email" class="auth-label">Email</label>
+            <input id="email" name="email" type="email" placeholder="a.dupont@mail.com" class="auth-input" />
+          </div>
+
+          <div>
+            <label for="password" class="auth-label">Mot de passe</label>
+            <input id="password" name="password" type="password" placeholder="••••••••••" class="auth-input" />
+          </div>
+
+          <div>
+            <button type="submit" class="btn-dark">Modifier les informations</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="app-footer-inner">
+      <img src="assets/images/logo-black.png" alt="Logo Abricot" width="253" height="33" class="h-4 w-auto" />
+      <span>Abricot 2025</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -71,7 +71,7 @@
           <h1 class="font-heading text-3xl font-bold text-ink">Mes projets</h1>
           <p class="mt-2 text-gray-500">Gérez vos projets</p>
         </div>
-        <button type="button" class="btn-dark">
+        <button type="button" class="btn-dark" data-modal-open="modal-create-project">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
             <path d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z" />
           </svg>
@@ -390,5 +390,68 @@
       <span>Abricot 2025</span>
     </div>
   </footer>
+
+  <!-- Modale : créer un projet -->
+  <dialog id="modal-create-project" class="modal-card">
+    <div class="relative p-6 sm:p-8">
+      <button type="button" class="absolute right-5 top-5 text-gray-400 hover:text-gray-600" data-modal-close aria-label="Fermer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+        </svg>
+      </button>
+
+      <h2 class="font-heading text-2xl font-bold text-ink">Créer un projet</h2>
+
+      <form class="mt-6 flex flex-col gap-6">
+        <div>
+          <label for="cp-title" class="auth-label">Titre*</label>
+          <input id="cp-title" name="title" type="text" required autofocus class="auth-input" />
+        </div>
+
+        <div>
+          <label for="cp-desc" class="auth-label">Description*</label>
+          <textarea id="cp-desc" name="description" rows="2" required class="auth-input"></textarea>
+        </div>
+
+        <div>
+          <label class="auth-label">Contributeurs</label>
+          <div class="search-input-wrap">
+            <button type="button" class="search-input w-full text-left text-gray-400">Choisir un ou plusieurs collaborateurs</button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="search-icon h-4 w-4">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-dark" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+            <path d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z" />
+          </svg>
+          Ajouter un projet
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    document.querySelectorAll("[data-modal-open]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const dialog = document.getElementById(trigger.dataset.modalOpen);
+        if (dialog) dialog.showModal();
+      });
+    });
+
+    document.querySelectorAll("[data-modal-close]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.closest("dialog").close();
+      });
+    });
+
+    document.querySelectorAll("dialog.modal-card").forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    });
+  </script>
 </body>
 </html>
