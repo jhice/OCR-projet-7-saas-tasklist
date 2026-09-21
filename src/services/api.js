@@ -1,7 +1,7 @@
 // Couche réseau, sans React : utilisable depuis un hook comme depuis un
 // gestionnaire d'évènement (Login), un loader de route, un test, etc.
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:8000";
 
 /**
  * Appel HTTP générique.
@@ -67,16 +67,9 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
 // Fonctions dédiées par endpoint : le reste de l'app ne manipule plus d'URL.
 
 export function login(credentials) {
-  return request("/api/login", { method: "POST", body: credentials });
+  return request("/auth/login", { method: "POST", body: credentials });
 }
 
 export function getUserInfo(token) {
-  return request("/api/user-info", { token });
+  return request("/auth/profile", { token });
 }
-
-// export function getUserActivity({ startWeek, endWeek, token }) {
-//   return request(
-//     `/api/user-activity?startWeek=${startWeek}&endWeek=${endWeek}`,
-//     { token }
-//   );
-// }
