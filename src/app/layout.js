@@ -32,10 +32,13 @@ export default function Layout({ children }) {
             <Link className="underline mr-4" href="/projects">Projets</Link>
             <Link className="underline mr-4" href="/account">Mon compte</Link>
             <Link className="underline mr-4" href="/login">Connexion</Link>
+            <Link className="underline mr-4" href="/register">Inscription</Link>
           </nav>
           <hr />
         </header>
-        <LoginProvider>{children}</LoginProvider>
+        <LoginProvider>
+          {children}
+        </LoginProvider>
         <footer><hr />Made with &hearts; by Abricot &copy; 2026</footer>
       </body>
     </html>

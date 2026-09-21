@@ -15,3 +15,7 @@
   - ~~ne pas mettre en place / à voir à lier avec une API IA~~
 - voir une tâche = modifier une tâche ?
   - pas plus d'infos à afficher que sur le widget, pas de maquette pour "afficher"
+
+## Todo
+
+- register : gérer si user déjà existant (voir api.js)

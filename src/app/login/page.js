@@ -1,4 +1,4 @@
-import LoginForm from "./LoginForm/LoginForm";
+import LoginForm from "../ui/login-form";
 
 export const metadata = {
   title: "Connexion",

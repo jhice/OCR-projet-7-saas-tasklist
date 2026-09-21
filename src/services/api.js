@@ -66,6 +66,10 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
 
 // Fonctions dédiées par endpoint : le reste de l'app ne manipule plus d'URL.
 
+export function register(credentials) {
+  return request("/auth/register", { method: "POST", body: credentials });
+}
+
 export function login(credentials) {
   return request("/auth/login", { method: "POST", body: credentials });
 }
