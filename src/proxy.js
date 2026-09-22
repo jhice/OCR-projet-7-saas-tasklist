@@ -21,7 +21,7 @@ export default async function proxy(req) {
     return NextResponse.redirect(new URL('/login', req.nextUrl))
   }
 
-  // 6. Redirect to /dashboard if the user is authenticated
+  // 6. Redirect to / if the user is authenticated
   if (
     isPublicRoute &&
     session?.userId &&

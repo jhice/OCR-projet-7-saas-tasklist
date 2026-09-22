@@ -2,7 +2,7 @@
 
 import { createContext, useEffect } from "react";
 import useToken from "../hooks/useToken";
-import { getUserInfo } from "./api";
+import { authProfile } from "./api";
 
 const LoginContext = createContext();
 
@@ -17,7 +17,7 @@ const LoginProvider = ({ children }) => {
         console.log("token existant", token);
         if (!token) return undefined;
         // let cancelled = false;
-        getUserInfo(token)
+        authProfile(token)
             .then((data) => {
                 // if (cancelled) return;
                 // setProfile({

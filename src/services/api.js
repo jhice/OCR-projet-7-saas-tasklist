@@ -74,6 +74,6 @@ export function login(credentials) {
   return request("/auth/login", { method: "POST", body: credentials });
 }
 
-export function getUserInfo(token) {
+export function authProfile(token) {
   return request("/auth/profile", { token });
 }
