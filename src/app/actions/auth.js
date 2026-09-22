@@ -27,7 +27,7 @@ export async function signup(state, formData) {
     "name": formData.get('name'),
   });
 
-  await createSession(responseData.data.user.id);
+  await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
   // 5. Redirect user
   redirect('/');
 }

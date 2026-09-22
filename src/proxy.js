@@ -1,3 +1,8 @@
+/**
+ * Script lu en amont de toutes les routes du projet.
+ * Permet de gérer l'authentification.
+ */
+
 import { NextResponse } from 'next/server'
 import { decrypt } from '@/app/lib/session'
 import { cookies } from 'next/headers'
@@ -30,10 +35,11 @@ export default async function proxy(req) {
     return NextResponse.redirect(new URL('/', req.nextUrl))
   }
 
+  // On continue le parcours HTTP
   return NextResponse.next()
 }
 
-// Routes Proxy should not run on
+// Routes exclues du proxy
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 }

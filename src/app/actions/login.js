@@ -25,7 +25,7 @@ export async function signin(state, formData) {
     "password": formData.get('password'), // P@ssword123
   });
 
-  await createSession(responseData.data.user.id, responseData.data.token);
+  await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
   // 5. Redirect user
   redirect('/');
 }

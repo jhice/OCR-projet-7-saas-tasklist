@@ -1,8 +1,13 @@
+import getSessionCookie from "./lib/get-session-cookie";
+
 export const metadata = {
   title: "Tableau de bord",
 };
 
-export default function Home() {
+export default async function Home() {
+
+  const session = await getSessionCookie();
+
   return (
     <>
       {/* Main */}
@@ -11,7 +16,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h1 className="font-heading text-3xl font-bold text-ink">Tableau de bord</h1>
-              <p className="mt-2 text-gray-500">Bonjour Alice Dupont, voici un aperçu de vos projets et tâches</p>
+              <p className="mt-2 text-gray-500">Bonjour {session.userName}, voici un aperçu de vos projets et tâches</p>
             </div>
             <button type="button" className="btn-dark" data-modal-open="modal-create-project">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">

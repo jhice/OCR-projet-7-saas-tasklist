@@ -3,7 +3,7 @@
 import { signup } from '@/app/actions/auth'
 import { useActionState } from 'react'
 
-export default function AccountForm({ profile }) {
+export default function AccountForm({ session }) {
 
   const [state, action, pending] = useActionState(signup, undefined)
 
@@ -11,13 +11,13 @@ export default function AccountForm({ profile }) {
     <form action={action} autoComplete='off'>
       <div>
         <label htmlFor="name">Name</label>
-        <input id="name" name="name" placeholder="Name" defaultValue={profile.name} />
+        <input id="name" name="name" placeholder="Name" defaultValue={session.userName} />
       </div>
       {state?.errors?.name && <p>{state.errors.name}</p>}
 
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" name="email" placeholder="Email" defaultValue={profile.email} />
+        <input id="email" name="email" placeholder="Email" defaultValue={session.userEmail} />
       </div>
       {state?.errors?.email && <p>{state.errors.email}</p>}
 
