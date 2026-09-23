@@ -28,7 +28,7 @@ export default function SignupForm() {
               <form className="space-y-6" action={action}>
 
                 <div>
-                  <label htmlFor="name" className="auth-label">Nom et prénom</label>
+                  <label htmlFor="name" className="auth-label">Prénom et nom</label>
                   <input id="name" name="name" type="text" autoComplete="name" className="auth-input" placeholder="ex. Lucien Dupont" />
                 </div>
                 {state?.errors?.name && <p className="text-[#CC3300]">{state.errors.name}</p>}

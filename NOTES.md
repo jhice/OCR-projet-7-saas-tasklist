@@ -27,3 +27,5 @@
   - affiche propriétaire
     - idem project detail
 - API : commentaires présents sur `projects/id/tasks` mais pas sur `projects/id`
+- form errors : messages en anglais
+  - account edit : changer mot de passe que si présent

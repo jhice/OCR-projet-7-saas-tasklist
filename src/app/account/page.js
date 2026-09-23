@@ -1,7 +1,4 @@
-import { cookies } from "next/headers";
-import { decrypt } from "../lib/session";
 import AccountForm from "../ui/account-form";
-import { authProfile } from "@/services/api";
 import getSessionCookie from "../lib/get-session-cookie";
 
 export const metadata = {
