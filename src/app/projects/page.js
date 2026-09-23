@@ -1,19 +1,15 @@
-import Link from "next/link";
+import getSessionCookie from "../lib/get-session-cookie";
+import { projects } from "@/services/api";
+import { ProjectsList } from "../ui/projects-list";
 
 export const metadata = {
   title: "Mes projets",
 };
 
-export default function Projects() {
-  return (
-    <>
-      <h1>Mes projets</h1>
-      <p>Gérez vos projets</p>
-      <ul>
-        <li>Projet 1 &ndash; <Link href="/projects/1">Afficher</Link></li>
-        <li>Projet 2 &ndash; <Link href="/projects/2">Afficher</Link></li>
-        <li>Projet 3 &ndash; <Link href="/projects/3">Afficher</Link></li>
-      </ul>
-    </>
-  )
+export default async function Projects() {
+
+  const session = await getSessionCookie();
+  const projectsResponse = await projects(session.ApiToken);
+
+  return <ProjectsList projects={projectsResponse.data.projects} />
 }

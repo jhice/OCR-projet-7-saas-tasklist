@@ -81,3 +81,7 @@ export function authProfile(token) {
 export function assignedTasks(token) {
   return request("/dashboard/assigned-tasks", { token });
 }
+
+export function projects(token) {
+  return request("/projects", { token });
+}
