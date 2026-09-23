@@ -16,7 +16,7 @@ export default function Dashboard({ session, tasks }) {
   const todoTasks = tasks.filter(t => t.status === "TODO");
   const inProgressTasks = tasks.filter(t => t.status === "IN_PROGRESS");
   const doneTasks = tasks.filter(t => t.status === "DONE");
-  console.log(todoTasks, inProgressTasks, doneTasks);
+  // console.log(todoTasks, inProgressTasks, doneTasks);
 
   return (
     <>

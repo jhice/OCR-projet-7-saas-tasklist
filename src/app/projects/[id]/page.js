@@ -1,5 +1,5 @@
 import getSessionCookie from "@/app/lib/get-session-cookie";
-import TaskItem from "@/app/ui/project/task-item";
+import TaskItem from "@/app/ui/project/project-task-item";
 import { projectById, projectsIdTasks } from "@/services/api";
 
 export const metadata = {
