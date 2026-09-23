@@ -1,9 +1,5 @@
 import { Manrope, Inter } from "next/font/google";
 
-import "./app.css";
-
-import Header from "./ui/layout-header";
-
 const ManropeSans = Manrope({
   variable: "--font-manrope-sans",
   subsets: ["latin"],
@@ -14,7 +10,9 @@ const InterSans = Inter({
   subsets: ["latin"],
 });
 
+import "./app.css";
 import getSessionCookie from "./lib/get-session-cookie";
+import Header from "./ui/layout-header";
 import Footer from "./ui/layout-footer";
 
 export default async function Layout({ children }) {
