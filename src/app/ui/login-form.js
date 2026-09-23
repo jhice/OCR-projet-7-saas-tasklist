@@ -2,7 +2,6 @@
 
 import { signin } from '@/app/actions/login'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useActionState } from 'react'
 
 import logoImage from "../ui/images/logo.png";
@@ -18,7 +17,7 @@ export default function LoginForm() {
         {/* Panneau formulaire */}
         <div className="auth-panel px-8 py-10 sm:px-16 sm:py-12">
           <header>
-            <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-9 w-auto" />
+            <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-9 w-auto mx-auto" />
           </header>
 
           <main className="flex flex-1 flex-col justify-center py-12">
@@ -26,15 +25,16 @@ export default function LoginForm() {
               <h1 className="font-heading text-4xl font-bold text-brand text-center mb-8">Connexion</h1>
 
               <form action={action} className="space-y-6">
+                
                 <div>
                   <label htmlFor="email" className="auth-label">Email</label>
-                  <input id="email" name="email" type="email" autoComplete="email" required className="auth-input" />
+                  <input id="email" name="email" type="email" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
                 </div>
                 {state?.errors?.email && <p className="text-[#CC3300]">{state.errors.email}</p>}
 
                 <div>
                   <label htmlFor="password" className="auth-label">Mot de passe</label>
-                  <input id="password" name="password" type="password" autoComplete="current-password" required className="auth-input" />
+                  <input id="password" name="password" type="password" autoComplete="current-password" className="auth-input" placeholder="8 caractères min." />
                 </div>
                 {state?.errors?.password && (
                   <div className="text-[#CC3300]">
