@@ -16,6 +16,10 @@ export default async function ProjectDetail({ params }) {
   const tasks = projectData.data.project.tasks;
 
   return (
-    <TaskItem project={project} tasks={tasks} />
+    <main className="flex-1">
+      <div className="page-container">
+        <TaskItem project={project} tasks={tasks} />
+      </div>
+    </main>
   )
 }

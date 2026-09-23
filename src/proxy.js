@@ -36,7 +36,7 @@ export default async function proxy(req) {
   }
 
   // On continue le parcours HTTP
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 // Routes exclues du proxy

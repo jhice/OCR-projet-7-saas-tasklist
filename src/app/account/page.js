@@ -13,8 +13,10 @@ export default async function Account() {
   const session = await getSessionCookie();
 
   return (
-    <>
-      <AccountForm session={session} />
-    </>
+    <main className="flex-1">
+      <div className="page-container">
+        <AccountForm session={session} />
+      </div>
+    </main>
   )
 }

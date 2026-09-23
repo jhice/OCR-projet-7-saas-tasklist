@@ -11,5 +11,11 @@ export default async function Projects() {
   const session = await getSessionCookie();
   const projectsResponse = await projects(session.ApiToken);
 
-  return <ProjectsList projects={projectsResponse.data.projects} />
+  return (
+    <main className="flex-1">
+      <div className="page-container">
+        <ProjectsList projects={projectsResponse.data.projects} />
+      </div>
+    </main>
+  )
 }

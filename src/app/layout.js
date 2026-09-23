@@ -26,11 +26,7 @@ export default async function Layout({ children }) {
       </head>
       <body className="min-h-full flex flex-col app-shell text-ink">
         <Header session={session} />
-        <main className="flex-1">
-          <div className="page-container">
-            {children}
-          </div>
-        </main>
+        {children}
         <Footer session={session} />
       </body>
     </html>

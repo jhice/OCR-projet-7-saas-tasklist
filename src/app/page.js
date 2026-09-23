@@ -14,7 +14,11 @@ export default async function Home() {
   return (
     <>
       {/* Main */}
-      <Dashboard tasks={tasksResponse.data.tasks} session={session} />
+      <main className="flex-1">
+        <div className="page-container">
+          <Dashboard tasks={tasksResponse.data.tasks} session={session} />
+        </div>
+      </main>
     </>
   )
 }
