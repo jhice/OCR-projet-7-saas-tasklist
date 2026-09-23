@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "message": "Projets récupérés avec succès",
+  "data": {
+    "projects": [
+      {
+        "id": "cmue1eplb000tp9jkfox11osx",
+        "name": "Plateforme de Formation",
+        "description": "Système de gestion de cours en ligne avec vidéos, quiz et suivi des progrès.",
+        "createdAt": "2026-09-23T11:46:12.624Z",
+        "updatedAt": "2026-09-23T11:46:12.624Z",
+        "ownerId": "cmue1epkm0009p9jkjvp9nnhp",
+        "owner": {
+          "id": "cmue1epkm0009p9jkjvp9nnhp",
+          "email": "jacques@example.com",
+          "name": "Jacques Durand"
+        },
+        "members": [
+          {
+            "id": "cmue1epld000vp9jk571xz6ek",
+            "role": "CONTRIBUTOR",
+            "joinedAt": "2026-09-23T11:46:12.626Z",
+            "userId": "cmue1ep9l0000p9jkzjwz2w8a",
+            "projectId": "cmue1eplb000tp9jkfox11osx",
+            "user": {
+              "id": "cmue1ep9l0000p9jkzjwz2w8a",
+              "email": "alice@example.com",
+              "name": "Alice Martin"
+            }
+          }
+        ],
+        "_count": {
+          "tasks": 3
+        },
+        "userRole": "CONTRIBUTOR"
+      },
+      {
+        "id": "cmue1epkp000bp9jkghljjywc",
+        "name": "Application E-commerce",
+        "description": "Développement d'une plateforme de vente en ligne moderne avec paiement sécurisé et gestion des stocks.",
+        "createdAt": "2026-09-23T11:46:12.602Z",
+        "updatedAt": "2026-09-23T11:46:12.602Z",
+        "ownerId": "cmue1ep9l0000p9jkzjwz2w8a",
+        "owner": {
+          "id": "cmue1ep9l0000p9jkzjwz2w8a",
+          "email": "alice@example.com",
+          "name": "Alice Martin"
+        },
+        "members": [
+          {
+            "id": "cmue1epks000dp9jkj9yt6xij",
+            "role": "CONTRIBUTOR",
+            "joinedAt": "2026-09-23T11:46:12.605Z",
+            "userId": "cmue1epat0001p9jkjucktb94",
+            "projectId": "cmue1epkp000bp9jkghljjywc",
+            "user": {
+              "id": "cmue1epat0001p9jkjucktb94",
+              "email": "bob@example.com",
+              "name": "Bob Dupont"
+            }
+          },
+          {
+            "id": "cmue1epkv000fp9jkogcvp953",
+            "role": "CONTRIBUTOR",
+            "joinedAt": "2026-09-23T11:46:12.607Z",
+            "userId": "cmue1epc10002p9jkaev5donh",
+            "projectId": "cmue1epkp000bp9jkghljjywc",
+            "user": {
+              "id": "cmue1epc10002p9jkaev5donh",
+              "email": "caroline@example.com",
+              "name": "Caroline Leroy"
+            }
+          },
+          {
+            "id": "cmue1epkx000hp9jkjlzdwhc5",
+            "role": "CONTRIBUTOR",
+            "joinedAt": "2026-09-23T11:46:12.609Z",
+            "userId": "cmue1epd90003p9jkq5fqq7e0",
+            "projectId": "cmue1epkp000bp9jkghljjywc",
+            "user": {
+              "id": "cmue1epd90003p9jkq5fqq7e0",
+              "email": "david@example.com",
+              "name": "David Moreau"
+            }
+          }
+        ],
+        "_count": {
+          "tasks": 5
+        },
+        "userRole": "ADMIN"
+      }
+    ]
+  }
+}

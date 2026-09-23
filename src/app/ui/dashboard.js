@@ -1,6 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import TaskListItem from "./task/task-list-item";
+import TaskKanbanItem from "./task/task-list-kanban";
+
+const TASK_STATUS = {
+  "TODO": "À faire",
+  "IN_PROGRESS": "En cours",
+  "DONE": "Terminée",
+}
 
 export default function Dashboard({ session, tasks }) {
 
@@ -32,7 +40,12 @@ export default function Dashboard({ session, tasks }) {
     }
   }
 
-  console.log(showKanban, tasks);
+  /* tasks */
+
+  const todoTasks = tasks.filter(t => t.status === "TODO");
+  const inProgressTasks = tasks.filter(t => t.status === "IN_PROGRESS");
+  const doneTasks = tasks.filter(t => t.status === "DONE");
+  console.log(todoTasks, inProgressTasks, doneTasks);
 
   return (
     <>
@@ -49,6 +62,7 @@ export default function Dashboard({ session, tasks }) {
           Créer un projet
         </button>
       </div>
+
       {/* Toggle Liste / Kanban */}
       <div className="segmented mt-8" role="tablist">
         <button type="button" className={"segmented-btn " + (showKanban ? '' : 'active')} data-view-tab="list" role="tab" aria-selected={!showKanban} onClick={() => setShowKanban(false)}>
@@ -81,491 +95,38 @@ export default function Dashboard({ session, tasks }) {
         </div>
 
         <div className="mt-6 flex flex-col gap-4">
-          {/* Task row (répété) */}
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
-
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-progress">En cours</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
-
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
-
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
-
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
-
-          <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
-              <div className="flex items-center gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-            </div>
-            <a href="task.html" className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
-          </article>
+          {/* Task list item */}
+          {tasks.map(task => <TaskListItem key={task.id} task={task} TASK_STATUS={TASK_STATUS} />)}
         </div>
       </section>
 
       {/* Vue Kanban */}
       <section id="view-kanban" className={"mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 " + (showKanban ? 'active' : 'hidden')}>
+        {/* TODO */}
         <div className="panel p-5">
           <div className="kanban-column-header">
-            À faire <span className="count-pill">4</span>
+            À faire <span className="count-pill">{todoTasks.length}</span>
           </div>
           <div className="mt-4 flex flex-col gap-4">
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-todo">À faire</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
+            {todoTasks.map(task => <TaskKanbanItem key={task.id} task={task} TASK_STATUS={TASK_STATUS} />)}
           </div>
         </div>
-
+        {/* IN_PROGRESS */}
         <div className="panel p-5">
           <div className="kanban-column-header">
-            En cours <span className="count-pill">4</span>
+            En cours <span className="count-pill">{inProgressTasks.length}</span>
           </div>
           <div className="mt-4 flex flex-col gap-4">
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-progress">En cours</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-progress">En cours</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-progress">En cours</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-progress">En cours</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
+            {inProgressTasks.map(task => <TaskKanbanItem key={task.id} task={task} TASK_STATUS={TASK_STATUS} />)}
           </div>
         </div>
-
+        {/* DONE */}
         <div className="panel p-5">
           <div className="kanban-column-header">
-            Terminées <span className="count-pill">4</span>
+            Terminées <span className="count-pill">{doneTasks.length}</span>
           </div>
           <div className="mt-4 flex flex-col gap-4">
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-done">Terminée</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-done">Terminée</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-done">Terminée</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
-
-            <article className="task-card">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="font-semibold text-ink">Nom de la tâche</h3>
-                <span className="badge badge-done">Terminée</span>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">Description de la tâche</p>
-              <div className="task-meta mt-3">
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                  Nom du projet
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  9 mars
-                </span>
-                <span className="task-meta-sep">|</span>
-                <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M2 4.25A2.25 2.25 0 014.25 2h11.5A2.25 2.25 0 0118 4.25v8.5A2.25 2.25 0 0115.75 15H9.06l-3.56 3.06A.75.75 0 014 17.5V15h-.25A2.25 2.25 0 011.5 12.75v-8.5z" clipRule="evenodd" /></svg>
-                  2
-                </span>
-              </div>
-              <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
-            </article>
+            {doneTasks.map(task => <TaskKanbanItem key={task.id} task={task} TASK_STATUS={TASK_STATUS} />)}
           </div>
         </div>
       </section>
