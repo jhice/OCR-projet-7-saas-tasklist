@@ -13,6 +13,15 @@ export function getNameInitials(name) {
 }
 
 /**
+ * task status
+ */
+export const TASK_STATUS = {
+  "TODO": "À faire",
+  "IN_PROGRESS": "En cours",
+  "DONE": "Terminée",
+}
+
+/**
  * modals
  */
 

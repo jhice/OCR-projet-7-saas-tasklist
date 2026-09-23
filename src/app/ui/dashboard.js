@@ -4,13 +4,7 @@ import { useState } from "react";
 import TaskListItem from "./task/task-list-item";
 import TaskKanbanItem from "./task/task-list-kanban";
 import ProjectCreateModal from "./project/project-create-modal";
-import { showModal } from "@/services/helpers";
-
-const TASK_STATUS = {
-  "TODO": "À faire",
-  "IN_PROGRESS": "En cours",
-  "DONE": "Terminée",
-}
+import { showModal, TASK_STATUS } from "@/services/helpers";
 
 export default function Dashboard({ session, tasks }) {
 
@@ -22,7 +16,7 @@ export default function Dashboard({ session, tasks }) {
   const todoTasks = tasks.filter(t => t.status === "TODO");
   const inProgressTasks = tasks.filter(t => t.status === "IN_PROGRESS");
   const doneTasks = tasks.filter(t => t.status === "DONE");
-  // console.log(todoTasks, inProgressTasks, doneTasks);
+  console.log(todoTasks, inProgressTasks, doneTasks);
 
   return (
     <>

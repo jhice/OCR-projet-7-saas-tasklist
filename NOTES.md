@@ -25,3 +25,5 @@
   - tâches terminées
   - pourcentage complété
   - affiche propriétaire
+    - idem project detail
+- API : commentaires présents sur `projects/id/tasks` mais pas sur `projects/id`

@@ -3,6 +3,7 @@
 import { getNameInitials } from "@/services/helpers";
 import { showModal } from "@/services/helpers";
 import ProjectCreateModal from "./project/project-create-modal";
+import Link from "next/link";
 
 export function ProjectsList({ projects }) {
 
@@ -26,10 +27,10 @@ export function ProjectsList({ projects }) {
         {/* Carte projet (répétée) */}
         {projects.map(project => (
           <article key={project.id} className="panel flex flex-col gap-5 p-6">
-            <a href="project-detail.html" className="block no-underline hover:opacity-80 transition">
+            <Link href={"/projects/" + project.id} className="block no-underline hover:opacity-80 transition">
               <h2 className="font-semibold text-ink">{project.name}</h2>
               <p className="mt-1 text-sm text-gray-500">{project.description}</p>
-            </a>
+            </Link>
 
             <div>
               <div className="flex items-center justify-between text-sm">

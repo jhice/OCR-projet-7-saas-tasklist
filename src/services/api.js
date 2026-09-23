@@ -85,3 +85,11 @@ export function assignedTasks(token) {
 export function projects(token) {
   return request("/projects", { token });
 }
+
+export function projectById(id, token) {
+  return request(`/projects/${id}`, { token });
+}
+
+export function projectsIdTasks(id, token) {
+  return request(`/projects/${id}/tasks`, { token });
+}

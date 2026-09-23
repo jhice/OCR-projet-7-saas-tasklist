@@ -22,7 +22,7 @@ export default async function Layout({ children }) {
   return (
     <html lang="fr" className="h-full antialiased">
       <head>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"></link>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"></link>
       </head>
       <body className="min-h-full flex flex-col app-shell text-ink">
         <Header session={session} />

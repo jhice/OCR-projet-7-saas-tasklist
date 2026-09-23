@@ -1,16 +1,21 @@
-import Link from "next/link";
+import getSessionCookie from "@/app/lib/get-session-cookie";
+import TaskItem from "@/app/ui/project/task-item";
+import { projectById, projectsIdTasks } from "@/services/api";
 
 export const metadata = {
   title: "Nom du projet",
 };
 
-export default async function Project({ params }) {
-  const { id } = await params
+export default async function ProjectDetail({ params }) {
+
+  const { id } = await params;
+  const session = await getSessionCookie();
+  const projectData = await projectById(id, session.ApiToken);
+  console.log(projectData);
+  const project = projectData.data.project;
+  const tasks = projectData.data.project.tasks;
+
   return (
-    <>
-      <Link href="/projects">&lt; Retour</Link>
-      <h1>Projet {id}</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam assumenda iusto eum esse, maiores ea, architecto officia et repudiandae optio repellat placeat, expedita fugit magni tempore illo? Aut, cumque facilis!</p>
-    </>
+    <TaskItem project={project} tasks={tasks} />
   )
 }
