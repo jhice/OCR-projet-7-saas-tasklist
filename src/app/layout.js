@@ -2,7 +2,6 @@ import { Manrope, Inter } from "next/font/google";
 
 import "./app.css";
 
-import Script from "next/script";
 import Header from "./ui/layout-header";
 
 const ManropeSans = Manrope({
@@ -25,11 +24,9 @@ export default async function Layout({ children }) {
   return (
     <html lang="fr" className="h-full antialiased">
       <head>
-        <Script src="https://cdn.tailwindcss.com" defer></Script>
-        <Script src="/assets/tailwind.js" defer></Script>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"></link>
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col app-shell text-ink">
         <Header session={session} />
         {children}
         <Footer session={session} />

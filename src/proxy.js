@@ -8,7 +8,7 @@ import { decrypt } from '@/app/lib/session'
 import { cookies } from 'next/headers'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/", "/projects/:path*", "/projects", "/account"]
+const protectedRoutes = ["/", "/projects/:path*", "/projects", "/account", "logout"]
 const publicRoutes = ['/login', "/register"]
 
 export default async function proxy(req) {

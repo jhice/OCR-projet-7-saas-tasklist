@@ -19,3 +19,5 @@
 ## Todo
 
 - register : gérer si user déjà existant (voir api.js)
+- React possible => document.getElementById(e.currentTarget.dataset.modalOpen);
+  - checker le state avant le rendu !

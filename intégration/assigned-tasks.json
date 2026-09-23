@@ -1,0 +1,191 @@
+{
+  "success": true,
+  "message": "Tâches assignées récupérées",
+  "data": {
+    "tasks": [
+      {
+        "id": "cmtvi6g490047p9xnn90vfxif",
+        "title": "Lecteur vidéo personnalisé",
+        "description": "Développer un lecteur vidéo avec contrôles de progression et notes.",
+        "status": "IN_PROGRESS",
+        "priority": "HIGH",
+        "dueDate": "2024-01-30T00:00:00.000Z",
+        "createdAt": "2026-09-10T12:28:03.226Z",
+        "updatedAt": "2026-09-10T12:28:03.226Z",
+        "projectId": "cmtvi6fzz000tp9xnotvpck36",
+        "creatorId": "cmtvi6fz70009p9xnmgg9a0uh",
+        "project": {
+          "id": "cmtvi6fzz000tp9xnotvpck36",
+          "name": "Plateforme de Formation",
+          "description": "Système de gestion de cours en ligne avec vidéos, quiz et suivi des progrès."
+        },
+        "assignees": [
+          {
+            "id": "cmtvi6g4b0049p9xn54ry3xkr",
+            "assignedAt": "2026-09-10T12:28:03.228Z",
+            "taskId": "cmtvi6g490047p9xnn90vfxif",
+            "userId": "cmtvi6fnp0000p9xnr1zkep74",
+            "user": {
+              "id": "cmtvi6fnp0000p9xnr1zkep74",
+              "name": "Alice Martin",
+              "email": "alice@example.com"
+            }
+          },
+          {
+            "id": "cmtvi6g4d004bp9xncu1x04sq",
+            "assignedAt": "2026-09-10T12:28:03.230Z",
+            "taskId": "cmtvi6g490047p9xnn90vfxif",
+            "userId": "cmtvi6fz70009p9xnmgg9a0uh",
+            "user": {
+              "id": "cmtvi6fz70009p9xnmgg9a0uh",
+              "name": "Jacques Durand",
+              "email": "jacques@example.com"
+            }
+          }
+        ],
+        "comments": [
+          {
+            "id": "cmtvi6g4k004hp9xnw8hissot",
+            "content": "Quiz interactif en développement. Système de notation en place.",
+            "createdAt": "2026-09-10T12:28:03.236Z",
+            "updatedAt": "2026-09-10T12:28:03.236Z",
+            "taskId": "cmtvi6g490047p9xnn90vfxif",
+            "authorId": "cmtvi6fz70009p9xnmgg9a0uh",
+            "author": {
+              "id": "cmtvi6fz70009p9xnmgg9a0uh",
+              "name": "Jacques Durand",
+              "email": "jacques@example.com"
+            }
+          },
+          {
+            "id": "cmtvi6g4h004fp9xn8ttn9qxf",
+            "content": "Lecteur vidéo en cours. Contrôles de base implémentés.",
+            "createdAt": "2026-09-10T12:28:03.234Z",
+            "updatedAt": "2026-09-10T12:28:03.234Z",
+            "taskId": "cmtvi6g490047p9xnn90vfxif",
+            "authorId": "cmtvi6fz70009p9xnmgg9a0uh",
+            "author": {
+              "id": "cmtvi6fz70009p9xnmgg9a0uh",
+              "name": "Jacques Durand",
+              "email": "jacques@example.com"
+            }
+          },
+          {
+            "id": "cmtvi6g4f004dp9xnxve4lrwk",
+            "content": "Système de cours opérationnel. Interface d'administration complète.",
+            "createdAt": "2026-09-10T12:28:03.232Z",
+            "updatedAt": "2026-09-10T12:28:03.232Z",
+            "taskId": "cmtvi6g490047p9xnn90vfxif",
+            "authorId": "cmtvi6fz70009p9xnmgg9a0uh",
+            "author": {
+              "id": "cmtvi6fz70009p9xnmgg9a0uh",
+              "name": "Jacques Durand",
+              "email": "jacques@example.com"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cmtvi6g16001np9xnw2m9kbba",
+        "title": "Interface utilisateur responsive",
+        "description": "Créer les composants React pour la liste des produits, panier et checkout.",
+        "status": "TODO",
+        "priority": "MEDIUM",
+        "dueDate": "2024-02-15T00:00:00.000Z",
+        "createdAt": "2026-09-10T12:28:03.115Z",
+        "updatedAt": "2026-09-10T12:28:03.115Z",
+        "projectId": "cmtvi6fza000bp9xnfkyuobjx",
+        "creatorId": "cmtvi6fnp0000p9xnr1zkep74",
+        "project": {
+          "id": "cmtvi6fza000bp9xnfkyuobjx",
+          "name": "Application E-commerce",
+          "description": "Développement d'une plateforme de vente en ligne moderne avec paiement sécurisé et gestion des stocks."
+        },
+        "assignees": [
+          {
+            "id": "cmtvi6g1a001pp9xnomxquhd9",
+            "assignedAt": "2026-09-10T12:28:03.118Z",
+            "taskId": "cmtvi6g16001np9xnw2m9kbba",
+            "userId": "cmtvi6fnp0000p9xnr1zkep74",
+            "user": {
+              "id": "cmtvi6fnp0000p9xnr1zkep74",
+              "name": "Alice Martin",
+              "email": "alice@example.com"
+            }
+          },
+          {
+            "id": "cmtvi6g1c001rp9xni10l7fpp",
+            "assignedAt": "2026-09-10T12:28:03.121Z",
+            "taskId": "cmtvi6g16001np9xnw2m9kbba",
+            "userId": "cmtvi6fq90002p9xnw9mogdax",
+            "user": {
+              "id": "cmtvi6fq90002p9xnw9mogdax",
+              "name": "Caroline Leroy",
+              "email": "caroline@example.com"
+            }
+          }
+        ],
+        "comments": [
+          {
+            "id": "cmtvi6g1f001tp9xnodz11u2p",
+            "content": "Interface responsive en cours. Les composants de base sont créés, reste à implémenter le panier.",
+            "createdAt": "2026-09-10T12:28:03.124Z",
+            "updatedAt": "2026-09-10T12:28:03.124Z",
+            "taskId": "cmtvi6g16001np9xnw2m9kbba",
+            "authorId": "cmtvi6fq90002p9xnw9mogdax",
+            "author": {
+              "id": "cmtvi6fq90002p9xnw9mogdax",
+              "name": "Caroline Leroy",
+              "email": "caroline@example.com"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cmtvi6g4m004jp9xn8a74mv50",
+        "title": "Système de quiz interactif",
+        "description": "Créer les quiz avec questions à choix multiples et évaluation automatique.",
+        "status": "TODO",
+        "priority": "MEDIUM",
+        "dueDate": "2024-02-15T00:00:00.000Z",
+        "createdAt": "2026-09-10T12:28:03.238Z",
+        "updatedAt": "2026-09-10T12:28:03.238Z",
+        "projectId": "cmtvi6fzz000tp9xnotvpck36",
+        "creatorId": "cmtvi6fz70009p9xnmgg9a0uh",
+        "project": {
+          "id": "cmtvi6fzz000tp9xnotvpck36",
+          "name": "Plateforme de Formation",
+          "description": "Système de gestion de cours en ligne avec vidéos, quiz et suivi des progrès."
+        },
+        "assignees": [
+          {
+            "id": "cmtvi6g4o004lp9xn5tacx64u",
+            "assignedAt": "2026-09-10T12:28:03.240Z",
+            "taskId": "cmtvi6g4m004jp9xn8a74mv50",
+            "userId": "cmtvi6fnp0000p9xnr1zkep74",
+            "user": {
+              "id": "cmtvi6fnp0000p9xnr1zkep74",
+              "name": "Alice Martin",
+              "email": "alice@example.com"
+            }
+          }
+        ],
+        "comments": [
+          {
+            "id": "cmtvi6g4q004np9xn9iyz058i",
+            "content": "Quiz interactif en développement. Système de notation en place.",
+            "createdAt": "2026-09-10T12:28:03.242Z",
+            "updatedAt": "2026-09-10T12:28:03.242Z",
+            "taskId": "cmtvi6g4m004jp9xn8a74mv50",
+            "authorId": "cmtvi6fnp0000p9xnr1zkep74",
+            "author": {
+              "id": "cmtvi6fnp0000p9xnr1zkep74",
+              "name": "Alice Martin",
+              "email": "alice@example.com"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -77,3 +77,7 @@ export function login(credentials) {
 export function authProfile(token) {
   return request("/auth/profile", { token });
 }
+
+export function assignedTasks(token) {
+  return request("/dashboard/assigned-tasks", { token });
+}
