@@ -9,7 +9,7 @@ export const metadata = {
 export default async function Projects() {
 
   const session = await getSessionCookie();
-  const projectsResponse = await projects(session.ApiToken);
+  const projectsResponse = await projects(session.apiToken);
 
   return (
     <main className="flex-1">

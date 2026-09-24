@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export default function SignupForm() {
 
-  const [state, action, pending] = useActionState(signup, undefined)
+  const [state, action, pending] = useActionState(signup, undefined);
 
   return (
     <>

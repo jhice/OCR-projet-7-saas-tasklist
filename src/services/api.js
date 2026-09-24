@@ -66,6 +66,9 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
 
 // Fonctions dédiées par endpoint : le reste de l'app ne manipule plus d'URL.
 
+/**
+ * User
+ */
 export function register(credentials) {
   return request("/auth/register", { method: "POST", body: credentials });
 }
@@ -76,6 +79,14 @@ export function login(credentials) {
 
 export function authProfile(token) {
   return request("/auth/profile", { token });
+}
+
+export function apiUserUpdate(userData, token) {
+  return request("/auth/profile", { method: "PUT", body: userData, token });
+}
+
+export function apiUserPassword(userData, token) {
+  return request("/auth/password", { method: "PUT", body: userData, token });
 }
 
 export function assignedTasks(token) {

@@ -9,7 +9,7 @@ export const metadata = {
 export default async function Home() {
 
   const session = await getSessionCookie();
-  const tasksResponse = await assignedTasks(session.ApiToken);
+  const tasksResponse = await assignedTasks(session.apiToken);
 
   return (
     <>

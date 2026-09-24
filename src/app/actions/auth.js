@@ -20,7 +20,7 @@ export async function signup(state, formData) {
     }
   }
 
-  // Call the provider or db to create a user...
+  // Call the API provider or db to create a user...
   const responseData = await register({
     "email": formData.get('email'),
     "password": formData.get('password'), // P@ssword123
