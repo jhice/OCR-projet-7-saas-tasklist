@@ -104,3 +104,7 @@ export function projectById(id, token) {
 export function projectsIdTasks(id, token) {
   return request(`/projects/${id}/tasks`, { token });
 }
+
+export function projectsCreate(data, token) {
+  return request("/projects", { method: "POST", body: data, token });
+}

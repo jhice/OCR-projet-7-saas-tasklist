@@ -10,8 +10,6 @@ export default async function Account() {
 
   const session = await getSessionCookie();
   const userData = await authProfile(session.apiToken);
-  console.log(userData);
-  
 
   return (
     <main className="flex-1">

@@ -29,3 +29,5 @@
 - API : commentaires présents sur `projects/id/tasks` mais pas sur `projects/id`
 - form errors : messages en anglais
   - account edit : changer mot de passe que si présent
+- bonus : ajouter des notifs de mise à jour (flash messages)
+- nav : sous-menu pour "mon compte" et "déconnexion"

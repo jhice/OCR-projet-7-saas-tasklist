@@ -11,7 +11,7 @@ export default async function ProjectDetail({ params }) {
   const { id } = await params;
   const session = await getSessionCookie();
   const projectData = await projectById(id, session.apiToken);
-  console.log(projectData);
+  // console.log(projectData);
   const project = projectData.data.project;
   const tasks = projectData.data.project.tasks;
 

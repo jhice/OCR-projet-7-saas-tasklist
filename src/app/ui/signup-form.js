@@ -18,7 +18,7 @@ export default function SignupForm() {
         {/* Panneau formulaire */}
         <div className="auth-panel px-8 py-10 sm:px-16 sm:py-12">
           <header>
-            <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-9 w-auto mx-auto" />
+            <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-9 w-auto mx-auto" loading="eager" />
           </header>
 
           <main className="flex flex-1 flex-col justify-center py-12">

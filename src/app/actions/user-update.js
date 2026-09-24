@@ -7,8 +7,6 @@ import getSessionCookie from '../lib/get-session-cookie';
 
 export async function userUpdate(state, formData) {
 
-  console.log(formData);
-
   // With or without a password
   let validatedFields;
 
@@ -43,7 +41,6 @@ export async function userUpdate(state, formData) {
   // With or without a password
   if (formData.get('newPassword')) {
     // password
-    console.log("ici", formData.get('newPassword'));
     // user info
     responseData = await apiUserUpdate({
       "email": formData.get('email'),

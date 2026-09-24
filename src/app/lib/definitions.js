@@ -57,3 +57,16 @@ export const UserUpdateFormSchemaNoPassword = z.object({
   email: z.email({ error: 'Please enter a valid email.' }).trim()
     .trim(),
 });
+
+export const createProjectFormSchema = z.object({
+  name: z
+    .string()
+    .nonempty()
+    .trim(),
+  description: z
+    .string()
+    .nonempty()
+    .trim(),
+  contributors: z
+    .array(z.string()),
+});

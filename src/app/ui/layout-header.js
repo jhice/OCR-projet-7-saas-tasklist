@@ -35,7 +35,7 @@ export default function Header({ session }) {
     <header className="app-header">
       <div className="app-header-inner">
         <Link href="/" className="app-logo">
-          <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-6 w-auto" />
+          <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
         </Link>
         <nav className="app-nav">
           <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
