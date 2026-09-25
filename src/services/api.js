@@ -108,3 +108,7 @@ export function projectsIdTasks(id, token) {
 export function projectsCreate(data, token) {
   return request("/projects", { method: "POST", body: data, token });
 }
+
+export function projectsUpdate(id, data, token) {
+  return request("/projects/" + id, { method: "PUT", body: data, token });
+}

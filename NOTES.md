@@ -27,7 +27,12 @@
   - affiche propriétaire
     - idem project detail
 - API : commentaires présents sur `projects/id/tasks` mais pas sur `projects/id`
-- form errors : messages en anglais
-  - account edit : changer mot de passe que si présent
+- **form errors : messages en anglais**
+  - ~~account edit : changer mot de passe que si présent~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
-- nav : sous-menu pour "mon compte" et "déconnexion"
+- **nav : sous-menu pour "mon compte" et "déconnexion"**
+- forms : usage de pending
+- liste des users ?
+  - ou **ajouter un contributeur par email**
+  - l'API update projects ne semble pas gérer les contributeurs (`projectRoutes.ts:40`)
+- **gestion des rôles**

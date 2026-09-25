@@ -1,6 +1,6 @@
 import getSessionCookie from "@/app/lib/get-session-cookie";
-import TaskItem from "@/app/ui/project/project-task-item";
-import { projectById, projectsIdTasks } from "@/services/api";
+import ProjectFull from "@/app/ui/project/project-full";
+import { projectById } from "@/services/api";
 
 export const metadata = {
   title: "Nom du projet",
@@ -18,7 +18,7 @@ export default async function ProjectDetail({ params }) {
   return (
     <main className="flex-1">
       <div className="page-container">
-        <TaskItem project={project} tasks={tasks} />
+        <ProjectFull project={project} tasks={tasks} />
       </div>
     </main>
   )
