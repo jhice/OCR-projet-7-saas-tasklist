@@ -172,11 +172,17 @@
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
               </div>
-              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche" data-modal-open="modal-edit-task">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                </svg>
-              </button>
+              <details class="dropdown shrink-0">
+                <summary class="icon-btn h-10 w-10" aria-label="Options de la tâche">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                  </svg>
+                </summary>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item" data-modal-open="modal-edit-task">Modifier</a>
+                  <a href="#" class="dropdown-item text-red-600">Supprimer</a>
+                </div>
+              </details>
             </div>
 
             <div class="task-meta mt-4">
@@ -199,12 +205,35 @@
               </span>
             </div>
 
-            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
-              Commentaires (1)
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
-                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
-              </svg>
-            </div>
+            <details class="comments mt-4 border-t border-gray-100 pt-3">
+              <summary class="flex w-full items-center justify-between text-sm font-medium text-ink">
+                Commentaires (1)
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="comments-caret h-4 w-4 text-gray-400">
+                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+                </svg>
+              </summary>
+
+              <ul class="mt-4 flex flex-col gap-4">
+                <li class="flex gap-4">
+                  <span class="avatar-sm">BD</span>
+                  <div class="comment-bubble flex-1">
+                    <div class="flex items-center justify-between gap-4">
+                      <span class="text-sm font-medium text-ink">Bertrand Dupont</span>
+                      <span class="text-xs text-gray-500">23 mars, 11:20</span>
+                    </div>
+                    <p class="mt-2 text-sm text-ink">Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.</p>
+                  </div>
+                </li>
+              </ul>
+
+              <form class="mt-4 flex flex-col gap-4">
+                <div class="flex gap-4">
+                  <span class="avatar-sm brand">AD</span>
+                  <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" class="auth-input comment-input flex-1"></textarea>
+                </div>
+                <button type="submit" class="btn-dark self-end" disabled>Envoyer</button>
+              </form>
+            </details>
           </article>
 
           <article class="task-card">
@@ -216,11 +245,17 @@
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
               </div>
-              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche" data-modal-open="modal-edit-task">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                </svg>
-              </button>
+              <details class="dropdown shrink-0">
+                <summary class="icon-btn h-10 w-10" aria-label="Options de la tâche">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                  </svg>
+                </summary>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item" data-modal-open="modal-edit-task">Modifier</a>
+                  <a href="#" class="dropdown-item text-red-600">Supprimer</a>
+                </div>
+              </details>
             </div>
 
             <div class="task-meta mt-4">
@@ -243,12 +278,35 @@
               </span>
             </div>
 
-            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
-              Commentaires (1)
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
-                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
-              </svg>
-            </div>
+            <details class="comments mt-4 border-t border-gray-100 pt-3">
+              <summary class="flex w-full items-center justify-between text-sm font-medium text-ink">
+                Commentaires (1)
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="comments-caret h-4 w-4 text-gray-400">
+                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+                </svg>
+              </summary>
+
+              <ul class="mt-4 flex flex-col gap-4">
+                <li class="flex gap-4">
+                  <span class="avatar-sm">BD</span>
+                  <div class="comment-bubble flex-1">
+                    <div class="flex items-center justify-between gap-4">
+                      <span class="text-sm font-medium text-ink">Bertrand Dupont</span>
+                      <span class="text-xs text-gray-500">23 mars, 11:20</span>
+                    </div>
+                    <p class="mt-2 text-sm text-ink">Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.</p>
+                  </div>
+                </li>
+              </ul>
+
+              <form class="mt-4 flex flex-col gap-4">
+                <div class="flex gap-4">
+                  <span class="avatar-sm brand">AD</span>
+                  <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" class="auth-input comment-input flex-1"></textarea>
+                </div>
+                <button type="submit" class="btn-dark self-end" disabled>Envoyer</button>
+              </form>
+            </details>
           </article>
 
           <article class="task-card">
@@ -260,11 +318,17 @@
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
               </div>
-              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche" data-modal-open="modal-edit-task">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                </svg>
-              </button>
+              <details class="dropdown shrink-0">
+                <summary class="icon-btn h-10 w-10" aria-label="Options de la tâche">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                  </svg>
+                </summary>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item" data-modal-open="modal-edit-task">Modifier</a>
+                  <a href="#" class="dropdown-item text-red-600">Supprimer</a>
+                </div>
+              </details>
             </div>
 
             <div class="task-meta mt-4">
@@ -287,12 +351,35 @@
               </span>
             </div>
 
-            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
-              Commentaires (1)
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
-                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
-              </svg>
-            </div>
+            <details class="comments mt-4 border-t border-gray-100 pt-3">
+              <summary class="flex w-full items-center justify-between text-sm font-medium text-ink">
+                Commentaires (1)
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="comments-caret h-4 w-4 text-gray-400">
+                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+                </svg>
+              </summary>
+
+              <ul class="mt-4 flex flex-col gap-4">
+                <li class="flex gap-4">
+                  <span class="avatar-sm">BD</span>
+                  <div class="comment-bubble flex-1">
+                    <div class="flex items-center justify-between gap-4">
+                      <span class="text-sm font-medium text-ink">Bertrand Dupont</span>
+                      <span class="text-xs text-gray-500">23 mars, 11:20</span>
+                    </div>
+                    <p class="mt-2 text-sm text-ink">Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.</p>
+                  </div>
+                </li>
+              </ul>
+
+              <form class="mt-4 flex flex-col gap-4">
+                <div class="flex gap-4">
+                  <span class="avatar-sm brand">AD</span>
+                  <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" class="auth-input comment-input flex-1"></textarea>
+                </div>
+                <button type="submit" class="btn-dark self-end" disabled>Envoyer</button>
+              </form>
+            </details>
           </article>
 
           <article class="task-card">
@@ -304,11 +391,17 @@
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Implémenter le système d'authentification avec tokens JWT</p>
               </div>
-              <button type="button" class="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche" data-modal-open="modal-edit-task">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-                  <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                </svg>
-              </button>
+              <details class="dropdown shrink-0">
+                <summary class="icon-btn h-10 w-10" aria-label="Options de la tâche">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                  </svg>
+                </summary>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item" data-modal-open="modal-edit-task">Modifier</a>
+                  <a href="#" class="dropdown-item text-red-600">Supprimer</a>
+                </div>
+              </details>
             </div>
 
             <div class="task-meta mt-4">
@@ -331,12 +424,35 @@
               </span>
             </div>
 
-            <div class="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
-              Commentaires (1)
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-gray-400">
-                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
-              </svg>
-            </div>
+            <details class="comments mt-4 border-t border-gray-100 pt-3">
+              <summary class="flex w-full items-center justify-between text-sm font-medium text-ink">
+                Commentaires (1)
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="comments-caret h-4 w-4 text-gray-400">
+                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clip-rule="evenodd" />
+                </svg>
+              </summary>
+
+              <ul class="mt-4 flex flex-col gap-4">
+                <li class="flex gap-4">
+                  <span class="avatar-sm">BD</span>
+                  <div class="comment-bubble flex-1">
+                    <div class="flex items-center justify-between gap-4">
+                      <span class="text-sm font-medium text-ink">Bertrand Dupont</span>
+                      <span class="text-xs text-gray-500">23 mars, 11:20</span>
+                    </div>
+                    <p class="mt-2 text-sm text-ink">Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.</p>
+                  </div>
+                </li>
+              </ul>
+
+              <form class="mt-4 flex flex-col gap-4">
+                <div class="flex gap-4">
+                  <span class="avatar-sm brand">AD</span>
+                  <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" class="auth-input comment-input flex-1"></textarea>
+                </div>
+                <button type="submit" class="btn-dark self-end" disabled>Envoyer</button>
+              </form>
+            </details>
           </article>
         </div>
       </section>
@@ -525,7 +641,8 @@
 
   <script>
     document.querySelectorAll("[data-modal-open]").forEach((trigger) => {
-      trigger.addEventListener("click", () => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
         const dialog = document.getElementById(trigger.dataset.modalOpen);
         if (dialog) dialog.showModal();
       });
@@ -540,6 +657,15 @@
     document.querySelectorAll("dialog.modal-card").forEach((dialog) => {
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
+      });
+    });
+
+    // Ferme les menus déroulants au clic en dehors ou sur un item
+    document.addEventListener("click", (event) => {
+      document.querySelectorAll("details.dropdown[open]").forEach((dropdown) => {
+        if (!dropdown.contains(event.target) || event.target.closest(".dropdown-item")) {
+          dropdown.removeAttribute("open");
+        }
       });
     });
   </script>

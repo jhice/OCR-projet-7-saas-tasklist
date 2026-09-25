@@ -12,23 +12,11 @@ const InterSans = Inter({
 
 import "./app.css";
 import getSessionCookie from "./lib/get-session-cookie";
-import Header from "./ui/layout-header";
-import Footer from "./ui/layout-footer";
+import LayoutUi from "./ui/layout";
 
 export default async function Layout({ children }) {
 
   const session = await getSessionCookie();
 
-  return (
-    <html lang="fr" className="h-full antialiased">
-      <head>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"></link>
-      </head>
-      <body className="min-h-full flex flex-col app-shell text-ink">
-        <Header session={session} />
-        {children}
-        <Footer session={session} />
-      </body>
-    </html>
-  );
+  return <LayoutUi session={session}>{children}</LayoutUi>;
 }

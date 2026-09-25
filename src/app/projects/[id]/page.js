@@ -18,7 +18,7 @@ export default async function ProjectDetail({ params }) {
   return (
     <main className="flex-1">
       <div className="page-container">
-        <ProjectFull project={project} tasks={tasks} />
+        <ProjectFull project={project} tasks={tasks} session={session} />
       </div>
     </main>
   )

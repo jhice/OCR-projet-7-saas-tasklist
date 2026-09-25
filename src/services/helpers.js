@@ -50,3 +50,13 @@ export function cardCloseModal(e) {
     // setModalOpened(false);
   }
 }
+
+// click on document body
+export function closeOptionsMenu(e) {
+  // console.log(e.target.className);
+  document.querySelectorAll("details.dropdown[open]").forEach((dropdown) => {
+    if (!dropdown.contains(e.target) || e.target.closest(".dropdown-item")) {
+      dropdown.removeAttribute("open");
+    }
+  });
+}

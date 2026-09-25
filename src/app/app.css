@@ -399,6 +399,68 @@ button {
   background-color: #f9fafb;
 }
 
+
+
+/* ---- Menu déroulant ---- */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown summary,
+.comments summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.dropdown summary::-webkit-details-marker,
+.comments summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  z-index: 10;
+  min-width: 9rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.dropdown-item:hover {
+  background-color: #f9fafb;
+}
+
+/* ---- Commentaires ---- */
+
+.comments[open] .comments-caret {
+  transform: rotate(180deg);
+}
+
+.comment-bubble {
+  border-radius: 0.75rem;
+  background-color: #f3f4f6;
+  padding: 1rem 1.25rem;
+}
+
+.comment-input {
+  background-color: #f9fafb;
+  border-color: transparent;
+  box-shadow: none;
+  resize: vertical;
+}
+
 .btn-accent {
   display: inline-flex;
   align-items: center;

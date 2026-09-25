@@ -8,7 +8,7 @@ import ModalCreateTask from "./modal-create-task";
 import ModalEditTask from "./modal-edit-task";
 import ModalEditProject from "./modal-edit-project";
 
-export default function ProjectFull({ project, tasks }) {
+export default function ProjectFull({ project, tasks, session }) {
 
   // console.log(project);  
 
@@ -126,18 +126,25 @@ export default function ProjectFull({ project, tasks }) {
                   </div>
                   <p className="mt-1 text-sm text-gray-500">{task.description}</p>
                 </div>
-                <button type="button" className="icon-btn h-10 w-10 shrink-0" aria-label="Options de la tâche" data-modal-open="modal-edit-task" onClick={(e) => showModal(e)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-                    <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                  </svg>
-                </button>
+                <details className="dropdown shrink-0">
+                  <summary className="icon-btn h-10 w-10" aria-label="Options de la tâche">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                      <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                    </svg>
+                  </summary>
+                  <div className="dropdown-menu">
+                    <a href="#" className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModal(e)}>Modifier</a>
+                    <a href="#" className="dropdown-item text-red-600">Supprimer</a>
+                  </div>
+                </details>
+
               </div>
 
               <div className="task-meta mt-4">
                 <span>Échéance :</span>
                 <span className="task-meta-item">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
-                  {format(task.dueDate, "d LLLL y", {locale: fr})}
+                  {format(task.dueDate, "d LLLL y", { locale: fr })}
                 </span>
               </div>
 
@@ -151,12 +158,38 @@ export default function ProjectFull({ project, tasks }) {
                 )}
               </div>
 
-              <div className="mt-4 flex w-full items-center justify-between border-t border-gray-100 pt-3 text-sm font-medium text-ink">
-                Commentaires ({task.comments.length})
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-gray-400">
-                  <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clipRule="evenodd" />
-                </svg>
-              </div>
+              <details className="comments mt-4 border-t border-gray-100 pt-3">
+                <summary className="flex w-full items-center justify-between text-sm font-medium text-ink">
+                  Commentaires ({task.comments.length})
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="comments-caret h-4 w-4 text-gray-400">
+                    <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clipRule="evenodd" />
+                  </svg>
+                </summary>
+                {task.comments.map(comment =>
+                  <div key={comment.id}>
+                    <ul className="mt-4 flex flex-col gap-4">
+                      <li className="flex gap-4">
+                        <span className="avatar-sm">{getNameInitials(comment.author.name)}</span>
+                        <div className="comment-bubble flex-1">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm font-medium text-ink">{comment.author.name}</span>
+                            <span className="text-xs text-gray-500">{comment.createdAt}</span>
+                          </div>
+                          <p className="mt-2 text-sm text-ink">{comment.content}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                <form className="mt-4 flex flex-col gap-4">
+                  <div className="flex gap-4">
+                    <span className="avatar-sm brand">{getNameInitials(session.userName)}</span>
+                    <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" className="auth-input comment-input flex-1"></textarea>
+                  </div>
+                  <button type="submit" className="btn-dark self-end" disabled>Envoyer</button>
+                </form>
+              </details>
+
             </article>
           )}
         </div>
