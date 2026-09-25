@@ -70,3 +70,19 @@ export const createProjectFormSchema = z.object({
   contributors: z
     .array(z.string()),
 });
+
+export const createTaskFormSchema = z.object({
+  title: z
+    .string()
+    .nonempty()
+    .trim(),
+  description: z
+    .string()
+    .nonempty()
+    .trim(),
+  dueDate: z
+    // @link https://zod.dev/api?id=iso-dates#iso-dates
+    .iso.date(),
+  assigneeIds: z
+    .array(z.string()),
+});

@@ -26,13 +26,17 @@
   - pourcentage complété
   - affiche propriétaire
     - idem project detail
-- API : commentaires présents sur `projects/id/tasks` mais pas sur `projects/id`
+  - tâches : vue calendrier ?
+- API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`
+  - voir les **composants sur la maquette Figma**
 - **form errors : messages en anglais**
   - ~~account edit : changer mot de passe que si présent~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
 - forms : usage de pending
+  - undefined en second argument de useActionState ?
 - liste des users ?
   - ou **ajouter un contributeur par email**
-  - l'API update projects ne semble pas gérer les contributeurs (`projectRoutes.ts:40`)
+  - l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
+    - SI : DELETE /projects/:id/contributors/:userId `projectController.ts:630`
 - **gestion des rôles**

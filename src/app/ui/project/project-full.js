@@ -163,7 +163,7 @@ export default function ProjectFull({ project, tasks }) {
       </section>
 
       {/* Modale : créer une tâche */}
-      <ModalCreateTask />
+      <ModalCreateTask project={project} />
 
       {/* Modale : modifier une tâche */}
       <ModalEditTask />
