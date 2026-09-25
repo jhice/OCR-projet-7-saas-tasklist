@@ -31,10 +31,7 @@ export default function ModalCreateTask({ project }) {
           <div>
             <label htmlFor="ct-due" className="auth-label">Échéance*</label>
             <div className="search-input-wrap">
-              <input id="ct-due" name="dueDate" type="date" placeholder="jj/mm/aaaa" className="search-input" />
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
-                <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" />
-              </svg>
+              <input id="ct-due" name="dueDate" type="date" placeholder="jj/mm/aaaa" className="search-input date-input" />
             </div>
           </div>
 
@@ -58,24 +55,6 @@ export default function ModalCreateTask({ project }) {
                 <span>&nbsp;|&nbsp;</span>
               </span>
 
-            </div>
-          </div>
-
-          <div>
-            <span className="auth-label">Statut :</span>
-            <div className="mt-2 flex flex-wrap gap-2">
-              <label className="cursor-pointer">
-                <input type="radio" name="ct-status" value="todo" className="peer sr-only" />
-                <span className="badge badge-todo peer-checked:ring-2 peer-checked:ring-red-300 peer-checked:ring-offset-1">À faire</span>
-              </label>
-              <label className="cursor-pointer">
-                <input type="radio" name="ct-status" value="progress" className="peer sr-only" />
-                <span className="badge badge-progress peer-checked:ring-2 peer-checked:ring-amber-300 peer-checked:ring-offset-1">En cours</span>
-              </label>
-              <label className="cursor-pointer">
-                <input type="radio" name="ct-status" value="done" className="peer sr-only" />
-                <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1">Terminée</span>
-              </label>
             </div>
           </div>
 

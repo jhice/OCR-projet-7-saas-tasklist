@@ -116,3 +116,7 @@ export function projectsUpdate(id, data, token) {
 export function tasksCreate(projectId, data, token) {
   return request(`/projects/${projectId}/tasks`, { method: "POST", body: data, token });
 }
+
+export function tasksUpdate(projectId, taskId, data, token) {
+  return request("/projects/" + projectId + "/tasks/" + taskId, { method: "PUT", body: data, token });
+}

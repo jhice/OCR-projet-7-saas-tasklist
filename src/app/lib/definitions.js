@@ -86,3 +86,21 @@ export const createTaskFormSchema = z.object({
   assigneeIds: z
     .array(z.string()),
 });
+
+export const updateTaskFormSchema = z.object({
+  title: z
+    .string()
+    .nonempty()
+    .trim(),
+  description: z
+    .string()
+    .nonempty()
+    .trim(),
+  dueDate: z
+    // @link https://zod.dev/api?id=iso-dates#iso-dates
+    .iso.date(),
+  status: z
+    .enum(["TODO", "IN_PROGRESS", "DONE"]),
+  assigneeIds: z
+    .array(z.string()),
+});

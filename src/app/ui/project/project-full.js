@@ -7,9 +7,17 @@ import Link from "next/link";
 import ModalCreateTask from "./modal-create-task";
 import ModalEditTask from "./modal-edit-task";
 import ModalEditProject from "./modal-edit-project";
+import { useState } from "react";
 
 export default function ProjectFull({ project, tasks, session }) {
 
+  const [taskInModal, setTaskInModal] = useState();
+
+  function showModalEditTask(e, task) {
+    console.log(task);
+    setTaskInModal(task);
+    showModal(e);
+  }
   // console.log(project);  
 
   return (
@@ -134,7 +142,7 @@ export default function ProjectFull({ project, tasks, session }) {
                     </svg>
                   </summary>
                   <div className="dropdown-menu">
-                    <a className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModal(e)}>Modifier</a>
+                    <a className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModalEditTask(e, task)}>Modifier</a>
                     <a className="dropdown-item text-red-600" onClick={(e) => null}>Supprimer</a>
                   </div>
                 </details>
@@ -202,7 +210,7 @@ export default function ProjectFull({ project, tasks, session }) {
       <ModalCreateTask project={project} />
 
       {/* Modale : modifier une tâche */}
-      <ModalEditTask />
+      <ModalEditTask taskInModal={taskInModal} setTaskInModal={setTaskInModal} />
 
       {/* Modale : modifier un projet */}
       <ModalEditProject project={project} />

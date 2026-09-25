@@ -35,8 +35,9 @@
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
 - forms : usage de pending
   - undefined en second argument de useActionState ?
+  - edit task : date qui reste "en cours de modification" dans les modales suivantes
 - liste des users ?
-  - ou **ajouter un contributeur par email**
+  - ou **ajouter un contributeur via email**
   - l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
     - SI : DELETE /projects/:id/contributors/:userId `projectController.ts:630`
 - **gestion des rôles**
