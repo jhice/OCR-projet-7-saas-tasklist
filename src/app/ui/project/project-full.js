@@ -126,6 +126,7 @@ export default function ProjectFull({ project, tasks, session }) {
                   </div>
                   <p className="mt-1 text-sm text-gray-500">{task.description}</p>
                 </div>
+                {/* Options */}
                 <details className="dropdown shrink-0">
                   <summary className="icon-btn h-10 w-10" aria-label="Options de la tâche">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
@@ -133,8 +134,8 @@ export default function ProjectFull({ project, tasks, session }) {
                     </svg>
                   </summary>
                   <div className="dropdown-menu">
-                    <a href="#" className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModal(e)}>Modifier</a>
-                    <a href="#" className="dropdown-item text-red-600">Supprimer</a>
+                    <a className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModal(e)}>Modifier</a>
+                    <a className="dropdown-item text-red-600" onClick={(e) => null}>Supprimer</a>
                   </div>
                 </details>
 
@@ -148,6 +149,7 @@ export default function ProjectFull({ project, tasks, session }) {
                 </span>
               </div>
 
+              {/* Contributors */}
               <div className="task-meta mt-3">
                 <span>Assigné à :</span>
                 {task.assignees.map(assignee =>
@@ -158,6 +160,7 @@ export default function ProjectFull({ project, tasks, session }) {
                 )}
               </div>
 
+              {/* Comments */}
               <details className="comments mt-4 border-t border-gray-100 pt-3">
                 <summary className="flex w-full items-center justify-between text-sm font-medium text-ink">
                   Commentaires ({task.comments.length})

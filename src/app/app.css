@@ -440,6 +440,7 @@ button {
 
 .dropdown-item:hover {
   background-color: #f9fafb;
+  cursor: pointer;
 }
 
 /* ---- Commentaires ---- */
