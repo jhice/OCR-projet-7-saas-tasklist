@@ -1,10 +1,15 @@
 import { createTask } from "@/app/actions/task-create";
 import { cardCloseModal, closeModal } from "@/services/helpers";
-import { useActionState } from "react";
+import { format } from "date-fns";
+import { useActionState, useState } from "react";
 
 export default function ModalCreateTask({ project }) {
 
   const [state, action, pending] = useActionState(createTask);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState(format(new Date(), "yyyy-MM-dd"));
 
   return (
     <dialog id="modal-create-task" data-modal-close="modal-create-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
@@ -20,20 +25,20 @@ export default function ModalCreateTask({ project }) {
         <form className="mt-6 flex flex-col gap-6" action={action}>
           <div>
             <label htmlFor="ct-title" className="auth-label">Titre*</label>
-            <input id="ct-title" name="title" type="text" autoFocus className="auth-input" />
+            <input id="ct-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" autoFocus className="auth-input" />
             {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
           </div>
 
           <div>
             <label htmlFor="ct-desc" className="auth-label">Description*</label>
-            <textarea id="ct-desc" name="description" rows="2" className="auth-input"></textarea>
+            <textarea id="ct-desc" name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
             {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
           <div>
             <label htmlFor="ct-due" className="auth-label">Échéance*</label>
             <div className="search-input-wrap">
-              <input id="ct-due" name="dueDate" type="date" placeholder="jj/mm/aaaa" className="search-input date-input" />
+              <input id="ct-due" name="dueDate" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} placeholder="jj/mm/aaaa" className="search-input date-input" />
             </div>
             {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
           </div>

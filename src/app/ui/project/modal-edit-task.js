@@ -1,11 +1,16 @@
 import { updateTask } from "@/app/actions/task-update";
 import { cardCloseModal, closeModal } from "@/services/helpers";
 import { format } from "date-fns";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 export default function ModalEditTask({ taskInModal, setTaskInModal }) {
 
   const [state, action, pending] = useActionState(updateTask);
+
+  const [title, setTitle] = useState(taskInModal?.title || "");
+  const [description, setdescription] = useState(taskInModal?.description || "");
+  const [dueDate, setDueDate] = useState(taskInModal ? format(taskInModal.dueDate, "yyyy-MM-dd") : "");
+  // const [status, setStatus] = useState(taskInModal?.status || "TODO");
 
   return (
     <dialog id="modal-edit-task" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
@@ -21,20 +26,20 @@ export default function ModalEditTask({ taskInModal, setTaskInModal }) {
         <form className="mt-6 flex flex-col gap-6" action={action}>
           <div>
             <label htmlFor="et-title" className="auth-label">Titre</label>
-            <input id="et-title" name="title" type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" defaultValue={taskInModal?.title} />
+            <input id="et-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
             {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
           </div>
 
           <div>
             <label htmlFor="et-desc" className="auth-label">Description</label>
-            <textarea id="et-desc" name="description" rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input" defaultValue={taskInModal?.description}></textarea>
+            <textarea id="et-desc" name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
             {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
           <div>
             <label htmlFor="dueDate" className="auth-label">Échéance</label>
             <div className="search-input-wrap">
-              <input id="dueDate" name="dueDate" type="date" placeholder="9 mars" className="search-input date-input" defaultValue={taskInModal?.dueDate?.substring(0, 10)} />
+              <input id="dueDate" name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
             </div>
             {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
           </div>

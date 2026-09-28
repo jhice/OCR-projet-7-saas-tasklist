@@ -1,10 +1,13 @@
 import { createProject } from "@/app/actions/project-create";
 import { cardCloseModal, closeModal } from "@/services/helpers";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 export default function ProjectCreateModal() {
 
   const [state, action, pending] = useActionState(createProject, undefined);
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <dialog id="modal-create-project" className="modal-card" data-modal-close="modal-create-project" onClick={(e) => cardCloseModal(e)}>
@@ -20,13 +23,13 @@ export default function ProjectCreateModal() {
         <form className="mt-6 flex flex-col gap-6" action={action}>
           <div>
             <label htmlFor="cp-name" className="auth-label">Titre*</label>
-            <input id="cp-name" name="name" type="text" autoFocus className="auth-input" />
+            <input id="cp-name" name="name" value={name} onChange={e => setName(e.target.value)} type="text" autoFocus className="auth-input" />
             {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
           <div>
             <label htmlFor="cp-desc" className="auth-label">Description*</label>
-            <textarea id="cp-desc" name="description" rows="2" className="auth-input"></textarea>
+            <textarea id="cp-desc" name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
             {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 

@@ -2,7 +2,7 @@
 
 ## Questions
 
-- on est censé avoir vu Next.js =>
+- ~~on est censé avoir vu~~ Next.js =>
   - https://openclassrooms.com/fr/courses/8710351-creez-une-application-react-avec-next-js
 - [Server vs Client](https://nextjs.org/docs/app/getting-started/server-and-client-components)
 - modales ~~avec Next.js, [Parallel Routes](https://nextjs.org/docs/app/api-reference/file-conventions/intercepting-routes#convention) ou bien chaque page gère sa modale + composants ?~~
@@ -13,12 +13,12 @@
   - utilisation ~~Pages Router~~ ou App Router ? ...
 - ~~génération IA dans le projet : fake ?~~
   - ~~ne pas mettre en place / à voir à lier avec une API IA~~
-- voir une tâche = modifier une tâche ?
-  - pas plus d'infos à afficher que sur le widget, pas de maquette pour "afficher"
 
 ## Todo
 
-- register : gérer si user déjà existant (voir api.js)
+- Q : voir une tâche = modifier une tâche ?
+  - pas plus d'infos à afficher que sur le widget, pas de maquette pour "afficher"
+- ~~register : gérer si user déjà existant (voir api.js)~~
 - React possible => document.getElementById(e.currentTarget.dataset.modalOpen);
   - checker le state avant le rendu !
 - projects :
@@ -32,9 +32,8 @@
   - [ ] **ajouter un commentaire**
 - ~~**form errors : messages en anglais**~~
   - ~~account edit : changer mot de passe que si présent~~
-- bonus : ajouter des notifs de mise à jour (flash messages)
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
-- **supprimer une tâche**
+- [ ] **supprimer une tâche**
 - forms
   - usage de pending
   - undefined en second argument de useActionState ?
@@ -44,6 +43,9 @@
   - [ ] ou **ajouter un contributeur via email**
   - [ ] l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
     - SI : DELETE /projects/:id/contributors/:userId `projectController.ts:630`
-- **gestion des rôles**
-- [ ] account : **changement de mot de passe ?**
+- routes API : mettre des try/catch là où c'est nécessaire
+- ~~**gestion des rôles**~~
+- [x] account : **changement de mot de passe ?**
   - P@ssword456
+- Balises ARIA, accessibilité
+- bonus : ajouter des notifs de mise à jour (flash messages)

@@ -14,7 +14,6 @@ export default function ProjectFull({ project, tasks, session }) {
   const [taskInModal, setTaskInModal] = useState();
 
   function showModalEditTask(e, task) {
-    // console.log(task);
     setTaskInModal(task);
     showModal(e);
   }
