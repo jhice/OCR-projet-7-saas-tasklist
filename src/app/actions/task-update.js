@@ -14,8 +14,6 @@ import { tasksUpdate } from '@/services/api';
 
 export async function updateTask(state, formData) {
 
-  console.log(formData);
-
   // Validate form fields
   const validatedFields = updateTaskFormSchema.safeParse({
     title: formData.get('title'),

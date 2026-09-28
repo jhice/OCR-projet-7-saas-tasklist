@@ -33,9 +33,11 @@
   - ~~account edit : changer mot de passe que si présent~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
-- forms : usage de pending
+- forms
+  - usage de pending
   - undefined en second argument de useActionState ?
   - edit task : date qui reste "en cours de modification" dans les modales suivantes
+  - from mappés sur un state ? (pour conserver les saisies)
 - liste des users ?
   - ou **ajouter un contributeur via email**
   - l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)

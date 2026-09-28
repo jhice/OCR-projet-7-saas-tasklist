@@ -21,11 +21,13 @@ export default function ModalCreateTask({ project }) {
           <div>
             <label htmlFor="ct-title" className="auth-label">Titre*</label>
             <input id="ct-title" name="title" type="text" autoFocus className="auth-input" />
+            {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
           </div>
 
           <div>
             <label htmlFor="ct-desc" className="auth-label">Description*</label>
             <textarea id="ct-desc" name="description" rows="2" className="auth-input"></textarea>
+            {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
           <div>
@@ -33,6 +35,7 @@ export default function ModalCreateTask({ project }) {
             <div className="search-input-wrap">
               <input id="ct-due" name="dueDate" type="date" placeholder="jj/mm/aaaa" className="search-input date-input" />
             </div>
+            {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
           </div>
 
           <div>
@@ -56,10 +59,11 @@ export default function ModalCreateTask({ project }) {
               </span>
 
             </div>
+            {state?.errors?.assigneeIds && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.assigneeIds}</p>}
           </div>
 
           <input type="hidden" name="projectId" defaultValue={project.id} />
-          <button type="submit" className="btn-dark">
+          <button disabled={pending} type="submit" className="btn-dark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
               <path d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z" />
             </svg>

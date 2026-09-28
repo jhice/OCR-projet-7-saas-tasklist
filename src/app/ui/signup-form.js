@@ -30,29 +30,29 @@ export default function SignupForm() {
                 <div>
                   <label htmlFor="name" className="auth-label">Prénom et nom</label>
                   <input id="name" name="name" type="text" autoComplete="name" className="auth-input" placeholder="ex. Lucien Dupont" />
+                  {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
                 </div>
-                {state?.errors?.name && <p className="text-[#CC3300]">{state.errors.name}</p>}
 
                 <div>
                   <label htmlFor="email" className="auth-label">Email</label>
                   <input id="email" name="email" type="email" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
+                  {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
                 </div>
-                {state?.errors?.email && <p className="text-[#CC3300]">{state.errors.email}</p>}
 
                 <div>
                   <label htmlFor="password" className="auth-label">Mot de passe</label>
                   <input id="password" name="password" type="password" autoComplete="new-password" className="auth-input" placeholder="8 caractères min." />
+                  {state?.errors?.password && (
+                    <div className="text-[#CC3300] mt-2 ml-2 text-sm">
+                      <p>Le mot de passe doit contenir :</p>
+                      <ul>
+                        {state.errors.password.map((error) => (
+                          <li key={error}>- {error}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-                {state?.errors?.password && (
-                  <div className="text-[#CC3300]">
-                    <p>Password must :</p>
-                    <ul>
-                      {state.errors.password.map((error) => (
-                        <li key={error}>- {error}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
 
                 <div className="flex justify-center pt-2">
                   <button type="submit" className="auth-button">S’inscrire</button>

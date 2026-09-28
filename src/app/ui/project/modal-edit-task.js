@@ -22,11 +22,13 @@ export default function ModalEditTask({ taskInModal, setTaskInModal }) {
           <div>
             <label htmlFor="et-title" className="auth-label">Titre</label>
             <input id="et-title" name="title" type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" defaultValue={taskInModal?.title} />
+            {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
           </div>
 
           <div>
             <label htmlFor="et-desc" className="auth-label">Description</label>
             <textarea id="et-desc" name="description" rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input" defaultValue={taskInModal?.description}></textarea>
+            {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
           <div>
@@ -34,6 +36,7 @@ export default function ModalEditTask({ taskInModal, setTaskInModal }) {
             <div className="search-input-wrap">
               <input id="dueDate" name="dueDate" type="date" placeholder="9 mars" className="search-input date-input" defaultValue={taskInModal?.dueDate?.substring(0, 10)} />
             </div>
+            {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
           </div>
 
           <div>
@@ -47,6 +50,7 @@ export default function ModalEditTask({ taskInModal, setTaskInModal }) {
                 </span>
               )}
             </div>
+            {state?.errors?.assigneeIds && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.assigneeIds}</p>}
           </div>
 
           <div>
@@ -74,11 +78,12 @@ export default function ModalEditTask({ taskInModal, setTaskInModal }) {
                 <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1">Terminée</span>
               </label>
             </div>
+            {state?.errors?.status && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}
           </div>
 
           <input type="hidden" name="projectId" defaultValue={taskInModal?.projectId} />
           <input type="hidden" name="taskId" defaultValue={taskInModal?.id} />
-          <button type="submit" className="btn-dark">Enregistrer</button>
+          <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
         </form>
       </div>
     </dialog>

@@ -21,11 +21,13 @@ export default function ModalEditProject({ project }) {
           <div>
             <label htmlFor="cp-name" className="auth-label">Titre*</label>
             <input id="cp-name" name="name" type="text" autoFocus className="auth-input" defaultValue={project.name} />
+            {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
           <div>
             <label htmlFor="cp-desc" className="auth-label">Description*</label>
             <textarea id="cp-desc" name="description" rows="2" className="auth-input" defaultValue={project.description}></textarea>
+            {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
           <div>
@@ -41,9 +43,10 @@ export default function ModalEditProject({ project }) {
               </span>
               )}
             </div>
+            {state?.errors?.contributors && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.contributors}</p>}
           </div>
 
-          <input type="hidden" name="id" defaultValue={project.id} />
+          <input disabled={pending} type="hidden" name="id" defaultValue={project.id} />
           <button type="submit" className="btn-dark">Enregistrer</button>
         </form>
       </div>
