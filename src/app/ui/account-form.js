@@ -17,8 +17,8 @@ export default function AccountForm({ userData }) {
           <div>
             <label htmlFor="name" className="auth-label">Prénom et nom</label>
             <input id="name" name="name" type="text" placeholder="ex. Amélie" className="auth-input" defaultValue={userData.name} />
+            {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
-          {state?.errors?.name && <p className="text-[#CC3300]">{state.errors.name}</p>}
 
           {/* <div>
             <label htmlFor="firstname" className="auth-label">Prénom</label>
@@ -28,31 +28,34 @@ export default function AccountForm({ userData }) {
           <div>
             <label htmlFor="email" className="auth-label">Email</label>
             <input id="email" name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" defaultValue={userData.email} />
+            {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
           </div>
-          {state?.errors?.email && <p className="text-[#CC3300]">{state.errors.email}</p>}
+
+          <p className="mt-1 text-gray-500">Si besoin de modifier le mot de passe :</p>
 
           <div>
             <label htmlFor="password" className="auth-label">Mot de passe actuel</label>
             <input id="password" name="password" type="password" placeholder="" className="auth-input" />
+            {state?.errors?.password && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.password}</p>}
           </div>
 
           <div>
             <label htmlFor="newPassword" className="auth-label">Nouveau mot de passe</label>
             <input id="newPassword" name="newPassword" type="password" placeholder="8 caractères min." className="auth-input" />
+            {state?.errors?.newPassword && (
+              <div className="text-[#CC3300] mt-2 ml-2 text-sm">
+                <p>Le nouveau mot de passe doit contenir :</p>
+                <ul>
+                  {state.errors.newPassword.map((error) => (
+                    <li key={error}>- {error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-          {state?.errors?.newPassword && (
-            <div className="text-[#CC3300]">
-              <p>Password must:</p>
-              <ul>
-                {state.errors.newPassword.map((error) => (
-                  <li key={error}>- {error}</li>
-                ))}
-              </ul>
-            </div>
-          )}
 
           <div>
-            <button type="submit" className="btn-dark">Modifier les informations</button>
+            <button disabled={pending} type="submit" className="btn-dark">Modifier les informations</button>
           </div>
         </form>
       </section>

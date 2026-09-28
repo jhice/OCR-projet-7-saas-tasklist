@@ -47,17 +47,23 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
       throw new Error("Erreur de connexion au serveur");
     }
     // on tente de récupérer un message d'erreur envoyé par l'API
-    let message = `Erreur ${response.status}`;
-    try {
-      // on vérifie si un message JSON existe
-      const data = await response.json();
-      if (data?.message) {
-        message = data.message;
-      }
-    } catch {
-      // pas de corps JSON exploitable, on garde le message par défaut
+    // let message = `Erreur ${response.status}`;
+
+    // try {
+    // on vérifie si un message JSON existe
+    const data = await response.json();
+    console.log("data", data);
+
+    // if (data?.message) {
+    //   message = data.message;
+    // }
+    if (data?.success === false) {
+      throw new Error(data.message);
     }
-    throw new Error(message);
+    // } catch {
+    //   // pas de corps JSON exploitable, on garde le message par défaut
+    //   throw new Error(message);
+    // }
   }
 
   // on retourne la donnée JSON reçue, sous forme d'objet

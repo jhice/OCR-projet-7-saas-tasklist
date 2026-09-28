@@ -28,7 +28,7 @@ export default function LoginForm() {
                 
                 <div>
                   <label htmlFor="email" className="auth-label">Email</label>
-                  <input id="email" name="email" type="email" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
+                  <input id="email" name="email" type="text" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
                   {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
                 </div>
 
@@ -48,6 +48,7 @@ export default function LoginForm() {
                 </div>
 
                 <div className="flex flex-col items-center gap-4 pt-2">
+                  {state?.errors?.login && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.login}</p>}
                   <button disabled={pending} type="submit" className="auth-button">Se connecter</button>
                   {/* <a href="#" className="auth-link text-sm">Mot de passe oublié?</a> */}
                 </div>

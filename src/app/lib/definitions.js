@@ -47,7 +47,7 @@ export const UserUpdateFormSchema = z.object({
     .string({ error: 'L\'e-mail est requis.' })
     .trim()
     .pipe(z.email({ error: 'Veuillez saisir une e-mail valide.' })),
-  password: z
+  newPassword: z
     .string({ error: 'Le mot de passe est requis.' })
     .trim()
     .min(8, { error: 'Au moins 8 caractères.' })

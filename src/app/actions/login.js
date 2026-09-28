@@ -14,18 +14,39 @@ export async function signin(state, formData) {
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
+    // {
+    //   errors: {
+    //     email: [ 'Veuillez saisir une e-mail valide.' ],
+    //     password: [
+    //       'Au moins 8 caractères.',
+    //       'Au moins un chiffre.',
+    //       'Au moins un caractère spécial.'
+    //     ]
+    //   }
+    // }
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
 
   // Call the provider or db to create a user...
-  const responseData = await login({
-    "email": formData.get('email'),
-    "password": formData.get('password'), // P@ssword123
-  });
+  try {
 
-  await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
+    const responseData = await login({
+      "email": formData.get('email'),
+      "password": formData.get('password'), // P@ssword123
+    });
+
+    await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
+
+  } catch (error) {
+    return {
+      errors: {
+        login: [error.message],
+      }
+    }
+  }
+
   // 5. Redirect user
   redirect('/');
 }

@@ -54,6 +54,8 @@ export default function SignupForm() {
                   )}
                 </div>
 
+                {state?.errors?.register && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.register}</p>}
+
                 <div className="flex justify-center pt-2">
                   <button type="submit" className="auth-button">S’inscrire</button>
                 </div>

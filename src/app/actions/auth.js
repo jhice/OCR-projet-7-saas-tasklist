@@ -20,14 +20,24 @@ export async function signup(state, formData) {
     }
   }
 
-  // Call the API provider or db to create a user...
-  const responseData = await register({
-    "email": formData.get('email'),
-    "password": formData.get('password'), // P@ssword123
-    "name": formData.get('name'),
-  });
+  try {
 
-  await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
+    // Call the API provider or db to create a user...
+    const responseData = await register({
+      "email": formData.get('email'),
+      "password": formData.get('password'), // P@ssword123
+      "name": formData.get('name'),
+    });
+
+    await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
+
+  } catch (error) {
+    return {
+      errors: {
+        register: [error.message],
+      }
+    }
+  }
   // 5. Redirect user
   redirect('/');
 }

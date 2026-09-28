@@ -184,7 +184,7 @@ export default function ProjectFull({ project, tasks, session }) {
                         <div className="comment-bubble flex-1">
                           <div className="flex items-center justify-between gap-4">
                             <span className="text-sm font-medium text-ink">{comment.author.name}</span>
-                            <span className="text-xs text-gray-500">{comment.createdAt}</span>
+                            <span className="text-xs text-gray-500">{format(comment.createdAt, "d LLLL y", {locale: fr})}</span>
                           </div>
                           <p className="mt-2 text-sm text-ink">{comment.content}</p>
                         </div>

@@ -27,9 +27,10 @@
   - affiche propriétaire
     - idem project detail
   - tâches : vue calendrier ?
-- API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`
-  - voir les **composants sur la maquette Figma**
-- **form errors : messages en anglais**
+- ~~API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`~~
+  - ~~voir les **composants sur la maquette Figma**~~
+  - [ ] **ajouter un commentaire**
+- ~~**form errors : messages en anglais**~~
   - ~~account edit : changer mot de passe que si présent~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
@@ -37,9 +38,11 @@
   - usage de pending
   - undefined en second argument de useActionState ?
   - edit task : date qui reste "en cours de modification" dans les modales suivantes
-  - from mappés sur un state ? (pour conserver les saisies)
+  - **forms mappés sur un state ?** (pour conserver les saisies)
 - liste des users ?
-  - ou **ajouter un contributeur via email**
-  - l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
+  - [ ] ou **ajouter un contributeur via email**
+  - [ ] l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
     - SI : DELETE /projects/:id/contributors/:userId `projectController.ts:630`
 - **gestion des rôles**
+- [ ] account : **changement de mot de passe ?**
+  - P@ssword456

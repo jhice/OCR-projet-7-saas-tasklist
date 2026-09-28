@@ -7,6 +7,9 @@ import getSessionCookie from '../lib/get-session-cookie';
 
 export async function userUpdate(state, formData) {
 
+  console.log(formData);
+  
+
   // With or without a password
   let validatedFields;
 
@@ -15,7 +18,7 @@ export async function userUpdate(state, formData) {
     validatedFields = UserUpdateFormSchema.safeParse({
       name: formData.get('name'),
       email: formData.get('email'),
-      password: formData.get('newPassword'),
+      newPassword: formData.get('newPassword'),
     });
   } else {
     // Validate form fields
