@@ -51,18 +51,13 @@ export function ProjectsList({ projects }) {
                 Équipe ({project.members.length})
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                {project.members.map(member =>
-                  <span key={member.id} className="inline-flex items-center">
-                    {member.role === "ADMIN" ? (
-                      <>
-                        <span className="avatar-sm brand">{getNameInitials(member.user.name)}</span>
-                        <span className="name-pill brand">Propriétaire</span>
-                      </>
-                    ) : (
-                      <span className="avatar-sm">{getNameInitials(member.user.name)}</span>
-                    )}
-                  </span>
-                )}
+                <span className="inline-flex items-center">
+                    <span className="avatar-sm brand">{getNameInitials(project.owner.name)}</span>
+                    <span className="name-pill brand">Propriétaire</span>
+                  {project.members.map(member =>
+                    <span key={member.id} className="avatar-sm">{getNameInitials(member.user.name)}</span>
+                  )}
+                </span>
               </div>
             </div>
           </article>

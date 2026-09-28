@@ -25,10 +25,20 @@ export async function updateProject(state, formData) {
 
   // Call the API provider or db to create a project...
   const projectId = formData.get('id');
-  const responseData = await projectsUpdate(projectId, {
-    name: formData.get('name'),
-    description: formData.get('description'),
-  }, token);
+  let responseData;
+  try {
+    responseData = await projectsUpdate(projectId, {
+      name: formData.get('name'),
+      description: formData.get('description'),
+    }, token);
+  } catch (error) {
+    // message de l'API (ex. pas les droits d'admin) affiché dans la modale
+    return {
+      errors: {
+        update: [error.message],
+      }
+    }
+  }
 
   // 5. Redirect to project page
   redirect('/projects/' + projectId);

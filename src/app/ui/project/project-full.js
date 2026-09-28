@@ -76,19 +76,14 @@ export default function ProjectFull({ project, tasks, session }) {
           <span className="ml-2 text-sm text-gray-500">{project.members.length} personne(s)</span>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <span className="avatar-sm brand">{getNameInitials(project.owner.name)}</span>
+          <span className="name-pill brand">Propriétaire</span>
           {project.members.map(member =>
             <span key={member.id} className="inline-flex items-center">
-              {member.role === "ADMIN" ? (
-                <>
-                  <span className="avatar-sm brand">{getNameInitials(member.user.name)}</span>
-                  <span className="name-pill brand">Propriétaire</span>
-                </>
-              ) : (
-                <>
-                  <span className="avatar-sm">{getNameInitials(member.user.name)}</span>
-                  <span className="name-pill">{member.user.name}</span>
-                </>
-              )}
+              <>
+                <span className="avatar-sm">{getNameInitials(member.user.name)}</span>
+                <span className="name-pill">{member.user.name}</span>
+              </>
             </span>
           )}
         </div>
@@ -204,7 +199,7 @@ export default function ProjectFull({ project, tasks, session }) {
                         <div className="comment-bubble flex-1">
                           <div className="flex items-center justify-between gap-4">
                             <span className="text-sm font-medium text-ink">{comment.author.name}</span>
-                            <span className="text-xs text-gray-500">{format(comment.createdAt, "d LLLL y", {locale: fr})}</span>
+                            <span className="text-xs text-gray-500">{format(comment.createdAt, "d LLLL y", { locale: fr })}</span>
                           </div>
                           <p className="mt-2 text-sm text-ink">{comment.content}</p>
                         </div>

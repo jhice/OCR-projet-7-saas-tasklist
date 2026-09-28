@@ -43,8 +43,10 @@ export default function ModalEditProject({ project }) {
             canRemove={member => member.id !== project.owner?.id}
           />
 
-          <input disabled={pending} type="hidden" name="id" defaultValue={project.id} />
-          <button type="submit" className="btn-dark">Enregistrer</button>
+          {state?.errors?.update && <p className="text-[#CC3300] ml-2 text-sm">{state.errors.update}</p>}
+
+          <input type="hidden" name="id" defaultValue={project.id} />
+          <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
         </form>
       </div>
     </dialog>

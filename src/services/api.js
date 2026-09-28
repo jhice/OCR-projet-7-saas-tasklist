@@ -4,6 +4,17 @@
 const BASE_URL = "http://localhost:8000";
 
 /**
+ * Erreur API : message exploitable pour l'UI + status HTTP (403, 404...)
+ * pour permettre aux pages d'afficher forbidden() / notFound()
+ */
+export class ApiError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.status = status;
+  }
+}
+
+/**
  * Appel HTTP générique.
  * @param {string} pathOrUrl  "/api/login" ou une URL absolue déjà construite
  * @param {object} [options]
@@ -42,34 +53,16 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
 
   // si réponse !== 2xx
   if (!response.ok) {
-    // 404
-    if (response.status === 404) {
-      // route inconnue ou pas de JSON => erreur de connexion,
-      // sinon ressource introuvable (ex. USER_NOT_FOUND) => message de l'API
-      const data = await response.json().catch(() => null);
-      if (!data?.message || data.error === "NOT_FOUND") {
-        throw new Error("Erreur de connexion au serveur");
-      }
-      throw new Error(data.message);
-    }
-    // on tente de récupérer un message d'erreur envoyé par l'API
-    // let message = `Erreur ${response.status}`;
+    // on tente de récupérer le message d'erreur JSON envoyé par l'API
+    const data = await response.json().catch(() => null);
 
-    // try {
-    // on vérifie si un message JSON existe
-    const data = await response.json();
-    console.log("data", data);
-
-    // if (data?.message) {
-    //   message = data.message;
-    // }
-    if (data?.success === false) {
-      throw new Error(data.message);
+    // 404 sur une route inconnue (ou pas de JSON) => erreur de connexion,
+    // sinon ressource introuvable (ex. USER_NOT_FOUND) => message de l'API
+    if (response.status === 404 && (!data?.message || data.error === "NOT_FOUND")) {
+      throw new ApiError("Erreur de connexion au serveur", response.status);
     }
-    // } catch {
-    //   // pas de corps JSON exploitable, on garde le message par défaut
-    //   throw new Error(message);
-    // }
+
+    throw new ApiError(data?.message || `Erreur ${response.status}`, response.status);
   }
 
   // on retourne la donnée JSON reçue, sous forme d'objet
