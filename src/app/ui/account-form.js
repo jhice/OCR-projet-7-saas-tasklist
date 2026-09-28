@@ -54,6 +54,8 @@ export default function AccountForm({ userData }) {
             )}
           </div>
 
+           {state?.errors?.update && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
+
           <div>
             <button disabled={pending} type="submit" className="btn-dark">Modifier les informations</button>
           </div>

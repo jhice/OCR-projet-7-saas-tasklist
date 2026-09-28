@@ -34,6 +34,7 @@
   - ~~account edit : changer mot de passe que si présent~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
+- **supprimer une tâche**
 - forms
   - usage de pending
   - undefined en second argument de useActionState ?
