@@ -33,16 +33,17 @@
 - ~~**form errors : messages en anglais**~~
   - ~~account edit : changer mot de passe que si présent~~
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
-- [ ] **supprimer une tâche**
+- [x] **supprimer une tâche**
 - forms
   - usage de pending
   - undefined en second argument de useActionState ?
   - ~~edit task : date qui reste "en cours de modification" dans les modales suivantes~~
   - **forms mappés sur un state ?** (pour conserver les saisies)
 - liste des users ?
-  - [ ] ou **ajouter un contributeur via email**
-  - [ ] l'**API update projects ne semble pas gérer les contributeurs** (`projectRoutes.ts:40`)
-    - SI : DELETE /projects/:id/contributors/:userId `projectController.ts:630`
+  - [x] ou ~~**ajouter un contributeur via email**~~
+  - [x] ~~l'**API update projects ne semble pas gérer les contributeurs**~~ (`projectRoutes.ts:40`)
+    - SI : ~~DELETE /projects/:id/contributors/:userId~~ `projectController.ts:630`
+- projet : proprio non visible
 - routes API : mettre des try/catch là où c'est nécessaire
 - ~~**gestion des rôles**~~
 - [x] account : **changement de mot de passe ?**

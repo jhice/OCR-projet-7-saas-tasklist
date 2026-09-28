@@ -2,8 +2,9 @@ import { updateTask } from "@/app/actions/task-update";
 import { cardCloseModal, closeModal } from "@/services/helpers";
 import { format } from "date-fns";
 import { useActionState, useState } from "react";
+import AssigneesField from "./assignees-field";
 
-export default function ModalEditTask({ taskInModal }) {
+export default function ModalEditTask({ project, taskInModal }) {
   return (
     <dialog id="modal-edit-task" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
       <div className="relative p-6 sm:p-8">
@@ -16,13 +17,13 @@ export default function ModalEditTask({ taskInModal }) {
         <h2 className="font-heading text-2xl font-bold text-ink">Modifier une tâche</h2>
 
         {/* key : remonte le formulaire (et réinitialise ses états) à chaque nouvelle tâche */}
-        <EditTaskForm key={taskInModal?.id ?? "empty"} taskInModal={taskInModal} />
+        <EditTaskForm key={taskInModal?.id ?? "empty"} project={project} taskInModal={taskInModal} />
       </div>
     </dialog>
   )
 }
 
-function EditTaskForm({ taskInModal }) {
+function EditTaskForm({ project, taskInModal }) {
 
   const [state, action, pending] = useActionState(updateTask);
 
@@ -53,19 +54,11 @@ function EditTaskForm({ taskInModal }) {
         {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
       </div>
 
-      <div>
-        <label className="auth-label">Contributeurs*</label>
-        <div className="select-wrap">
-          {taskInModal?.assignees?.map(assignee =>
-            <span key={assignee.id}>
-              <input type="checkbox" name="assigneeIds" id={assignee.user.id} value={assignee.user.id} defaultChecked={true} />
-              <label htmlFor={assignee.user.id} className="pl-2">{assignee.user.name}</label>
-              <span>&nbsp;|&nbsp;</span>
-            </span>
-          )}
-        </div>
-        {state?.errors?.assigneeIds && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.assigneeIds}</p>}
-      </div>
+      <AssigneesField id="et-assignees" project={project}
+        initialAssignees={taskInModal?.assignees?.map(assignee => assignee.user) ?? []}
+        error={state?.errors?.assigneeIds}
+      />
+
 
       <div>
         <span className="auth-label">Statut :</span>

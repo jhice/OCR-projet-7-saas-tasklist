@@ -79,8 +79,26 @@ export const createProjectFormSchema = z.object({
     .trim()
     .nonempty({ error: 'La description est requise.' }),
   contributors: z
-    .array(z.string(), { error: 'Liste de contributeurs invalide.' })
-    .nonempty({ error: 'Veuillez sélectionner au moins un contributeur.' }),
+    .array(z.email(), { error: 'Liste de contributeurs invalide.' }),
+});
+
+// les contributeurs d'un projet existant sont gérés à part (POST/DELETE /contributors)
+export const updateProjectFormSchema = z.object({
+  name: z
+    .string({ error: 'Le nom du projet est requis.' })
+    .trim()
+    .nonempty({ error: 'Le nom du projet est requis.' }),
+  description: z
+    .string({ error: 'La description est requise.' })
+    .trim()
+    .nonempty({ error: 'La description est requise.' }),
+});
+
+export const contributorFormSchema = z.object({
+  email: z
+    .string({ error: 'L\'e-mail est requis.' })
+    .trim()
+    .pipe(z.email({ error: 'Veuillez saisir une e-mail valide.' })),
 });
 
 export const createTaskFormSchema = z.object({
@@ -96,8 +114,7 @@ export const createTaskFormSchema = z.object({
     // @link https://zod.dev/api?id=iso-dates#iso-dates
     .iso.date({ error: 'Veuillez saisir une date d\'échéance valide.' }),
   assigneeIds: z
-    .array(z.string(), { error: 'Liste des personnes assignées invalide.' })
-    .nonempty({ error: 'Veuillez assigner au moins une personne.' }),
+    .array(z.string(), { error: 'Liste des personnes assignées invalide.' }),
 });
 
 export const updateTaskFormSchema = z.object({
@@ -115,8 +132,7 @@ export const updateTaskFormSchema = z.object({
   status: z
     .enum(["TODO", "IN_PROGRESS", "DONE"], { error: 'Veuillez sélectionner un statut valide.' }),
   assigneeIds: z
-    .array(z.string(), { error: 'Liste des personnes assignées invalide.' })
-    .nonempty({ error: 'Veuillez assigner au moins une personne.' }),
+    .array(z.string(), { error: 'Liste des personnes assignées invalide.' }),
 });
 
 export const createCommentFormSchema = z.object({

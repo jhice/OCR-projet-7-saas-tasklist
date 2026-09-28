@@ -1,6 +1,8 @@
 import { createProject } from "@/app/actions/project-create";
 import { cardCloseModal, closeModal } from "@/services/helpers";
 import { useActionState, useState } from "react";
+import { findUserByEmail } from "@/app/actions/project-contributors";
+import MembersField from "../members-field";
 
 export default function ProjectCreateModal() {
 
@@ -8,6 +10,19 @@ export default function ProjectCreateModal() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [contributors, setContributors] = useState([]);
+
+  // vérifie que l'utilisateur existe avant de l'ajouter à la liste
+  async function addContributor(email) {
+    if (contributors.some(c => c.email.toLowerCase() === email.toLowerCase())) {
+      return "Ce contributeur est déjà dans la liste.";
+    }
+    const { user, error } = await findUserByEmail(email);
+    if (error) {
+      return error;
+    }
+    setContributors(current => [...current, user]);
+  }
 
   return (
     <dialog id="modal-create-project" className="modal-card" data-modal-close="modal-create-project" onClick={(e) => cardCloseModal(e)}>
@@ -33,28 +48,15 @@ export default function ProjectCreateModal() {
             {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
-          <div>
-            <label className="auth-label">Contributeurs*</label>
-            <div className="select-wrap">
-              <span>
-                <input type="checkbox" name="contributors" id="a" value={"alice@example.com"} />
-                <label htmlFor="a" className="pl-2">Alice Martin</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              <span>
-                <input type="checkbox" name="contributors" id="b" value={"henri@example.com"} />
-                <label htmlFor="b" className="pl-2">Henri Dupont</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              <span>
-                <input type="checkbox" name="contributors" id="c" value={"emma@example.com"} />
-                <label htmlFor="c" className="pl-2">Emma Watson</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              {state?.errors?.contributors && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.contributors}</p>}
-            </div>
-
-          </div>
+          {/* contributeurs : liste locale, envoyée (emails) à la création */}
+          <MembersField id="cp-contributors" label="Contributeurs"
+            members={contributors}
+            onAdd={addContributor}
+            onRemove={member => setContributors(contributors.filter(c => c.id !== member.id))}
+            hiddenName="contributors"
+            hiddenKey="email"
+            error={state?.errors?.contributors}
+          />
 
           <button disabled={pending} type="submit" className="btn-dark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">

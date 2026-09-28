@@ -2,6 +2,7 @@ import { createTask } from "@/app/actions/task-create";
 import { cardCloseModal, closeModal } from "@/services/helpers";
 import { format } from "date-fns";
 import { useActionState, useState } from "react";
+import AssigneesField from "./assignees-field";
 
 export default function ModalCreateTask({ project }) {
 
@@ -43,29 +44,8 @@ export default function ModalCreateTask({ project }) {
             {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
           </div>
 
-          <div>
-            <label className="auth-label">Contributeurs*</label>
-            <div className="select-wrap">
+          <AssigneesField id="ct-assignees" project={project} error={state?.errors?.assigneeIds} />
 
-              <span>
-                <input type="checkbox" name="assigneeIds" id="a" value={"cmugpcw2h0000p9yupya9vg4u"} />
-                <label htmlFor="a" className="pl-2">Alice Martin</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              <span>
-                <input type="checkbox" name="assigneeIds" id="b" value={"cmugpcwbh0007p9yu0pavnf2g"} />
-                <label htmlFor="b" className="pl-2">Henri Dupont</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              <span>
-                <input type="checkbox" name="assigneeIds" id="c" value={"cmugpcw7m0004p9yuxtxm1j6p"} />
-                <label htmlFor="c" className="pl-2">Emma Watson</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-
-            </div>
-            {state?.errors?.assigneeIds && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.assigneeIds}</p>}
-          </div>
 
           <input type="hidden" name="projectId" defaultValue={project.id} />
           <button disabled={pending} type="submit" className="btn-dark">

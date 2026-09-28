@@ -8,7 +8,8 @@
 export function getNameInitials(name) {
   const splitName = name.split(" ");
   const firstLetter = splitName[0].substring(0, 1);
-  const secondLetter = splitName[1].substring(0, 1);
+  // nom en un seul mot : pas de seconde initiale
+  const secondLetter = (splitName[1] ?? "").substring(0, 1);
   return firstLetter + secondLetter;
 }
 
@@ -59,4 +60,12 @@ export function closeOptionsMenu(e) {
       dropdown.removeAttribute("open");
     }
   });
+}
+/**
+ * Personnes assignables à une tâche : propriétaire + membres du projet, sans doublon
+ * @returns {object[]} [{ id, name, email }]
+ */
+export function getProjectMembers(project) {
+  const users = [project.owner, ...project.members.map(member => member.user)].filter(Boolean);
+  return users.filter((user, index) => users.findIndex(u => u.id === user.id) === index);
 }

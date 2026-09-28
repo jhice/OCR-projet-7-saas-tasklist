@@ -1,16 +1,15 @@
 "use server";
 
-import { createProjectFormSchema } from '@/app/lib/definitions'
+import { updateProjectFormSchema } from '@/app/lib/definitions'
 import { projectsUpdate } from '@/services/api'
 import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
 
 export async function updateProject(state, formData) {
   // Validate form fields
-  const validatedFields = createProjectFormSchema.safeParse({
+  const validatedFields = updateProjectFormSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
-    contributors: formData.getAll('contributors'),
   })
 
   // If any form fields are invalid, return early
@@ -29,7 +28,6 @@ export async function updateProject(state, formData) {
   const responseData = await projectsUpdate(projectId, {
     name: formData.get('name'),
     description: formData.get('description'),
-    contributors: formData.getAll('contributors'),
   }, token);
 
   // 5. Redirect to project page

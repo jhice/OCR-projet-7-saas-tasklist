@@ -2,7 +2,7 @@
 
 import { getNameInitials } from "@/services/helpers";
 import { showModal } from "@/services/helpers";
-import ProjectCreateModal from "./project/project-create-modal";
+import ProjectCreateModal from "./project/modal-create-project";
 import Link from "next/link";
 
 export function ProjectsList({ projects }) {

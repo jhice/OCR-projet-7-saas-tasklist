@@ -1,6 +1,8 @@
 import { updateProject } from "@/app/actions/project-update";
-import { cardCloseModal, closeModal } from "@/services/helpers";
+import { addContributor, removeContributor } from "@/app/actions/project-contributors";
+import { cardCloseModal, closeModal, getProjectMembers } from "@/services/helpers";
 import { useActionState, useState } from "react";
+import MembersField from "../members-field";
 
 export default function ModalEditProject({ project }) {
 
@@ -33,21 +35,13 @@ export default function ModalEditProject({ project }) {
             {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
-          <div>
-            <label className="auth-label">Contributeurs*</label>
-            <div className="select-wrap">
-
-              {/* contributors */}
-              {project.members.map(member => 
-              <span key={member.id}>
-                <input type="checkbox" name="contributors" id={member.user.id} value={member.user.email} defaultChecked={true} />
-                <label htmlFor={member.user.id} className="pl-2">{member.user.name}</label>
-                <span>&nbsp;|&nbsp;</span>
-              </span>
-              )}
-            </div>
-            {state?.errors?.contributors && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.contributors}</p>}
-          </div>
+          {/* contributeurs : ajout / retrait appliqués tout de suite via l'API */}
+          <MembersField id="ep-contributors" label="Contributeurs"
+            members={getProjectMembers(project)}
+            onAdd={async email => (await addContributor(project.id, email)).error}
+            onRemove={async member => (await removeContributor(project.id, member.id)).error}
+            canRemove={member => member.id !== project.owner?.id}
+          />
 
           <input disabled={pending} type="hidden" name="id" defaultValue={project.id} />
           <button type="submit" className="btn-dark">Enregistrer</button>

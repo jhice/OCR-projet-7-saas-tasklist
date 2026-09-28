@@ -3,7 +3,7 @@
 import { useState } from "react";
 import TaskListItem from "./task/task-list-item";
 import TaskKanbanItem from "./task/task-list-kanban";
-import ProjectCreateModal from "./project/project-create-modal";
+import ProjectCreateModal from "./project/modal-create-project";
 import { showModal, TASK_STATUS } from "@/services/helpers";
 
 export default function Dashboard({ session, tasks }) {

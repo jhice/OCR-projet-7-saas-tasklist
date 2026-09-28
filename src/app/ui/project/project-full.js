@@ -7,8 +7,9 @@ import Link from "next/link";
 import ModalCreateTask from "./modal-create-task";
 import ModalEditTask from "./modal-edit-task";
 import ModalEditProject from "./modal-edit-project";
-import { useActionState, useState } from "react";
+import { useActionState, useState, useTransition } from "react";
 import { createComment } from "@/app/actions/comment-create";
+import { deleteTask } from "@/app/actions/task-delete";
 
 export default function ProjectFull({ project, tasks, session }) {
 
@@ -19,6 +20,21 @@ export default function ProjectFull({ project, tasks, session }) {
   function showModalEditTask(e, task) {
     setTaskInModal(task);
     showModal(e);
+  }
+
+  // suppression d'une tâche : { taskId, message } si l'API renvoie une erreur
+  const [deleteError, setDeleteError] = useState();
+  const [pendingDelete, startDelete] = useTransition();
+
+  function handleDeleteTask(e, task) {
+    e.preventDefault();
+    if (!window.confirm(`Supprimer la tâche « ${task.title} » ?`)) {
+      return;
+    }
+    startDelete(async () => {
+      const { error } = await deleteTask(project.id, task.id);
+      setDeleteError(error ? { taskId: task.id, message: error } : undefined);
+    });
   }
   // console.log(project);
 
@@ -145,11 +161,13 @@ export default function ProjectFull({ project, tasks, session }) {
                   </summary>
                   <div className="dropdown-menu">
                     <a className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModalEditTask(e, task)}>Modifier</a>
-                    <a className="dropdown-item text-red-600" onClick={(e) => null}>Supprimer</a>
+                    <a className="dropdown-item text-red-600" aria-disabled={pendingDelete} onClick={(e) => !pendingDelete && handleDeleteTask(e, task)}>Supprimer</a>
                   </div>
                 </details>
 
               </div>
+
+              {deleteError?.taskId === task.id && <p className="text-[#CC3300] mt-2 text-sm">{deleteError.message}</p>}
 
               <div className="task-meta mt-4">
                 <span>Échéance :</span>
@@ -215,7 +233,7 @@ export default function ProjectFull({ project, tasks, session }) {
       <ModalCreateTask project={project} />
 
       {/* Modale : modifier une tâche */}
-      <ModalEditTask taskInModal={taskInModal} />
+      <ModalEditTask project={project} taskInModal={taskInModal} />
 
       {/* Modale : modifier un projet */}
       <ModalEditProject project={project} />

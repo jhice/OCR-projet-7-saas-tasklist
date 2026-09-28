@@ -44,7 +44,13 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
   if (!response.ok) {
     // 404
     if (response.status === 404) {
-      throw new Error("Erreur de connexion au serveur");
+      // route inconnue ou pas de JSON => erreur de connexion,
+      // sinon ressource introuvable (ex. USER_NOT_FOUND) => message de l'API
+      const data = await response.json().catch(() => null);
+      if (!data?.message || data.error === "NOT_FOUND") {
+        throw new Error("Erreur de connexion au serveur");
+      }
+      throw new Error(data.message);
     }
     // on tente de récupérer un message d'erreur envoyé par l'API
     // let message = `Erreur ${response.status}`;
@@ -129,4 +135,20 @@ export function tasksUpdate(projectId, taskId, data, token) {
 
 export function commentsCreate(projectId, taskId, data, token) {
   return request(`/projects/${projectId}/tasks/${taskId}/comments`, { method: "POST", body: data, token });
+}
+
+export function projectsAddContributor(projectId, data, token) {
+  return request(`/projects/${projectId}/contributors`, { method: "POST", body: data, token });
+}
+
+export function projectsRemoveContributor(projectId, userId, token) {
+  return request(`/projects/${projectId}/contributors/${userId}`, { method: "DELETE", token });
+}
+
+export function usersSearch(query, token) {
+  return request(`/users/search?query=${encodeURIComponent(query)}`, { token });
+}
+
+export function tasksDelete(projectId, taskId, token) {
+  return request(`/projects/${projectId}/tasks/${taskId}`, { method: "DELETE", token });
 }
