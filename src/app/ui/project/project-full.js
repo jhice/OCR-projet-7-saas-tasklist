@@ -209,7 +209,7 @@ export default function ProjectFull({ project, tasks, session }) {
       <ModalCreateTask project={project} />
 
       {/* Modale : modifier une tâche */}
-      <ModalEditTask taskInModal={taskInModal} setTaskInModal={setTaskInModal} />
+      <ModalEditTask taskInModal={taskInModal} />
 
       {/* Modale : modifier un projet */}
       <ModalEditProject project={project} />

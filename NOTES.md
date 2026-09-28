@@ -46,6 +46,6 @@
 - routes API : mettre des try/catch là où c'est nécessaire
 - ~~**gestion des rôles**~~
 - [x] account : **changement de mot de passe ?**
-  - P@ssword456
+  - `P@ssword456`
 - Balises ARIA, accessibilité
 - bonus : ajouter des notifs de mise à jour (flash messages)
