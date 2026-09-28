@@ -1,15 +1,18 @@
 "use client";
 
-import { cardCloseModal, closeModal, getNameInitials, showModal, TASK_STATUS } from "@/services/helpers";
+import { getNameInitials, showModal, TASK_STATUS } from "@/services/helpers";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
 import ModalCreateTask from "./modal-create-task";
 import ModalEditTask from "./modal-edit-task";
 import ModalEditProject from "./modal-edit-project";
-import { useState } from "react";
+import { useActionState, useState } from "react";
+import { createComment } from "@/app/actions/comment-create";
 
 export default function ProjectFull({ project, tasks, session }) {
+
+  const [stateComment, actionComment, pendingComment] = useActionState(createComment, undefined);
 
   const [taskInModal, setTaskInModal] = useState();
 
@@ -168,7 +171,7 @@ export default function ProjectFull({ project, tasks, session }) {
               </div>
 
               {/* Comments */}
-              <details className="comments mt-4 border-t border-gray-100 pt-3">
+              <details className="comments mt-4 border-t border-gray-100 pt-3" open={stateComment?.taskId === task.id}>
                 <summary className="flex w-full items-center justify-between text-sm font-medium text-ink">
                   Commentaires ({task.comments.length})
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="comments-caret h-4 w-4 text-gray-400">
@@ -191,12 +194,15 @@ export default function ProjectFull({ project, tasks, session }) {
                     </ul>
                   </div>
                 )}
-                <form className="mt-4 flex flex-col gap-4">
+                <form className="mt-4 flex flex-col gap-4" action={actionComment}>
                   <div className="flex gap-4">
                     <span className="avatar-sm brand">{getNameInitials(session.userName)}</span>
-                    <textarea name="comment" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" className="auth-input comment-input flex-1"></textarea>
+                    <textarea name="content" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" className="auth-input comment-input flex-1"></textarea>
                   </div>
-                  <button type="submit" className="btn-dark self-end" disabled>Envoyer</button>
+                  {stateComment?.taskId === task.id && stateComment?.errors?.content && <p className="flex-wrap text-[#CC3300] text-right text-sm">{stateComment.errors.content}</p>}
+                  <input type="hidden" name="projectId" defaultValue={project.id} />
+                  <input type="hidden" name="taskId" defaultValue={task.id} />
+                  <button type="submit" className="btn-dark self-end" disabled={pendingComment}>Envoyer</button>
                 </form>
               </details>
 

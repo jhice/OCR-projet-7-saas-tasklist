@@ -126,3 +126,7 @@ export function tasksCreate(projectId, data, token) {
 export function tasksUpdate(projectId, taskId, data, token) {
   return request("/projects/" + projectId + "/tasks/" + taskId, { method: "PUT", body: data, token });
 }
+
+export function commentsCreate(projectId, taskId, data, token) {
+  return request(`/projects/${projectId}/tasks/${taskId}/comments`, { method: "POST", body: data, token });
+}

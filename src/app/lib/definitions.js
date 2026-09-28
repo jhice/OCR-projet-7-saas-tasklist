@@ -118,3 +118,16 @@ export const updateTaskFormSchema = z.object({
     .array(z.string(), { error: 'Liste des personnes assignées invalide.' })
     .nonempty({ error: 'Veuillez assigner au moins une personne.' }),
 });
+
+export const createCommentFormSchema = z.object({
+  content: z
+    .string({ error: 'Le commentaire est requis.' })
+    .trim()
+    .nonempty({ error: 'Le commentaire est requis.' }),
+  task: z
+    .string({ error: 'Tâche invalide.' })
+    .nonempty({ error: 'Tâche invalide.' }),
+  author: z
+    .string({ error: 'Auteur invalide.' })
+    .nonempty({ error: 'Auteur invalide.' }),
+});

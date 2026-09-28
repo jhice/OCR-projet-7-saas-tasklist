@@ -29,7 +29,7 @@
   - tâches : vue calendrier ?
 - ~~API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`~~
   - ~~voir les **composants sur la maquette Figma**~~
-  - [ ] **ajouter un commentaire**
+  - [x] **ajouter un commentaire**
 - ~~**form errors : messages en anglais**~~
   - ~~account edit : changer mot de passe que si présent~~
 - **nav : sous-menu pour "mon compte" et "déconnexion"**
@@ -37,7 +37,7 @@
 - forms
   - usage de pending
   - undefined en second argument de useActionState ?
-  - edit task : date qui reste "en cours de modification" dans les modales suivantes
+  - ~~edit task : date qui reste "en cours de modification" dans les modales suivantes~~
   - **forms mappés sur un state ?** (pour conserver les saisies)
 - liste des users ?
   - [ ] ou **ajouter un contributeur via email**
