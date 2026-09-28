@@ -209,6 +209,10 @@ button {
   font-weight: 700;
   text-transform: uppercase;
 }
+.avatar:hover {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
 
 .page-container {
   max-width: 72rem;

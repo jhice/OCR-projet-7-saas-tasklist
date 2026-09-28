@@ -53,9 +53,7 @@ export default function Header({ session }) {
           {/* <Link className="underline mr-4" href="/register">Inscription</Link>
           <Link className="underline mr-4" href="/login">Connexion</Link> */}
         </nav>
-        <Link className="underline mr-4" href="/account">Mon compte</Link>
-        <a className="underline mr-4" href="/logout">Déconnexion</a>
-        <span className="avatar">{getNameInitials(session.userName)}</span>
+        <Link href="/account" className={`avatar nav-link ${pathname.startsWith('/account') ? 'active' : ''}`}>{getNameInitials(session.userName)}</Link>
       </div>
     </header>
 

@@ -10,8 +10,6 @@ export default async function Projects() {
 
   const session = await getSessionCookie();
   const projectsResponse = await projects(session.apiToken);
-  console.log(projectsResponse.data.projects);
-  
 
   return (
     <main className="flex-1">

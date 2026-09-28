@@ -10,10 +10,15 @@ export default function AccountForm({ userData }) {
   return (
     <>
       <section className="panel p-6 sm:p-10">
-        <h1 className="font-heading text-2xl font-bold text-ink">Mon compte</h1>
-        <p className="mt-1 text-gray-500">{userData.name}</p>
+        <div className="flex justify-between">
+          <div>
+            <h1 className="font-heading text-2xl font-bold text-ink">Mon compte</h1>
+            <p className="mt-1 text-gray-500">{userData.name}</p>
+          </div>
+          <p className="mt-1"><a className="underline" href="/logout">Déconnexion</a></p>
+        </div>
 
-        <form action={action} className="mt-8 flex max-w-2xl flex-col gap-6">
+        <form action={action} className="mt-8 flex flex-col gap-6">
           <div>
             <label htmlFor="name" className="auth-label">Prénom et nom</label>
             <input id="name" name="name" type="text" placeholder="ex. Amélie" className="auth-input" defaultValue={userData.name} />
@@ -54,7 +59,7 @@ export default function AccountForm({ userData }) {
             )}
           </div>
 
-           {state?.errors?.update && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
+          {state?.errors?.update && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
 
           <div>
             <button disabled={pending} type="submit" className="btn-dark">Modifier les informations</button>
