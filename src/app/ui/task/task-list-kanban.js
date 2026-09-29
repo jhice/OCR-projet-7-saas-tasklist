@@ -26,7 +26,7 @@ export default function TaskKanbanItem({ task, TASK_STATUS }) {
           {task.comments.length}
         </span>
       </div>
-      <a href="task.html" className="btn-dark mt-4 inline-flex">Voir</a>
+      <a href={`/projects/${task.project.id}#task-${task.id}`} className="btn-dark mt-4 inline-flex">Voir</a>
     </article>
   )
 }

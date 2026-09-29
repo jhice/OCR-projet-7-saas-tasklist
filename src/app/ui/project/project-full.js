@@ -51,7 +51,7 @@ export default function ProjectFull({ project, tasks, session }) {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h1 className="font-heading text-2xl font-bold text-ink">{project.name}</h1>
-              <button type="button" className="auth-link text-sm" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>
+              <button type="button" className="auth-link text-sm mt-[5px]" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>
             </div>
             <p className="mt-2 text-gray-500">{project.description}</p>
           </div>
@@ -138,7 +138,7 @@ export default function ProjectFull({ project, tasks, session }) {
 
           {/* Tâche (répétée) */}
           {tasks.map(task =>
-            <article key={task.id} className="task-card">
+            <article key={task.id} className="task-card" id={`task-${task.id}`}>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-3">

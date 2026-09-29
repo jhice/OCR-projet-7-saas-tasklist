@@ -16,16 +16,20 @@
 
 ## Todo
 
-- Q : voir une tâche = modifier une tâche ?
-  - pas plus d'infos à afficher que sur le widget, pas de maquette pour "afficher"
+- ~~Q : voir une tâche = modifier une tâche ?~~
+  - ~~lien "voir tâche" => modale ou renvoi vers projet#task-24df2g4sd2fg4s2df4g6sd54~~
+    - ~~`.task:target { background-color: yellow; }` (ciblé par un lien #)~~
 - ~~register : gérer si user déjà existant (voir api.js)~~
 - React possible => document.getElementById(e.currentTarget.dataset.modalOpen);
   - checker le state avant le rendu !
+  - pour l'écoute sur le body, privilégier un overlay invisible derrière le bouton
+  - OU gérer via le contexte une écoute depuis le layout
 - projects :
   - tâches terminées
   - pourcentage complété
-  - affiche propriétaire
-    - idem project detail
+  - A FAIRE (traitement front)
+  - ~~affiche propriétaire~~
+    - ~~idem project detail~~
   - tâches : vue calendrier ?
 - ~~API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`~~
   - ~~voir les **composants sur la maquette Figma**~~
@@ -47,6 +51,8 @@
 - WIP routes API : mettre des try/catch là où c'est nécessaire
 - ~~**gestion des rôles**~~
 - [x] ~~account : **changement de mot de passe ?**~~
+  - `P@ssword123`
   - `P@ssword456`
 - Balises ARIA, accessibilité
+- mot de passe connexion : ne pas indiquer les contraintes (utiliser un autre validator)
 - bonus : ajouter des notifs de mise à jour (flash messages)

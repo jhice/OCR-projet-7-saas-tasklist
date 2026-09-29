@@ -25,17 +25,13 @@ export const SignupFormSchema = z.object({
 export const SigninFormSchema = z.object({
   email: z
     .string({ error: 'L\'e-mail est requis.' })
+    .nonempty()
     .trim()
     .pipe(z.email({ error: 'Veuillez saisir une e-mail valide.' })),
   password: z
     .string({ error: 'Le mot de passe est requis.' })
+    .nonempty()
     .trim()
-    .min(8, { error: 'Au moins 8 caractères.' })
-    .regex(/[a-zA-Z]/, { error: 'Au moins une lettre.' })
-    .regex(/[0-9]/, { error: 'Au moins un chiffre.' })
-    .regex(/[^a-zA-Z0-9]/, {
-      error: 'Au moins un caractère spécial.',
-    }),
 })
 
 export const UserUpdateFormSchema = z.object({

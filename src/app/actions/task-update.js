@@ -4,6 +4,8 @@ import { updateTaskFormSchema } from '@/app/lib/definitions'
 import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
 import { tasksUpdate } from '@/services/api';
+import { revalidatePath } from 'next/cache';
+import { success } from 'zod';
 
 // title,
 // description,
@@ -49,5 +51,5 @@ export async function updateTask(state, formData) {
   }, token);  
   
   // 5. Redirect to project page
-  redirect('/projects/' + projectId);
+  redirect(`/projects/${projectId}#task-${taskId}`);
 }

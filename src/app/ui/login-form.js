@@ -31,19 +31,19 @@ export default function LoginForm() {
                 
                 <div>
                   <label htmlFor="email" className="auth-label">Email</label>
-                  <input id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} type="text" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
+                  <input id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} type="text" autoComplete="email" className="auth-input"/>
                   {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="password" className="auth-label">Mot de passe</label>
-                  <input id="password" name="password" value={password} onChange={e => setPassword(e.target.value)} type="password" autoComplete="current-password" className="auth-input" placeholder="8 caractères min." />
+                  <input id="password" name="password" value={password} onChange={e => setPassword(e.target.value)} type="password" autoComplete="current-password" className="auth-input" />
                   {state?.errors?.password && (
                     <div className="text-[#CC3300] mt-2 ml-2 text-sm">
-                      <p>Le mot de passe doit contenir :</p>
+                      {/* <p>Le mot de passe doit contenir :</p> */}
                       <ul>
                         {state.errors.password.map((error) => (
-                          <li key={error}>- {error}</li>
+                          <li key={error}>{error}</li>
                         ))}
                       </ul>
                     </div>

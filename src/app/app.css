@@ -209,6 +209,7 @@ button {
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .avatar:hover {
   background-color: #1f1f1f;
   color: #ffffff;
@@ -312,6 +313,10 @@ button {
   border: 1px solid #e5e7eb;
   border-radius: 0.875rem;
   padding: 1.25rem 1.5rem;
+}
+
+.task-card:target {
+  border-color: #d3590b;
 }
 
 .task-meta {
