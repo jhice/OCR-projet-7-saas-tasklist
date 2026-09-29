@@ -7,7 +7,7 @@ import Link from "next/link";
 import ModalCreateTask from "./modal-create-task";
 import ModalEditTask from "./modal-edit-task";
 import ModalEditProject from "./modal-edit-project";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useState, useSyncExternalStore, useTransition } from "react";
 import { createComment } from "@/app/actions/comment-create";
 import { deleteTask } from "@/app/actions/task-delete";
 
@@ -16,6 +16,10 @@ export default function ProjectFull({ project, tasks, session }) {
   const [stateComment, actionComment, pendingComment] = useActionState(createComment, undefined);
 
   const [taskInModal, setTaskInModal] = useState();
+
+  // tâche ciblée par le hash (#task-xx) : :target ne s'applique pas avec <Link>
+  // (navigation via history.pushState), on ajoute donc la classe .is-target
+  const targetId = useSyncExternalStore(subscribeHash, () => window.location.hash.slice(1), () => "");
 
   function showModalEditTask(e, task) {
     setTaskInModal(task);
@@ -138,7 +142,7 @@ export default function ProjectFull({ project, tasks, session }) {
 
           {/* Tâche (répétée) */}
           {tasks.map(task =>
-            <article key={task.id} className="task-card" id={`task-${task.id}`}>
+            <article key={task.id} className={"task-card" + (targetId === `task-${task.id}` ? " is-target" : "")} id={`task-${task.id}`}>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-3">
@@ -235,4 +239,10 @@ export default function ProjectFull({ project, tasks, session }) {
 
     </>
   )
+}
+
+// abonnement aux changements de hash (pour useSyncExternalStore)
+function subscribeHash(callback) {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
 }

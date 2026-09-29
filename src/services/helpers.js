@@ -2,6 +2,8 @@
  * Helpers
  */
 
+import { projectsIdTasks } from "./api";
+
 /**
  * returns user nam initials
  */
@@ -68,4 +70,31 @@ export function closeOptionsMenu(e) {
 export function getProjectMembers(project) {
   const users = [project.owner, ...project.members.map(member => member.user)].filter(Boolean);
   return users.filter((user, index) => users.findIndex(u => u.id === user.id) === index);
+}
+
+/**
+ * progression des projets fournis (total tâches, tâches terminées, pourcentage de progression)
+ */
+export async function getProjectsStats(projectsData, apiToken) {
+  // objet qui contiendra les données finales
+  const projectsTasks = {};
+  // pour chaque projet fourni
+  for (const project of projectsData) {
+    const projectData = await projectsIdTasks(project.id, apiToken);
+    // console.log(projectData);
+    // nombre de tâches totales
+    const totalTasks = projectData.data.tasks.length;
+    // nombre de tâches terminées
+    const doneTasks = projectData.data.tasks.filter(t => t.status === "DONE");
+    const totalDoneTasks = doneTasks.length;
+    // progression en %
+    const progressionPercent = Math.round((totalDoneTasks / totalTasks) * 100);
+    // store for later use
+    projectsTasks[project.id] = {
+      totalTasks,
+      totalDoneTasks,
+      progressionPercent,
+    };
+  };
+  return projectsTasks;
 }

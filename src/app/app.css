@@ -315,7 +315,8 @@ button {
   padding: 1.25rem 1.5rem;
 }
 
-.task-card:target {
+.task-card:target,
+.task-card.is-target {
   border-color: #d3590b;
 }
 

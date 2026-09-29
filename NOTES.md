@@ -24,13 +24,13 @@
   - checker le state avant le rendu !
   - pour l'écoute sur le body, privilégier un overlay invisible derrière le bouton
   - OU gérer via le contexte une écoute depuis le layout
-- projects :
-  - tâches terminées
-  - pourcentage complété
+- ~~projects :~~
+  - ~~tâches terminées~~
+  - ~~pourcentage complété~~
   - A FAIRE (traitement front)
   - ~~affiche propriétaire~~
     - ~~idem project detail~~
-  - tâches : vue calendrier ?
+  - tâches : vue calendrier ? STANDBY
 - ~~API : **commentaires** présents sur `projects/id/tasks` mais pas sur `projects/id`~~
   - ~~voir les **composants sur la maquette Figma**~~
   - [x] ~~**ajouter un commentaire**~~
@@ -54,5 +54,5 @@
   - `P@ssword123`
   - `P@ssword456`
 - Balises ARIA, accessibilité
-- mot de passe connexion : ne pas indiquer les contraintes (utiliser un autre validator)
+- ~~mot de passe connexion : ne pas indiquer les contraintes (utiliser un autre validator)~~
 - bonus : ajouter des notifs de mise à jour (flash messages)

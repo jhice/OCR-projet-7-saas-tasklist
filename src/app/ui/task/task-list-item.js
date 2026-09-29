@@ -28,7 +28,7 @@ export default function TaskListItem({ task, TASK_STATUS }) {
           </span>
         </div>
       </div>
-      <a href={`/projects/${task.project.id}#task-${task.id}`} className="btn-dark shrink-0 self-start sm:self-center">Voir</a>
+      <Link href={`/projects/${task.project.id}#task-${task.id}`} className="btn-dark shrink-0 self-start sm:self-center">Voir</Link>
     </article>
   )
 }

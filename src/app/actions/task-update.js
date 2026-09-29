@@ -1,11 +1,9 @@
 "use server";
 
 import { updateTaskFormSchema } from '@/app/lib/definitions'
-import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
 import { tasksUpdate } from '@/services/api';
 import { revalidatePath } from 'next/cache';
-import { success } from 'zod';
 
 // title,
 // description,
@@ -41,15 +39,21 @@ export async function updateTask(state, formData) {
   // récupération de l'id du projet
   const projectId = formData.get('projectId');
 
-  // Call the API provider or db to create a project...
-  const responseData = await tasksUpdate(projectId, taskId, {
-    title: formData.get('title'),
-    description: formData.get('description'),
-    dueDate: formData.get('dueDate'),
-    assigneeIds: formData.getAll('assigneeIds'),
-    status: formData.get('status'),
-  }, token);  
-  
-  // 5. Redirect to project page
-  redirect(`/projects/${projectId}#task-${taskId}`);
+  // Call the API provider or db to update the task
+  try {
+    await tasksUpdate(projectId, taskId, {
+      title: formData.get('title'),
+      description: formData.get('description'),
+      dueDate: formData.get('dueDate'),
+      assigneeIds: formData.getAll('assigneeIds'),
+      status: formData.get('status'),
+    }, token);
+  } catch (error) {
+    return { error: error.message };
+  }
+
+  // Rafraîchit la page projet (pas de redirect : on y est déjà, et un redirect
+  // vers la même URL sans le #task-xx serait traité comme un simple changement de hash)
+  revalidatePath('/projects/' + projectId);
+  return { success: true };
 }

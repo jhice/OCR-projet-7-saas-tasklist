@@ -1,7 +1,7 @@
 import { updateTask } from "@/app/actions/task-update";
 import { cardCloseModal, closeModal } from "@/services/helpers";
 import { format } from "date-fns";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import AssigneesField from "./assignees-field";
 
 export default function ModalEditTask({ project, taskInModal }) {
@@ -26,6 +26,11 @@ export default function ModalEditTask({ project, taskInModal }) {
 function EditTaskForm({ project, taskInModal }) {
 
   const [state, action, pending] = useActionState(updateTask);
+
+  // tâche enregistrée : on ferme la modale (la page est rafraîchie par revalidatePath)
+  useEffect(() => {
+    if (state?.success) document.getElementById("modal-edit-task")?.close();
+  }, [state]);
 
   const [title, setTitle] = useState(taskInModal?.title || "");
   const [description, setdescription] = useState(taskInModal?.description || "");
@@ -90,6 +95,7 @@ function EditTaskForm({ project, taskInModal }) {
 
       <input type="hidden" name="projectId" defaultValue={taskInModal?.projectId} />
       <input type="hidden" name="taskId" defaultValue={taskInModal?.id} />
+      {state?.error && <p className="text-[#CC3300] text-sm">{state.error}</p>}
       <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
     </form>
   )
