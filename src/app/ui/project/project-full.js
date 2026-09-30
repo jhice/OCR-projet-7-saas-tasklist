@@ -18,6 +18,10 @@ export default function ProjectFull({ project, tasks, session }) {
 
   const [taskInModal, setTaskInModal] = useState();
 
+  // droits sur le projet, calqués sur l'API : modifier = propriétaire ou membre ADMIN, supprimer = propriétaire
+  const isOwner = project.owner.id === session.userId;
+  const canEditProject = isOwner || project.members.some(member => member.user.id === session.userId && member.role === "ADMIN");
+
   // tâche ciblée par le hash (#task-xx) : :target ne s'applique pas avec <Link>
   // (navigation via history.pushState), on ajoute donc la classe .is-target
   const targetId = useSyncExternalStore(subscribeHash, () => window.location.hash.slice(1), () => "");
@@ -71,8 +75,8 @@ export default function ProjectFull({ project, tasks, session }) {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h1 className="font-heading text-2xl font-bold text-ink">{project.name}</h1>
-              <button type="button" className="auth-link text-sm mt-[5px]" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>
-              <button type="button" className="auth-link text-sm mt-[5px]" disabled={pendingDeleteProject} onClick={handleDeleteProject}>Supprimer</button>
+              {canEditProject && <button type="button" className="auth-link text-sm mt-[5px]" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>}
+              {isOwner && <button type="button" className="auth-link text-sm mt-[5px]" disabled={pendingDeleteProject} onClick={handleDeleteProject}>Supprimer</button>}
             </div>
             <p className="mt-2 text-gray-500">{project.description}</p>
             {deleteProjectError && <p className="text-[#CC3300] mt-2 text-sm">{deleteProjectError}</p>}
@@ -253,7 +257,7 @@ export default function ProjectFull({ project, tasks, session }) {
       <ModalEditTask project={project} taskInModal={taskInModal} />
 
       {/* Modale : modifier un projet */}
-      <ModalEditProject project={project} />
+      {canEditProject && <ModalEditProject project={project} />}
 
     </>
   )

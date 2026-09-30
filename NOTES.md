@@ -50,7 +50,7 @@
 - ~~projet : **proprio non visible**~~
 - WIP routes API : mettre des try/catch là où c'est nécessaire
 - ~~**gestion des rôles**~~
-  - masquer l'UI sur permissions
+  - ~~masquer l'UI sur permissions~~
 - ~~supprimer projet~~
 - [x] ~~account : **changement de mot de passe ?**~~
   - `P@ssword123`
