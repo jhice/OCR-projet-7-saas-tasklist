@@ -145,3 +145,7 @@ export function usersSearch(query, token) {
 export function tasksDelete(projectId, taskId, token) {
   return request(`/projects/${projectId}/tasks/${taskId}`, { method: "DELETE", token });
 }
+
+export function projectsDelete(projectId, token) {
+  return request(`/projects/${projectId}`, { method: "DELETE", token });
+}

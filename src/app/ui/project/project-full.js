@@ -10,6 +10,7 @@ import ModalEditProject from "./modal-edit-project";
 import { useActionState, useState, useSyncExternalStore, useTransition } from "react";
 import { createComment } from "@/app/actions/comment-create";
 import { deleteTask } from "@/app/actions/task-delete";
+import { deleteProject } from "@/app/actions/project-delete";
 
 export default function ProjectFull({ project, tasks, session }) {
 
@@ -40,6 +41,21 @@ export default function ProjectFull({ project, tasks, session }) {
       setDeleteError(error ? { taskId: task.id, message: error } : undefined);
     });
   }
+
+  // suppression du projet : message si l'API renvoie une erreur, sinon redirection vers /projects
+  const [deleteProjectError, setDeleteProjectError] = useState();
+  const [pendingDeleteProject, startDeleteProject] = useTransition();
+
+  function handleDeleteProject(e) {
+    e.preventDefault();
+    if (!window.confirm(`Supprimer le projet « ${project.name} » et toutes ses tâches ?`)) {
+      return;
+    }
+    startDeleteProject(async () => {
+      const result = await deleteProject(project.id);
+      setDeleteProjectError(result?.error);
+    });
+  }
   // console.log(project);
 
   return (
@@ -56,8 +72,10 @@ export default function ProjectFull({ project, tasks, session }) {
             <div className="flex flex-wrap items-center gap-3">
               <h1 className="font-heading text-2xl font-bold text-ink">{project.name}</h1>
               <button type="button" className="auth-link text-sm mt-[5px]" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>
+              <button type="button" className="auth-link text-sm mt-[5px]" disabled={pendingDeleteProject} onClick={handleDeleteProject}>Supprimer</button>
             </div>
             <p className="mt-2 text-gray-500">{project.description}</p>
+            {deleteProjectError && <p className="text-[#CC3300] mt-2 text-sm">{deleteProjectError}</p>}
           </div>
         </div>
 

@@ -27,7 +27,7 @@
 - ~~projects :~~
   - ~~tâches terminées~~
   - ~~pourcentage complété~~
-  - A FAIRE (traitement front)
+  - ~~A FAIRE (traitement front)~~
   - ~~affiche propriétaire~~
     - ~~idem project detail~~
   - tâches : vue calendrier ? STANDBY
@@ -50,6 +50,8 @@
 - ~~projet : **proprio non visible**~~
 - WIP routes API : mettre des try/catch là où c'est nécessaire
 - ~~**gestion des rôles**~~
+  - masquer l'UI sur permissions
+- ~~supprimer projet~~
 - [x] ~~account : **changement de mot de passe ?**~~
   - `P@ssword123`
   - `P@ssword456`
