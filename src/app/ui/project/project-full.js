@@ -1,6 +1,6 @@
 "use client";
 
-import { getNameInitials, showModal, TASK_STATUS } from "@/services/helpers";
+import { closeOptionsMenuOnBlur, closeOptionsMenuOnEscape, getNameInitials, showModal, TASK_STATUS } from "@/services/helpers";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
@@ -175,7 +175,7 @@ export default function ProjectFull({ project, tasks, session }) {
                   <p className="mt-1 text-sm text-gray-500">{task.description}</p>
                 </div>
                 {/* Options */}
-                <details className="dropdown shrink-0">
+                <details className="dropdown shrink-0" onKeyDown={closeOptionsMenuOnEscape} onBlur={closeOptionsMenuOnBlur}>
                   <summary className="icon-btn h-10 w-10" aria-label={`Options de la tâche ${task.title}`}>
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                       <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />

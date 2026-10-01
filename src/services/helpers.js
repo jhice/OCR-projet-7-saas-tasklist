@@ -63,6 +63,24 @@ export function closeOptionsMenu(e) {
     }
   });
 }
+
+// clavier : Échap ferme le menu et rend le focus au bouton d'options
+export function closeOptionsMenuOnEscape(e) {
+  const dropdown = e.currentTarget;
+  if (e.key === "Escape" && dropdown.open) {
+    dropdown.removeAttribute("open");
+    dropdown.querySelector("summary")?.focus();
+  }
+}
+
+// clavier : le focus quitte le menu (Tab) => fermeture
+// relatedTarget null (clic souris sans focus, ex. Safari) : on laisse closeOptionsMenu gérer
+export function closeOptionsMenuOnBlur(e) {
+  const dropdown = e.currentTarget;
+  if (e.relatedTarget && !dropdown.contains(e.relatedTarget)) {
+    dropdown.removeAttribute("open");
+  }
+}
 /**
  * Personnes assignables à une tâche : propriétaire + membres du projet, sans doublon
  * @returns {object[]} [{ id, name, email }]

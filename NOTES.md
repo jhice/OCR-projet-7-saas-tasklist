@@ -55,6 +55,6 @@
 - [x] ~~account : **changement de mot de passe ?**~~
   - `P@ssword123`
   - `P@ssword456`
-- Balises ARIA, accessibilité
+- ~~Balises ARIA, accessibilité~~
 - ~~mot de passe connexion : ne pas indiquer les contraintes (utiliser un autre validator)~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
