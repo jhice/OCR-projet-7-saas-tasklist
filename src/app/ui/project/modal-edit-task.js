@@ -73,21 +73,21 @@ function EditTaskForm({ project, taskInModal }) {
               checked={status === "TODO"}
               onChange={() => setStatus("TODO")}
             />
-            <span className="badge badge-todo peer-checked:ring-2 peer-checked:ring-red-300 peer-checked:ring-offset-1">À faire</span>
+            <span className="badge badge-todo peer-checked:ring-2 peer-checked:ring-red-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">À faire</span>
           </label>
           <label className="cursor-pointer">
             <input type="radio" name="status" value="IN_PROGRESS" className="peer sr-only"
               checked={status === "IN_PROGRESS"}
               onChange={() => setStatus("IN_PROGRESS")}
             />
-            <span className="badge badge-progress peer-checked:ring-2 peer-checked:ring-amber-300 peer-checked:ring-offset-1">En cours</span>
+            <span className="badge badge-progress peer-checked:ring-2 peer-checked:ring-amber-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">En cours</span>
           </label>
           <label className="cursor-pointer">
             <input type="radio" name="status" value="DONE" className="peer sr-only"
               checked={status === "DONE"}
               onChange={() => setStatus("DONE")}
             />
-            <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1">Terminée</span>
+            <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">Terminée</span>
           </label>
         </div>
         {state?.errors?.status && <p id="et-status-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}

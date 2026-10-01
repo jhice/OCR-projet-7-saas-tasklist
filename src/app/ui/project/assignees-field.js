@@ -24,7 +24,7 @@ export default function AssigneesField({ id, project, initialAssignees = [], err
   }
 
   return (
-    <MembersField id={id} label="Assigné à"
+    <MembersField id={id} label="Assigné à" listLabel="Personnes assignées"
       members={assignees}
       onAdd={addAssignee}
       onRemove={member => setAssignees(assignees.filter(assignee => assignee.id !== member.id))}

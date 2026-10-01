@@ -25,21 +25,21 @@ export default function ModalCreateTask({ project }) {
 
         <form className="mt-6 flex flex-col gap-6" action={action}>
             <div>
-              <label htmlFor="ct-title" className="auth-label">Titre*</label>
-              <input id="ct-title" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "ct-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" autoFocus className="auth-input" />
+              <label htmlFor="ct-title" className="auth-label">Titre<span aria-hidden="true">*</span></label>
+              <input id="ct-title" aria-required="true" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "ct-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" autoFocus className="auth-input" />
               {state?.errors?.title && <p id="ct-title-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
             </div>
 
             <div>
-              <label htmlFor="ct-desc" className="auth-label">Description*</label>
-              <textarea id="ct-desc" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "ct-desc-error" : undefined} name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
+              <label htmlFor="ct-desc" className="auth-label">Description<span aria-hidden="true">*</span></label>
+              <textarea id="ct-desc" aria-required="true" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "ct-desc-error" : undefined} name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
               {state?.errors?.description && <p id="ct-desc-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
             </div>
 
             <div>
-              <label htmlFor="ct-due" className="auth-label">Échéance*</label>
+              <label htmlFor="ct-due" className="auth-label">Échéance<span aria-hidden="true">*</span></label>
               <div className="search-input-wrap">
-                <input id="ct-due" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "ct-due-error" : undefined} name="dueDate" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} placeholder="jj/mm/aaaa" className="search-input date-input" />
+                <input id="ct-due" aria-required="true" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "ct-due-error" : undefined} name="dueDate" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} placeholder="jj/mm/aaaa" className="search-input date-input" />
               </div>
               {state?.errors?.dueDate && <p id="ct-due-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
             </div>

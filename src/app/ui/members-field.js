@@ -15,8 +15,9 @@ import { useState, useTransition } from "react";
  * @param {string} [hiddenName] si fourni, un <input hidden> par membre pour le formData
  * @param {string} [hiddenKey]  propriété du membre utilisée comme valeur ("id" ou "email")
  * @param {string[]} [error]    erreurs zod renvoyées par l'action du formulaire parent
+ * @param {string} [listLabel]  légende de la liste des membres
  */
-export default function MembersField({ id, label, members, onAdd, onRemove, canRemove = () => true, hiddenName, hiddenKey = "id", error }) {
+export default function MembersField({ id, label, members, onAdd, onRemove, canRemove = () => true, hiddenName, hiddenKey = "id", error, listLabel = "Liste des contributeurs" }) {
 
   const [email, setEmail] = useState("");
   const [localError, setLocalError] = useState();
@@ -67,7 +68,7 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
 
       {members.length > 0 && (
         <fieldset className="mt-2 flex flex-col gap-2">
-          <legend className="auth-label">Liste des contributeurs</legend>
+          <legend className="auth-label">{listLabel}</legend>
           {members.map(member =>
             <div key={member.id} className="flex items-center justify-between gap-4">
               <span className="inline-flex items-center">

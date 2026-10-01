@@ -24,14 +24,14 @@ export default function ModalEditProject({ project }) {
 
         <form className="mt-6 flex flex-col gap-6" action={action}>
           <div>
-            <label htmlFor="cp-name" className="auth-label">Titre*</label>
-            <input id="cp-name" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "cp-name-error" : undefined} name="name" type="text" autoFocus className="auth-input" value={name} onChange={e => setName(e.target.value)} />
+            <label htmlFor="cp-name" className="auth-label">Titre<span aria-hidden="true">*</span></label>
+            <input id="cp-name" aria-required="true" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "cp-name-error" : undefined} name="name" type="text" autoFocus className="auth-input" value={name} onChange={e => setName(e.target.value)} />
             {state?.errors?.name && <p id="cp-name-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
           <div>
-            <label htmlFor="cp-desc" className="auth-label">Description*</label>
-            <textarea id="cp-desc" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "cp-desc-error" : undefined} name="description" rows="2" className="auth-input" value={description} onChange={e => setDescription(e.target.value)}></textarea>
+            <label htmlFor="cp-desc" className="auth-label">Description<span aria-hidden="true">*</span></label>
+            <textarea id="cp-desc" aria-required="true" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "cp-desc-error" : undefined} name="description" rows="2" className="auth-input" value={description} onChange={e => setDescription(e.target.value)}></textarea>
             {state?.errors?.description && <p id="cp-desc-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
           </div>
 
