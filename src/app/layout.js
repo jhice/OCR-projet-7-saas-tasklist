@@ -11,6 +11,7 @@ const InterSans = Inter({
 });
 
 import "./app.css";
+import "./app-a11y.css";
 import getSessionCookie from "./lib/get-session-cookie";
 import LayoutUi from "./ui/layout";
 

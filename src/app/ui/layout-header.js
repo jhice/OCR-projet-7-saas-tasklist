@@ -34,9 +34,9 @@ export default function Header({ session }) {
 
     <header className="app-header">
       <div className="app-header-inner">
-        <Link href="/" className="app-logo">
-          <Image src={logoImage} alt="Logo Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
-        </Link>
+        {/* <Link href="/" className="app-logo"> */}
+          <Image src={logoImage} alt="Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
+        {/* </Link> */}
         <nav className="app-nav">
           <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">

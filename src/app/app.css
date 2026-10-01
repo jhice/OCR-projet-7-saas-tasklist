@@ -107,7 +107,7 @@ button {
 }
 
 .auth-link {
-  color: #d3590b;
+  color: var(--color-brand);
   text-decoration: underline;
   text-underline-offset: 2px;
   font-weight: 500;
@@ -447,6 +447,8 @@ button {
 
 .dropdown-item {
   display: block;
+  width: 100%;
+  text-align: left;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   font-size: 0.875rem;

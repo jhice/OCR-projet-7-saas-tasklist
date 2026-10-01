@@ -48,28 +48,10 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
 
   return (
     <div>
+      {/* ajout contributeur */}
       <label htmlFor={id} className="auth-label">{label}</label>
-
-      {members.length > 0 && (
-        <ul className="mt-2 flex flex-col gap-2">
-          {members.map(member =>
-            <li key={member.id} className="flex items-center justify-between gap-4">
-              <span className="inline-flex items-center">
-                <span className="avatar-sm">{getNameInitials(member.name)}</span>
-                <span className="name-pill">{member.name}</span>
-                <span className="ml-2 text-xs text-gray-500">{member.email}</span>
-              </span>
-              {canRemove(member) && (
-                <button type="button" className="auth-link text-sm text-red-600" disabled={pending} onClick={() => handleRemove(member)}>Retirer</button>
-              )}
-              {hiddenName && <input type="hidden" name={hiddenName} value={member[hiddenKey]} />}
-            </li>
-          )}
-        </ul>
-      )}
-
       <div className="mt-2 flex gap-2">
-        {/* type text (et pas email) : une saisie en cours ne doit pas bloquer le submit du formulaire parent */}
+        {/* type text (et pas email) : pour tester la validation serveur */}
         <input id={id} type="text" inputMode="email" autoComplete="off" placeholder="E-mail du membre" className="auth-input flex-1"
           value={email}
           onChange={e => setEmail(e.target.value)}
@@ -80,6 +62,28 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
 
       {localError && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{localError}</p>}
       {error && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{error}</p>}
+
+      {/* liste des contributeurs */}
+
+      {members.length > 0 && (
+        <fieldset className="mt-2 flex flex-col gap-2">
+          <legend className="auth-label">Liste des contributeurs</legend>
+          {members.map(member =>
+            <div key={member.id} className="flex items-center justify-between gap-4">
+              <span className="inline-flex items-center">
+                <span className="avatar-sm">{getNameInitials(member.name)}</span>
+                <span className="name-pill">{member.name}</span>
+                <span className="ml-2 text-xs text-gray-500">{member.email}</span>
+              </span>
+              {canRemove(member) && (
+                <button type="button" className="auth-link text-sm text-red-600" disabled={pending} onClick={() => handleRemove(member)}>Retirer</button>
+              )}
+              {hiddenName && <input type="hidden" name={hiddenName} value={member[hiddenKey]} />}
+            </div>
+          )}
+        </fieldset>
+      )}
+
     </div>
   )
 }

@@ -24,28 +24,27 @@ export default function ModalCreateTask({ project }) {
         <h2 className="font-heading text-2xl font-bold text-ink">Créer une tâche</h2>
 
         <form className="mt-6 flex flex-col gap-6" action={action}>
-          <div>
-            <label htmlFor="ct-title" className="auth-label">Titre*</label>
-            <input id="ct-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" autoFocus className="auth-input" />
-            {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="ct-desc" className="auth-label">Description*</label>
-            <textarea id="ct-desc" name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
-            {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="ct-due" className="auth-label">Échéance*</label>
-            <div className="search-input-wrap">
-              <input id="ct-due" name="dueDate" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} placeholder="jj/mm/aaaa" className="search-input date-input" />
+            <div>
+              <label htmlFor="ct-title" className="auth-label">Titre*</label>
+              <input id="ct-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" autoFocus className="auth-input" />
+              {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
             </div>
-            {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
-          </div>
+
+            <div>
+              <label htmlFor="ct-desc" className="auth-label">Description*</label>
+              <textarea id="ct-desc" name="description" value={description} onChange={e => setDescription(e.target.value)} rows="2" className="auth-input"></textarea>
+              {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="ct-due" className="auth-label">Échéance*</label>
+              <div className="search-input-wrap">
+                <input id="ct-due" name="dueDate" type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} placeholder="jj/mm/aaaa" className="search-input date-input" />
+              </div>
+              {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
+            </div>
 
           <AssigneesField id="ct-assignees" project={project} error={state?.errors?.assigneeIds} />
-
 
           <input type="hidden" name="projectId" defaultValue={project.id} />
           <button disabled={pending} type="submit" className="btn-dark">

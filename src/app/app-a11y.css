@@ -1,0 +1,16 @@
+/* contrastes */
+
+@theme {
+  --color-brand: #C44D03;
+}
+
+.nav-link {
+  color: var(--color-brand);
+}
+/* focus clavier */
+
+.dropdown-item:focus-visible {
+  background-color: #f9fafb;
+  outline: 2px solid var(--color-brand);
+  outline-offset: -2px;
+}

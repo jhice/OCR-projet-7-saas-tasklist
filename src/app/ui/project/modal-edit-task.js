@@ -39,25 +39,25 @@ function EditTaskForm({ project, taskInModal }) {
 
   return (
     <form className="mt-6 flex flex-col gap-6" action={action}>
-      <div>
-        <label htmlFor="et-title" className="auth-label">Titre</label>
-        <input id="et-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
-        {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
-      </div>
-
-      <div>
-        <label htmlFor="et-desc" className="auth-label">Description</label>
-        <textarea id="et-desc" name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
-        {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
-      </div>
-
-      <div>
-        <label htmlFor="dueDate" className="auth-label">Échéance</label>
-        <div className="search-input-wrap">
-          <input id="dueDate" name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
+        <div>
+          <label htmlFor="et-title" className="auth-label">Titre</label>
+          <input id="et-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
+          {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
         </div>
-        {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
-      </div>
+
+        <div>
+          <label htmlFor="et-desc" className="auth-label">Description</label>
+          <textarea id="et-desc" name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
+          {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="dueDate" className="auth-label">Échéance</label>
+          <div className="search-input-wrap">
+            <input id="dueDate" name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
+          </div>
+          {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
+        </div>
 
       <AssigneesField id="et-assignees" project={project}
         initialAssignees={taskInModal?.assignees?.map(assignee => assignee.user) ?? []}
@@ -65,8 +65,8 @@ function EditTaskForm({ project, taskInModal }) {
       />
 
 
-      <div>
-        <span className="auth-label">Statut :</span>
+      <fieldset>
+        <legend className="auth-label">Statut :</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           <label className="cursor-pointer">
             <input type="radio" name="status" value="TODO" className="peer sr-only"
@@ -91,7 +91,7 @@ function EditTaskForm({ project, taskInModal }) {
           </label>
         </div>
         {state?.errors?.status && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}
-      </div>
+      </fieldset>
 
       <input type="hidden" name="projectId" defaultValue={taskInModal?.projectId} />
       <input type="hidden" name="taskId" defaultValue={taskInModal?.id} />
