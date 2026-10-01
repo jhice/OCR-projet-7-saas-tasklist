@@ -52,7 +52,7 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
       <label htmlFor={id} className="auth-label">{label}</label>
       <div className="mt-2 flex gap-2">
         {/* type text (et pas email) : pour tester la validation serveur */}
-        <input id={id} type="text" inputMode="email" autoComplete="off" placeholder="E-mail du membre" className="auth-input flex-1"
+        <input id={id} aria-invalid={!!(localError || error)} aria-describedby={[localError && `${id}-error-local`, error && `${id}-error`].filter(Boolean).join(" ") || undefined} type="text" inputMode="email" autoComplete="off" placeholder="E-mail du membre" className="auth-input flex-1"
           value={email}
           onChange={e => setEmail(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -60,8 +60,8 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
         <button type="button" className="btn-dark" disabled={pending || !email.trim()} onClick={handleAdd}>Ajouter</button>
       </div>
 
-      {localError && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{localError}</p>}
-      {error && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{error}</p>}
+      {localError && <p id={`${id}-error-local`} role="alert" className="text-[#CC3300] mt-2 ml-2 text-sm">{localError}</p>}
+      {error && <p id={`${id}-error`} className="text-[#CC3300] mt-2 ml-2 text-sm">{error}</p>}
 
       {/* liste des contributeurs */}
 
@@ -71,7 +71,7 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
           {members.map(member =>
             <div key={member.id} className="flex items-center justify-between gap-4">
               <span className="inline-flex items-center">
-                <span className="avatar-sm">{getNameInitials(member.name)}</span>
+                <span aria-hidden="true" className="avatar-sm">{getNameInitials(member.name)}</span>
                 <span className="name-pill">{member.name}</span>
                 <span className="ml-2 text-xs text-gray-500">{member.email}</span>
               </span>

@@ -88,7 +88,7 @@ export async function getProjectsStats(projectsData, apiToken) {
     const doneTasks = projectData.data.tasks.filter(t => t.status === "DONE");
     const totalDoneTasks = doneTasks.length;
     // progression en %
-    const progressionPercent = Math.round((totalDoneTasks / totalTasks) * 100);
+    const progressionPercent = totalTasks ? Math.round((totalDoneTasks / totalTasks) * 100) : 0;
     // store for later use
     projectsTasks[project.id] = {
       totalTasks,

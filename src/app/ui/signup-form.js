@@ -29,21 +29,21 @@ export default function SignupForm() {
 
                 <div>
                   <label htmlFor="name" className="auth-label">Prénom et nom</label>
-                  <input id="name" name="name" type="text" autoComplete="name" className="auth-input" placeholder="ex. Lucien Dupont" />
-                  {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
+                  <input id="name" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "name-error" : undefined} name="name" type="text" autoComplete="name" className="auth-input" placeholder="ex. Lucien Dupont" />
+                  {state?.errors?.name && <p id="name-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="email" className="auth-label">Email</label>
-                  <input id="email" name="email" type="email" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
-                  {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
+                  <input id="email" aria-invalid={!!state?.errors?.email} aria-describedby={state?.errors?.email ? "email-error" : undefined} name="email" type="email" autoComplete="email" className="auth-input" placeholder="ex. lucien.dupont@example.com" />
+                  {state?.errors?.email && <p id="email-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="password" className="auth-label">Mot de passe</label>
-                  <input id="password" name="password" type="password" autoComplete="new-password" className="auth-input" placeholder="8 caractères min." />
+                  <input id="password" aria-invalid={!!state?.errors?.password} aria-describedby={state?.errors?.password ? "password-error" : undefined} name="password" type="password" autoComplete="new-password" className="auth-input" placeholder="8 caractères min." />
                   {state?.errors?.password && (
-                    <div className="text-[#CC3300] mt-2 ml-2 text-sm">
+                    <div id="password-error" className="text-[#CC3300] mt-2 ml-2 text-sm">
                       <p>Le mot de passe doit contenir :</p>
                       <ul>
                         {state.errors.password.map((error) => (
@@ -54,7 +54,7 @@ export default function SignupForm() {
                   )}
                 </div>
 
-                {state?.errors?.register && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.register}</p>}
+                {state?.errors?.register && <p role="alert" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.register}</p>}
 
                 <div className="flex justify-center pt-2">
                   <button type="submit" className="auth-button">S’inscrire</button>

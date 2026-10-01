@@ -6,15 +6,15 @@ import AssigneesField from "./assignees-field";
 
 export default function ModalEditTask({ project, taskInModal }) {
   return (
-    <dialog id="modal-edit-task" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
+    <dialog id="modal-edit-task" aria-labelledby="modal-edit-task-title" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
       <div className="relative p-6 sm:p-8">
         <button type="button" className="absolute right-5 top-5 text-gray-400 hover:text-gray-600" data-modal-close="modal-edit-task" aria-label="Fermer" onClick={(e) => closeModal(e)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>
         </button>
 
-        <h2 className="font-heading text-2xl font-bold text-ink">Modifier une tâche</h2>
+        <h2 id="modal-edit-task-title" className="font-heading text-2xl font-bold text-ink">Modifier une tâche</h2>
 
         {/* key : remonte le formulaire (et réinitialise ses états) à chaque nouvelle tâche */}
         <EditTaskForm key={taskInModal?.id ?? "empty"} project={project} taskInModal={taskInModal} />
@@ -41,22 +41,22 @@ function EditTaskForm({ project, taskInModal }) {
     <form className="mt-6 flex flex-col gap-6" action={action}>
         <div>
           <label htmlFor="et-title" className="auth-label">Titre</label>
-          <input id="et-title" name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
-          {state?.errors?.title && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
+          <input id="et-title" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "et-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
+          {state?.errors?.title && <p id="et-title-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
         </div>
 
         <div>
           <label htmlFor="et-desc" className="auth-label">Description</label>
-          <textarea id="et-desc" name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
-          {state?.errors?.description && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
+          <textarea id="et-desc" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "et-desc-error" : undefined} name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
+          {state?.errors?.description && <p id="et-desc-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
         </div>
 
         <div>
           <label htmlFor="dueDate" className="auth-label">Échéance</label>
           <div className="search-input-wrap">
-            <input id="dueDate" name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
+            <input id="dueDate" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "dueDate-error" : undefined} name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
           </div>
-          {state?.errors?.dueDate && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
+          {state?.errors?.dueDate && <p id="dueDate-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
         </div>
 
       <AssigneesField id="et-assignees" project={project}
@@ -65,7 +65,7 @@ function EditTaskForm({ project, taskInModal }) {
       />
 
 
-      <fieldset>
+      <fieldset aria-describedby={state?.errors?.status ? "et-status-error" : undefined}>
         <legend className="auth-label">Statut :</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           <label className="cursor-pointer">
@@ -90,12 +90,12 @@ function EditTaskForm({ project, taskInModal }) {
             <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1">Terminée</span>
           </label>
         </div>
-        {state?.errors?.status && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}
+        {state?.errors?.status && <p id="et-status-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}
       </fieldset>
 
       <input type="hidden" name="projectId" defaultValue={taskInModal?.projectId} />
       <input type="hidden" name="taskId" defaultValue={taskInModal?.id} />
-      {state?.error && <p className="text-[#CC3300] text-sm">{state.error}</p>}
+      {state?.error && <p role="alert" className="text-[#CC3300] text-sm">{state.error}</p>}
       <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
     </form>
   )

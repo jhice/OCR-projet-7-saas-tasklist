@@ -21,8 +21,8 @@ export default function AccountForm({ userData }) {
         <form action={action} className="mt-8 flex flex-col gap-6">
           <div>
             <label htmlFor="name" className="auth-label">Prénom et nom</label>
-            <input id="name" name="name" type="text" placeholder="ex. Amélie" className="auth-input" defaultValue={userData.name} />
-            {state?.errors?.name && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
+            <input id="name" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "name-error" : undefined} name="name" type="text" placeholder="ex. Amélie" className="auth-input" defaultValue={userData.name} />
+            {state?.errors?.name && <p id="name-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
           {/* <div>
@@ -32,23 +32,23 @@ export default function AccountForm({ userData }) {
 
           <div>
             <label htmlFor="email" className="auth-label">Email</label>
-            <input id="email" name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" defaultValue={userData.email} />
-            {state?.errors?.email && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
+            <input id="email" aria-invalid={!!state?.errors?.email} aria-describedby={state?.errors?.email ? "email-error" : undefined} name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" defaultValue={userData.email} />
+            {state?.errors?.email && <p id="email-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
           </div>
 
           <p className="mt-1 text-gray-500">Si besoin de modifier le mot de passe :</p>
 
           <div>
             <label htmlFor="password" className="auth-label">Mot de passe actuel</label>
-            <input id="password" name="password" type="password" placeholder="" className="auth-input" />
-            {state?.errors?.password && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.password}</p>}
+            <input id="password" aria-invalid={!!state?.errors?.password} aria-describedby={state?.errors?.password ? "password-error" : undefined} name="password" type="password" placeholder="" className="auth-input" />
+            {state?.errors?.password && <p id="password-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.password}</p>}
           </div>
 
           <div>
             <label htmlFor="newPassword" className="auth-label">Nouveau mot de passe</label>
-            <input id="newPassword" name="newPassword" type="password" placeholder="8 caractères min." className="auth-input" />
+            <input id="newPassword" aria-invalid={!!state?.errors?.newPassword} aria-describedby={state?.errors?.newPassword ? "newPassword-error" : undefined} name="newPassword" type="password" placeholder="8 caractères min." className="auth-input" />
             {state?.errors?.newPassword && (
-              <div className="text-[#CC3300] mt-2 ml-2 text-sm">
+              <div id="newPassword-error" className="text-[#CC3300] mt-2 ml-2 text-sm">
                 <p>Le nouveau mot de passe doit contenir :</p>
                 <ul>
                   {state.errors.newPassword.map((error) => (
@@ -59,7 +59,7 @@ export default function AccountForm({ userData }) {
             )}
           </div>
 
-          {state?.errors?.update && <p className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
+          {state?.errors?.update && <p role="alert" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
 
           <div>
             <button disabled={pending} type="submit" className="btn-dark">Modifier les informations</button>

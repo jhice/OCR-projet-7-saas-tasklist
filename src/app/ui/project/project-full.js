@@ -68,7 +68,7 @@ export default function ProjectFull({ project, tasks, session }) {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex items-start gap-4">
           <Link href="/projects" className="icon-btn shrink-0" aria-label="Retour aux projets">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
               <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
             </svg>
           </Link>
@@ -79,14 +79,14 @@ export default function ProjectFull({ project, tasks, session }) {
               {isOwner && <button type="button" className="auth-link text-sm mt-[5px]" disabled={pendingDeleteProject} onClick={handleDeleteProject}>Supprimer</button>}
             </div>
             <p className="mt-2 text-gray-500">{project.description}</p>
-            {deleteProjectError && <p className="text-[#CC3300] mt-2 text-sm">{deleteProjectError}</p>}
+            {deleteProjectError && <p role="alert" className="text-[#CC3300] mt-2 text-sm">{deleteProjectError}</p>}
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
           <button type="button" className="btn-dark" data-modal-open="modal-create-task" onClick={(e) => showModal(e)}>Créer une tâche</button>
           {/* <button type="button" className="btn-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
               <path d="M10 2c.4 2.4 1.5 3.9 4 4.3-2.5.4-3.6 1.9-4 4.3-.4-2.4-1.5-3.9-4-4.3 2.5-.4 3.6-1.9 4-4.3z" />
               <path d="M15.5 12c.24 1.36.86 2.2 2.3 2.43-1.44.23-2.06 1.07-2.3 2.43-.24-1.36-.86-2.2-2.3-2.43 1.44-.23 2.06-1.07 2.3-2.43z" />
             </svg>
@@ -102,12 +102,12 @@ export default function ProjectFull({ project, tasks, session }) {
           <span className="ml-2 text-sm text-gray-500">{project.members.length} personne(s)</span>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="avatar-sm brand">{getNameInitials(project.owner.name)}</span>
+          <span className="avatar-sm brand" role="img" aria-label={project.owner.name} title={project.owner.name}>{getNameInitials(project.owner.name)}</span>
           <span className="name-pill brand">Propriétaire</span>
           {project.members.map(member =>
             <span key={member.id} className="inline-flex items-center">
               <>
-                <span className="avatar-sm">{getNameInitials(member.user.name)}</span>
+                <span aria-hidden="true" className="avatar-sm">{getNameInitials(member.user.name)}</span>
                 <span className="name-pill">{member.user.name}</span>
               </>
             </span>
@@ -125,13 +125,13 @@ export default function ProjectFull({ project, tasks, session }) {
           <div className="flex flex-wrap items-center gap-3">
             {/* <div className="segmented" role="tablist">
               <button type="button" className="segmented-btn active" role="tab" aria-selected="true">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                   <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                 </svg>
                 Liste
               </button>
               <button type="button" className="segmented-btn" role="tab" aria-selected="false">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                   <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" />
                 </svg>
                 Calendrier
@@ -145,14 +145,14 @@ export default function ProjectFull({ project, tasks, session }) {
                 <option value="progress">En cours</option>
                 <option value="done">Terminée</option>
               </select>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="select-caret h-4 w-4">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="select-caret h-4 w-4">
                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
               </svg>
             </div> */}
 
             {/* <div className="search-input-wrap w-full sm:w-64">
               <input type="search" placeholder="Rechercher une tâche" className="search-input" />
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
                 <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
               </svg>
             </div> */}
@@ -176,8 +176,8 @@ export default function ProjectFull({ project, tasks, session }) {
                 </div>
                 {/* Options */}
                 <details className="dropdown shrink-0">
-                  <summary className="icon-btn h-10 w-10" aria-label="Options de la tâche">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                  <summary className="icon-btn h-10 w-10" aria-label={`Options de la tâche ${task.title}`}>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                       <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                     </svg>
                   </summary>
@@ -189,12 +189,12 @@ export default function ProjectFull({ project, tasks, session }) {
 
               </div>
 
-              {deleteError?.taskId === task.id && <p className="text-[#CC3300] mt-2 text-sm">{deleteError.message}</p>}
+              {deleteError?.taskId === task.id && <p role="alert" className="text-[#CC3300] mt-2 text-sm">{deleteError.message}</p>}
 
               <div className="task-meta mt-4">
                 <span>Échéance :</span>
                 <span className="task-meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
                   {format(task.dueDate, "d LLLL y", { locale: fr })}
                 </span>
               </div>
@@ -204,7 +204,7 @@ export default function ProjectFull({ project, tasks, session }) {
                 <span>Assigné à :</span>
                 {task.assignees.map(assignee =>
                   <span key={assignee.id} className="inline-flex items-center">
-                    <span className="avatar-sm">{getNameInitials(assignee.user.name)}</span>
+                    <span aria-hidden="true" className="avatar-sm">{getNameInitials(assignee.user.name)}</span>
                     <span className="name-pill">{assignee.user.name}</span>
                   </span>
                 )}
@@ -214,7 +214,7 @@ export default function ProjectFull({ project, tasks, session }) {
               <details className="comments mt-4 border-t border-gray-100 pt-3" open={stateComment?.taskId === task.id}>
                 <summary className="flex w-full items-center justify-between text-sm font-medium text-ink">
                   Commentaires ({task.comments.length})
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="comments-caret h-4 w-4 text-gray-400">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="comments-caret h-4 w-4 text-gray-400">
                     <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clipRule="evenodd" />
                   </svg>
                 </summary>
@@ -222,7 +222,7 @@ export default function ProjectFull({ project, tasks, session }) {
                   <div key={comment.id}>
                     <ul className="mt-4 flex flex-col gap-4">
                       <li className="flex gap-4">
-                        <span className="avatar-sm">{getNameInitials(comment.author.name)}</span>
+                        <span aria-hidden="true" className="avatar-sm">{getNameInitials(comment.author.name)}</span>
                         <div className="comment-bubble flex-1">
                           <div className="flex items-center justify-between gap-4">
                             <span className="text-sm font-medium text-ink">{comment.author.name}</span>
@@ -236,10 +236,10 @@ export default function ProjectFull({ project, tasks, session }) {
                 )}
                 <form className="mt-4 flex flex-col gap-4" action={actionComment}>
                   <div className="flex gap-4">
-                    <span className="avatar-sm brand">{getNameInitials(session.userName)}</span>
-                    <textarea name="content" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" className="auth-input comment-input flex-1"></textarea>
+                    <span aria-hidden="true" className="avatar-sm brand">{getNameInitials(session.userName)}</span>
+                    <textarea name="content" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" aria-invalid={stateComment?.taskId === task.id && !!stateComment?.errors?.content} aria-describedby={stateComment?.taskId === task.id && stateComment?.errors?.content ? `comment-error-${task.id}` : undefined} className="auth-input comment-input flex-1"></textarea>
                   </div>
-                  {stateComment?.taskId === task.id && stateComment?.errors?.content && <p className="flex-wrap text-[#CC3300] text-right text-sm">{stateComment.errors.content}</p>}
+                  {stateComment?.taskId === task.id && stateComment?.errors?.content && <p id={`comment-error-${task.id}`} className="flex-wrap text-[#CC3300] text-right text-sm">{stateComment.errors.content}</p>}
                   <input type="hidden" name="projectId" defaultValue={project.id} />
                   <input type="hidden" name="taskId" defaultValue={task.id} />
                   <button type="submit" className="btn-dark self-end" disabled={pendingComment}>Envoyer</button>

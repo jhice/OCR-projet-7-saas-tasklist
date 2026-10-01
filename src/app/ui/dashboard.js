@@ -27,7 +27,7 @@ export default function Dashboard({ session, tasks }) {
           <p className="mt-2 text-gray-500">Bonjour {session.userName}, voici un aperçu de vos projets et tâches</p>
         </div>
         <button type="button" className="btn-dark" data-modal-open="modal-create-project" onClick={(e) => showModal(e)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
             <path d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z" />
           </svg>
           Créer un projet
@@ -35,15 +35,15 @@ export default function Dashboard({ session, tasks }) {
       </div>
 
       {/* Toggle Liste / Kanban */}
-      <div className="segmented mt-8" role="tablist">
-        <button type="button" className={"segmented-btn " + (showKanban ? '' : 'active')} data-view-tab="list" role="tab" aria-selected={!showKanban} onClick={() => setShowKanban(false)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+      <div className="segmented mt-8" role="group" aria-label="Affichage des tâches">
+        <button type="button" className={"segmented-btn " + (showKanban ? '' : 'active')} data-view-tab="list" aria-pressed={!showKanban} onClick={() => setShowKanban(false)}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
             <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
           </svg>
           Liste
         </button>
-        <button type="button" className={"segmented-btn " + (showKanban ? 'active' : '')} data-view-tab="kanban" role="tab" aria-selected={showKanban} onClick={() => setShowKanban(true)}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+        <button type="button" className={"segmented-btn " + (showKanban ? 'active' : '')} data-view-tab="kanban" aria-pressed={showKanban} onClick={() => setShowKanban(true)}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
             <path fillRule="evenodd" d="M5.75 3a2 2 0 00-2 2v10a2 2 0 002 2h8.5a2 2 0 002-2V5a2 2 0 00-2-2h-8.5zM5.5 5.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v2.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-2.5zm5 0a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v6.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-6.5zm-5 5a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v1.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-1.5z" clipRule="evenodd" />
           </svg>
           Kanban
@@ -59,7 +59,7 @@ export default function Dashboard({ session, tasks }) {
           </div>
           {/* <div className="search-input-wrap w-full sm:w-80">
             <input type="search" placeholder="Rechercher une tâche" className="search-input" />
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
               <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
             </svg>
           </div> */}
