@@ -7,9 +7,6 @@ import getSessionCookie from '../lib/get-session-cookie';
 
 export async function userUpdate(state, formData) {
 
-  console.log(formData);
-
-
   // With or without a password
   let validatedFields;
 
