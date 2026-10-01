@@ -15,6 +15,7 @@ export default function ModalEditTask({ project, taskInModal }) {
         </button>
 
         <h2 id="modal-edit-task-title" className="font-heading text-2xl font-bold text-ink">Modifier une tâche</h2>
+        <p className="mt-2 text-sm text-gray-500">Les champs marqués d&apos;un astérisque (*) sont obligatoires.</p>
 
         {/* key : remonte le formulaire (et réinitialise ses états) à chaque nouvelle tâche */}
         <EditTaskForm key={taskInModal?.id ?? "empty"} project={project} taskInModal={taskInModal} />
@@ -40,21 +41,21 @@ function EditTaskForm({ project, taskInModal }) {
   return (
     <form className="mt-6 flex flex-col gap-6" action={action}>
         <div>
-          <label htmlFor="et-title" className="auth-label">Titre</label>
-          <input id="et-title" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "et-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
+          <label htmlFor="et-title" className="auth-label">Titre<span aria-hidden="true">*</span></label>
+          <input id="et-title" aria-required="true" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "et-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
           {state?.errors?.title && <p id="et-title-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
         </div>
 
         <div>
-          <label htmlFor="et-desc" className="auth-label">Description</label>
-          <textarea id="et-desc" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "et-desc-error" : undefined} name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
+          <label htmlFor="et-desc" className="auth-label">Description<span aria-hidden="true">*</span></label>
+          <textarea id="et-desc" aria-required="true" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "et-desc-error" : undefined} name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
           {state?.errors?.description && <p id="et-desc-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
         </div>
 
         <div>
-          <label htmlFor="dueDate" className="auth-label">Échéance</label>
+          <label htmlFor="dueDate" className="auth-label">Échéance<span aria-hidden="true">*</span></label>
           <div className="search-input-wrap">
-            <input id="dueDate" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "dueDate-error" : undefined} name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
+            <input id="dueDate" aria-required="true" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "dueDate-error" : undefined} name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
           </div>
           {state?.errors?.dueDate && <p id="dueDate-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
         </div>

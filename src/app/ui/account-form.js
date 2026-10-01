@@ -1,11 +1,14 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useState } from 'react'
 import { userUpdate } from '../actions/user-update'
 
 export default function AccountForm({ userData }) {
 
   const [state, action, pending] = useActionState(userUpdate, undefined)
+
+  const [name, setName] = useState(userData.name);
+  const [email, setEmail] = useState(userData.email);
 
   return (
     <>
@@ -21,7 +24,7 @@ export default function AccountForm({ userData }) {
         <form action={action} className="mt-8 flex flex-col gap-6">
           <div>
             <label htmlFor="name" className="auth-label">Prénom et nom</label>
-            <input id="name" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "name-error" : undefined} name="name" type="text" placeholder="ex. Amélie" className="auth-input" defaultValue={userData.name} />
+            <input id="name" aria-invalid={!!state?.errors?.name} aria-describedby={state?.errors?.name ? "name-error" : undefined} name="name" type="text" placeholder="ex. Amélie" className="auth-input" value={name} onChange={e => setName(e.target.value)} />
             {state?.errors?.name && <p id="name-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
@@ -32,7 +35,7 @@ export default function AccountForm({ userData }) {
 
           <div>
             <label htmlFor="email" className="auth-label">Email</label>
-            <input id="email" aria-invalid={!!state?.errors?.email} aria-describedby={state?.errors?.email ? "email-error" : undefined} name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" defaultValue={userData.email} />
+            <input id="email" aria-invalid={!!state?.errors?.email} aria-describedby={state?.errors?.email ? "email-error" : undefined} name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" value={email} onChange={e => setEmail(e.target.value)} />
             {state?.errors?.email && <p id="email-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.email}</p>}
           </div>
 

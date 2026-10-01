@@ -21,6 +21,7 @@ export default function ModalEditProject({ project }) {
         </button>
 
         <h2 id="modal-edit-project-title" className="font-heading text-2xl font-bold text-ink">Modifier un projet</h2>
+        <p className="mt-2 text-sm text-gray-500">Les champs marqués d&apos;un astérisque (*) sont obligatoires.</p>
 
         <form className="mt-6 flex flex-col gap-6" action={action}>
           <div>
