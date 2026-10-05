@@ -19,16 +19,16 @@ import { useState, useTransition } from "react";
  */
 export default function MembersField({ id, label, members, onAdd, onRemove, canRemove = () => true, hiddenName, hiddenKey = "id", error, listLabel = "Liste des contributeurs" }) {
 
-  const [email, setEmail] = useState("");
-  const [localError, setLocalError] = useState();
-  const [pending, startTransition] = useTransition();
+  const [email, setEmail] = useState(""); // contenu du champ de saisie
+  const [localError, setLocalError] = useState(); // erreur renvoyée par onAdd / onRemove
+  const [pending, startTransition] = useTransition(); // sert à désactiver les boutons pour éviter un double clic pendant un appel API
 
   function handleAdd() {
     startTransition(async () => {
       const addError = await onAdd(email.trim());
-      setLocalError(addError);
+      setLocalError(addError); // affiche l'erreur, ou l'efface si undefined
       if (!addError) {
-        setEmail("");
+        setEmail(""); // vide le champ seulement en cas de succès
       }
     });
   }

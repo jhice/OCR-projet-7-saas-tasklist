@@ -18,25 +18,9 @@ export default function Header({ session }) {
   const pathname = usePathname();
 
   return (
-    // <header>
-    //   <Image src={`/images/logo.png`} width={253} height={33} alt="Logo Abricot" loading="eager" />
-    //   <nav>
-    //     <Link className="underline mr-4" href="/">Tableau de bord</Link>
-    //     <Link className="underline mr-4" href="/projects">Projets</Link>
-    //     <Link className="underline mr-4" href="/register">Inscription</Link>
-    //     <Link className="underline mr-4" href="/login">Connexion</Link>
-    //     <Link className="mr-4" href="/pouet">{session.userName}</Link>
-    //     <Link className="underline mr-4" href="/account">Mon compte</Link>
-    //     <a className="underline mr-4" href="/logout">Déconnexion</a>
-    //   </nav>
-    //   <hr />
-    // </header>
-
     <header className="app-header">
       <div className="app-header-inner">
-        {/* <Link href="/" className="app-logo"> */}
-          <Image src={logoImage} alt="Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
-        {/* </Link> */}
+        <Image src={logoImage} alt="Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
         <nav className="app-nav" aria-label="Navigation principale">
           <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`} aria-current={pathname === "/" ? "page" : undefined}>
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
@@ -50,8 +34,6 @@ export default function Header({ session }) {
             </svg>
             Projets
           </Link>
-          {/* <Link className="underline mr-4" href="/register">Inscription</Link>
-          <Link className="underline mr-4" href="/login">Connexion</Link> */}
         </nav>
         <Link href="/account" className={`avatar nav-link ${pathname.startsWith("/account") ? "active" : ""}`} aria-label="Mon compte" aria-current={pathname === "/account" ? "page" : undefined}>{getNameInitials(session.userName)}</Link>
       </div>

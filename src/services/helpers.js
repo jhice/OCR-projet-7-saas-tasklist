@@ -86,7 +86,10 @@ export function closeOptionsMenuOnBlur(e) {
  * @returns {object[]} [{ id, name, email }]
  */
 export function getProjectMembers(project) {
-  const users = [project.owner, ...project.members.map(member => member.user)].filter(Boolean);
+  // project.owner est le propriétaire du projet
+  // ... (spread) ajoute les utilisateurs du projet
+  const users = [project.owner, ...project.members.map(member => member.user)];
+  // supprime les doublons (si propriétaire a été ajouté plusieurs fois - l'API ne devrait pas le permettre)
   return users.filter((user, index) => users.findIndex(u => u.id === user.id) === index);
 }
 

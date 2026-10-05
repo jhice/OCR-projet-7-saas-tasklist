@@ -14,6 +14,7 @@ export async function signin(state, formData) {
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
+    // exemple de retour généré/attendu
     // {
     //   errors: {
     //     email: [ 'Veuillez saisir une e-mail valide.' ],

@@ -18,8 +18,7 @@ import getSessionCookie from "./lib/get-session-cookie";
 import LayoutUi from "./ui/layout";
 
 export default async function Layout({ children }) {
-
+  // on transmet la session au composant client
   const session = await getSessionCookie();
-
   return <LayoutUi session={session}>{children}</LayoutUi>;
 }

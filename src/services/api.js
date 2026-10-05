@@ -5,11 +5,14 @@ const BASE_URL = "http://localhost:8000";
 /**
  * Erreur API : message exploitable pour l'UI + status HTTP (403, 404...)
  * pour permettre aux pages d'afficher forbidden() / notFound()
+ * ex. : page /projects/[id]
  */
 export class ApiError extends Error {
   constructor(message, status) {
     super(message);
     this.status = status;
+    // pour les logs notamment
+    this.name = "ApiError";
   }
 }
 
@@ -21,7 +24,7 @@ export class ApiError extends Error {
  * @param {object} [options.body]    sérialisé en JSON si présent
  * @param {string} [options.token]   ajoute l'en-tête Authorization: Bearer
  * @returns {Promise<any>}  le JSON de la réponse
- * @throws {Error}  message exploitable pour l'UI si la requête échoue
+ * @throws {ApiError|Error}  message exploitable pour l'UI si la requête échoue
  */
 export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
   // url relative ou absolue

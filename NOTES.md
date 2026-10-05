@@ -58,3 +58,9 @@
 - ~~Balises ARIA, accessibilité~~
 - ~~mot de passe connexion : ne pas indiquer les contraintes (utiliser un autre validator)~~
 - bonus : ajouter des notifs de mise à jour (flash messages)
+
+## Revoir
+
+- MembersField
+- AssigneesField
+- 

@@ -28,11 +28,6 @@ export default function AccountForm({ userData }) {
             {state?.errors?.name && <p id="name-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.name}</p>}
           </div>
 
-          {/* <div>
-            <label htmlFor="firstname" className="auth-label">Prénom</label>
-            <input id="firstname" name="firstname" type="text" placeholder="Amélie" className="auth-input" defaultValue={userData.email} />
-          </div> */}
-
           <div>
             <label htmlFor="email" className="auth-label">Email</label>
             <input id="email" aria-invalid={!!state?.errors?.email} aria-describedby={state?.errors?.email ? "email-error" : undefined} name="email" type="text" placeholder="ex. a.dupont@mail.com" className="auth-input" value={email} onChange={e => setEmail(e.target.value)} />
@@ -60,9 +55,8 @@ export default function AccountForm({ userData }) {
                 </ul>
               </div>
             )}
+            {state?.errors?.update && <p role="alert" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
           </div>
-
-          {state?.errors?.update && <p role="alert" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.update}</p>}
 
           <div>
             <button disabled={pending} type="submit" className="btn-dark">Modifier les informations</button>

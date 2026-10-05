@@ -9,10 +9,7 @@ import { showModal, TASK_STATUS } from "@/services/helpers";
 export default function Dashboard({ session, tasks }) {
 
   const [showKanban, setShowKanban] = useState(false);
-  // const [modalOpened, setModalOpened] = useState(false);
-
   /* tasks */
-
   const todoTasks = tasks.filter(t => t.status === "TODO");
   const inProgressTasks = tasks.filter(t => t.status === "IN_PROGRESS");
   const doneTasks = tasks.filter(t => t.status === "DONE");
