@@ -1,5 +1,6 @@
 import { assignedTasks } from "@/services/api";
 import getSessionCookie from "./lib/get-session-cookie";
+import handleApiError from "./lib/handle-api-error";
 import Dashboard from "./ui/dashboard";
 
 export const metadata = {
@@ -9,7 +10,12 @@ export const metadata = {
 export default async function Home() {
 
   const session = await getSessionCookie();
-  const tasksResponse = await assignedTasks(session.apiToken);
+  let tasksResponse;
+  try {
+    tasksResponse = await assignedTasks(session.apiToken);
+  } catch (error) {
+    handleApiError(error);
+  }
 
   return (
     <>

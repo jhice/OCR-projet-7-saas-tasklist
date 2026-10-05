@@ -1,4 +1,5 @@
 import getSessionCookie from "../lib/get-session-cookie";
+import handleApiError from "../lib/handle-api-error";
 import { projects, projectsIdTasks } from "@/services/api";
 import { ProjectsList } from "../ui/projects-list";
 import { getProjectsStats } from "@/services/helpers";
@@ -10,11 +11,16 @@ export const metadata = {
 export default async function Projects() {
 
   const session = await getSessionCookie();
-  const projectsResponse = await projects(session.apiToken);
-  const projectsData = projectsResponse.data.projects;
+  let projectsData, projectsTasks;
+  try {
+    const projectsResponse = await projects(session.apiToken);
+    projectsData = projectsResponse.data.projects;
 
-  // get projects tasks statistics
-  const projectsTasks = await getProjectsStats(projectsData, session.apiToken);
+    // get projects tasks statistics
+    projectsTasks = await getProjectsStats(projectsData, session.apiToken);
+  } catch (error) {
+    handleApiError(error);
+  }
   // console.log(projectsTasks);
 
   return (

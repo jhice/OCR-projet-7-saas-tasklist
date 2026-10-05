@@ -1,7 +1,7 @@
 import getSessionCookie from "@/app/lib/get-session-cookie";
 import ProjectFull from "@/app/ui/project/project-full";
 import { projectById } from "@/services/api";
-import { forbidden, notFound } from "next/navigation";
+import handleApiError from "@/app/lib/handle-api-error";
 
 export const metadata = {
   title: "Nom du projet",
@@ -16,15 +16,8 @@ export default async function ProjectDetail({ params }) {
   try {
     projectData = await projectById(id, session.apiToken);
   } catch (error) {
-    // ni admin ni contributeur du projet => page 403 (src/app/forbidden.js)
-    if (error.status === 403) {
-      forbidden();
-    }
-    // projet inexistant => page 404
-    if (error.status === 404) {
-      notFound();
-    }
-    throw error;
+    // 401 => logout, 403 => forbidden, 404 => notFound
+    handleApiError(error);
   }
   // console.log(projectData);
   const project = projectData.data.project;
