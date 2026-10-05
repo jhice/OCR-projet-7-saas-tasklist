@@ -1,9 +1,9 @@
 "use server";
 
-import { createCommentFormSchema } from '@/app/lib/definitions';
-import { revalidatePath } from 'next/cache';
-import getSessionCookie from '../lib/get-session-cookie';
-import { commentsCreate } from '@/services/api';
+import { createCommentFormSchema } from "@/app/lib/definitions";
+import { revalidatePath } from "next/cache";
+import getSessionCookie from "../lib/get-session-cookie";
+import { commentsCreate } from "@/services/api";
 
 // content
 // task
@@ -16,12 +16,12 @@ export async function createComment(state, formData) {
   const token = session.apiToken;
 
   // récupération des ids du projet et de la tâche
-  const projectId = formData.get('projectId');
-  const taskId = formData.get('taskId');
+  const projectId = formData.get("projectId");
+  const taskId = formData.get("taskId");
 
   // Validate form fields
   const validatedFields = createCommentFormSchema.safeParse({
-    content: formData.get('content'),
+    content: formData.get("content"),
     task: taskId,
     author: session.userId,
   });
@@ -53,7 +53,7 @@ export async function createComment(state, formData) {
 
   // Rafraîchit les données de la page projet (pas de redirect, pour garder le state :
   // taskId permet de garder ouverts les commentaires de la tâche concernée)
-  revalidatePath('/projects/' + projectId);
+  revalidatePath("/projects/" + projectId);
 
   return {
     taskId,

@@ -4,12 +4,12 @@
  * (documentation Next.js)
  */
 
-import { NextResponse } from 'next/server';
-import { decrypt } from '@/app/lib/session';
-import { cookies } from 'next/headers';
+import { NextResponse } from "next/server";
+import { decrypt } from "@/app/lib/session";
+import { cookies } from "next/headers";
 
 // Routes publiques et privées
-const publicRoutes = ['/login', "/register"];
+const publicRoutes = ["/login", "/register"];
 const protectedRoutes = [/^\/$/, /^\/projects\/.+$/, /^\/projects$/, /^\/account$/, /^\/logout$/];
 
 export default async function proxy(req) {
@@ -21,12 +21,12 @@ export default async function proxy(req) {
   const isProtectedRoute = protectedRoutes.some(route => route.test(path));
   
   // Décrypte la session depuis le cookie
-  const cookie = (await cookies()).get('session')?.value;
+  const cookie = (await cookies()).get("session")?.value;
   const session = await decrypt(cookie);
 
   // Redirige vers la page de login si utilisateur non connecté sur une route protégée
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl));
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   // Redirige vers la home (dashboard) si l'utilisateur est authentifié et souhaite accéder à login ou register
@@ -34,7 +34,7 @@ export default async function proxy(req) {
     isPublicRoute &&
     session?.userId
   ) {
-    return NextResponse.redirect(new URL('/', req.nextUrl));
+    return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 
   // On continue le parcours HTTP (la route demandée)
@@ -43,5 +43,5 @@ export default async function proxy(req) {
 
 // Routes exclues du proxy (les assets notamment)
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

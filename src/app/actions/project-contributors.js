@@ -1,9 +1,9 @@
 "use server";
 
-import { contributorFormSchema } from '@/app/lib/definitions';
-import { projectsAddContributor, projectsRemoveContributor, usersSearch } from '@/services/api';
-import { revalidatePath } from 'next/cache';
-import getSessionCookie from '../lib/get-session-cookie';
+import { contributorFormSchema } from "@/app/lib/definitions";
+import { projectsAddContributor, projectsRemoveContributor, usersSearch } from "@/services/api";
+import { revalidatePath } from "next/cache";
+import getSessionCookie from "../lib/get-session-cookie";
 
 // Appelées directement depuis les composants (pas via un <form>),
 // elles renvoient { error } ou un résultat, sans redirect.
@@ -36,7 +36,7 @@ export async function findUserByEmail(email) {
   // la recherche API est partielle (contains) : on garde la correspondance exacte
   const user = responseData.data.users.find(user => user.email.toLowerCase() === searchedEmail);
   if (!user) {
-    return { error: 'Aucun utilisateur avec cet e-mail.' };
+    return { error: "Aucun utilisateur avec cet e-mail." };
   }
 
   return { user };
@@ -64,7 +64,7 @@ export async function addContributor(projectId, email) {
   }
 
   // Rafraîchit la page projet (liste des membres)
-  revalidatePath('/projects/' + projectId);
+  revalidatePath("/projects/" + projectId);
   return { success: true };
 }
 
@@ -84,6 +84,6 @@ export async function removeContributor(projectId, userId) {
   }
 
   // Rafraîchit la page projet (liste des membres)
-  revalidatePath('/projects/' + projectId);
+  revalidatePath("/projects/" + projectId);
   return { success: true };
 }

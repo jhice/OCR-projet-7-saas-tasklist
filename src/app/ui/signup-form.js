@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { signup } from '@/app/actions/auth';
-import Link from 'next/link';
-import { useActionState } from 'react';
+import { signup } from "@/app/actions/auth";
+import Link from "next/link";
+import { useActionState } from "react";
 
 import logoImage from "../ui/images/logo.png";
 import registerImage from "../ui/images/auth-signin.jpg";
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function SignupForm() {
 

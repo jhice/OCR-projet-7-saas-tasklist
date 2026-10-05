@@ -1,16 +1,16 @@
 "use server";
 
-import { SignupFormSchema } from '@/app/lib/definitions';
-import { register } from '@/services/api';
-import { createSession } from '@/app/lib/session';
-import { redirect } from 'next/navigation';
+import { SignupFormSchema } from "@/app/lib/definitions";
+import { register } from "@/services/api";
+import { createSession } from "@/app/lib/session";
+import { redirect } from "next/navigation";
 
 export async function signup(state, formData) {
   // Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    password: formData.get('password'),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
   });
 
   // If any form fields are invalid, return early
@@ -24,9 +24,9 @@ export async function signup(state, formData) {
 
     // Call the API provider or db to create a user...
     const responseData = await register({
-      "email": formData.get('email'),
-      "password": formData.get('password'), // P@ssword123
-      "name": formData.get('name'),
+      "email": formData.get("email"),
+      "password": formData.get("password"), // P@ssword123
+      "name": formData.get("name"),
     });
 
     await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);
@@ -39,5 +39,5 @@ export async function signup(state, formData) {
     };
   }
   // 5. Redirect user
-  redirect('/');
+  redirect("/");
 }

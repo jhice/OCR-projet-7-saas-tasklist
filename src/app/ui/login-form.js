@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { signin } from '@/app/actions/login';
-import Image from 'next/image';
-import { useActionState, useState } from 'react';
+import { signin } from "@/app/actions/login";
+import Image from "next/image";
+import { useActionState, useState } from "react";
 
 import logoImage from "../ui/images/logo.png";
 import loginImage from "../ui/images/auth-login.jpg";

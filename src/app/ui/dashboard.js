@@ -36,13 +36,13 @@ export default function Dashboard({ session, tasks }) {
 
       {/* Toggle Liste / Kanban */}
       <div className="segmented mt-8" role="group" aria-label="Affichage des tâches">
-        <button type="button" className={"segmented-btn " + (showKanban ? '' : 'active')} data-view-tab="list" aria-pressed={!showKanban} onClick={() => setShowKanban(false)}>
+        <button type="button" className={"segmented-btn " + (showKanban ? "" : "active")} data-view-tab="list" aria-pressed={!showKanban} onClick={() => setShowKanban(false)}>
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
             <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
           </svg>
           Liste
         </button>
-        <button type="button" className={"segmented-btn " + (showKanban ? 'active' : '')} data-view-tab="kanban" aria-pressed={showKanban} onClick={() => setShowKanban(true)}>
+        <button type="button" className={"segmented-btn " + (showKanban ? "active" : "")} data-view-tab="kanban" aria-pressed={showKanban} onClick={() => setShowKanban(true)}>
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
             <path fillRule="evenodd" d="M5.75 3a2 2 0 00-2 2v10a2 2 0 002 2h8.5a2 2 0 002-2V5a2 2 0 00-2-2h-8.5zM5.5 5.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v2.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-2.5zm5 0a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v6.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-6.5zm-5 5a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25v1.5a.25.25 0 01-.25.25h-2.5a.25.25 0 01-.25-.25v-1.5z" clipRule="evenodd" />
           </svg>
@@ -51,7 +51,7 @@ export default function Dashboard({ session, tasks }) {
       </div>
 
       {/* Vue Liste */}
-      <section id="view-list" className={"panel mt-6 p-6 sm:p-8 " + (showKanban ? 'hidden' : 'active')}>
+      <section id="view-list" className={"panel mt-6 p-6 sm:p-8 " + (showKanban ? "hidden" : "active")}>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-lg font-bold text-ink">Mes tâches assignées</h2>
@@ -72,7 +72,7 @@ export default function Dashboard({ session, tasks }) {
       </section>
 
       {/* Vue Kanban */}
-      <section id="view-kanban" className={"mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 " + (showKanban ? 'active' : 'hidden')}>
+      <section id="view-kanban" className={"mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 " + (showKanban ? "active" : "hidden")}>
         {/* TODO */}
         <div className="panel p-5">
           <div className="kanban-column-header">

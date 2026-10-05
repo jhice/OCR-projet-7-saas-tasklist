@@ -1,27 +1,27 @@
 "use server";
 
-import { UserUpdateFormSchema, UserUpdateFormSchemaNoPassword } from '@/app/lib/definitions';
-import { apiUserPassword, apiUserUpdate } from '@/services/api';
-import { redirect } from 'next/navigation';
-import getSessionCookie from '../lib/get-session-cookie';
+import { UserUpdateFormSchema, UserUpdateFormSchemaNoPassword } from "@/app/lib/definitions";
+import { apiUserPassword, apiUserUpdate } from "@/services/api";
+import { redirect } from "next/navigation";
+import getSessionCookie from "../lib/get-session-cookie";
 
 export async function userUpdate(state, formData) {
 
   // With or without a password
   let validatedFields;
 
-  if (formData.get('newPassword')) {
+  if (formData.get("newPassword")) {
     // Validate form fields
     validatedFields = UserUpdateFormSchema.safeParse({
-      name: formData.get('name'),
-      email: formData.get('email'),
-      newPassword: formData.get('newPassword'),
+      name: formData.get("name"),
+      email: formData.get("email"),
+      newPassword: formData.get("newPassword"),
     });
   } else {
     // Validate form fields
     validatedFields = UserUpdateFormSchemaNoPassword.safeParse({
-      name: formData.get('name'),
-      email: formData.get('email'),
+      name: formData.get("name"),
+      email: formData.get("email"),
     });
   }
 
@@ -39,19 +39,19 @@ export async function userUpdate(state, formData) {
   // Call the API provider or db to update a user...
   let responseData;
   // With or without a password
-  if (formData.get('newPassword')) {
+  if (formData.get("newPassword")) {
     // password
     // user info
     responseData = await apiUserUpdate({
-      "email": formData.get('email'),
-      "name": formData.get('name'),
+      "email": formData.get("email"),
+      "name": formData.get("name"),
     }, token);
 
     try {
       // password
       responseData = await apiUserPassword({
-        "currentPassword": formData.get('password'), // P@ssword123
-        "newPassword": formData.get('newPassword'), // P@ssword123!!!
+        "currentPassword": formData.get("password"), // P@ssword123
+        "newPassword": formData.get("newPassword"), // P@ssword123!!!
       }, token);
     } catch (error) {
       return {
@@ -63,11 +63,11 @@ export async function userUpdate(state, formData) {
   } else {
     // no password
     responseData = await apiUserUpdate({
-      "email": formData.get('email'),
-      "name": formData.get('name'),
+      "email": formData.get("email"),
+      "name": formData.get("name"),
     }, token);
   }
 
   // Redirect user
-  redirect('/account');
+  redirect("/account");
 }

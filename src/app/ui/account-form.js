@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useActionState, useState } from 'react';
-import { userUpdate } from '../actions/user-update';
+import { useActionState, useState } from "react";
+import { userUpdate } from "../actions/user-update";
 
 export default function AccountForm({ userData }) {
 
