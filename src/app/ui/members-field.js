@@ -86,5 +86,5 @@ export default function MembersField({ id, label, members, onAdd, onRemove, canR
       )}
 
     </div>
-  )
+  );
 }

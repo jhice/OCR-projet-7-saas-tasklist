@@ -30,5 +30,5 @@ export default function TaskListItem({ task, TASK_STATUS }) {
       </div>
       <Link href={`/projects/${task.project.id}#task-${task.id}`} aria-label={`Voir la tâche ${task.title}`} className="btn-dark shrink-0 self-start sm:self-center">Voir</Link>
     </article>
-  )
+  );
 }

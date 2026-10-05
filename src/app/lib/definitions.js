@@ -1,4 +1,4 @@
-import * as z from 'zod'
+import * as z from 'zod';
 
 // P@ssword123
 
@@ -20,7 +20,7 @@ export const SignupFormSchema = z.object({
     .regex(/[^a-zA-Z0-9]/, {
       error: 'Au moins un caractère spécial.',
     }),
-})
+});
 
 export const SigninFormSchema = z.object({
   email: z
@@ -32,7 +32,7 @@ export const SigninFormSchema = z.object({
     .string({ error: 'Le mot de passe est requis.' })
     .nonempty()
     .trim()
-})
+});
 
 export const UserUpdateFormSchema = z.object({
   name: z

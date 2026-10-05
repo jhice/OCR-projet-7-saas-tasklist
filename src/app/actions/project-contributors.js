@@ -1,6 +1,6 @@
 "use server";
 
-import { contributorFormSchema } from '@/app/lib/definitions'
+import { contributorFormSchema } from '@/app/lib/definitions';
 import { projectsAddContributor, projectsRemoveContributor, usersSearch } from '@/services/api';
 import { revalidatePath } from 'next/cache';
 import getSessionCookie from '../lib/get-session-cookie';

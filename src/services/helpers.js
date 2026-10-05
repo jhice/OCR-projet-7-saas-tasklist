@@ -5,7 +5,7 @@
 import { projectsIdTasks } from "./api";
 
 /**
- * returns user nam initials
+ * returns user name initials
  */
 export function getNameInitials(name) {
   const splitName = name.split(" ");
@@ -22,7 +22,7 @@ export const TASK_STATUS = {
   "TODO": "À faire",
   "IN_PROGRESS": "En cours",
   "DONE": "Terminée",
-}
+};
 
 /**
  * modals
@@ -48,7 +48,7 @@ export function cardCloseModal(e) {
   if (e.target.className === "modal-card") {
     const dialog = document.getElementById(e.currentTarget.dataset.modalClose);
     if (dialog) {
-      dialog.close()
+      dialog.close();
     };
     // setModalOpened(false);
   }

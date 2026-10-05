@@ -37,6 +37,7 @@ button {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 100vh;
   background-color: #f9fafb;
 }
 
@@ -49,6 +50,7 @@ button {
 
 .auth-photo {
   display: none;
+  max-height: 100vh;
 }
 
 @media (min-width: 1024px) {

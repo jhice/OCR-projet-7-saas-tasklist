@@ -1,6 +1,6 @@
 "use server";
 
-import { createCommentFormSchema } from '@/app/lib/definitions'
+import { createCommentFormSchema } from '@/app/lib/definitions';
 import { revalidatePath } from 'next/cache';
 import getSessionCookie from '../lib/get-session-cookie';
 import { commentsCreate } from '@/services/api';
@@ -24,7 +24,7 @@ export async function createComment(state, formData) {
     content: formData.get('content'),
     task: taskId,
     author: session.userId,
-  })
+  });
 
   // If any form fields are invalid, return early
   // taskId renvoyé pour n'afficher l'erreur que sous le formulaire de cette tâche
@@ -32,7 +32,7 @@ export async function createComment(state, formData) {
     return {
       taskId,
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Call the API provider or db to create a comment...
@@ -48,7 +48,7 @@ export async function createComment(state, formData) {
       errors: {
         content: [error.message],
       }
-    }
+    };
   }
 
   // Rafraîchit les données de la page projet (pas de redirect, pour garder le state :
@@ -58,5 +58,5 @@ export async function createComment(state, formData) {
   return {
     taskId,
     success: true,
-  }
+  };
 }

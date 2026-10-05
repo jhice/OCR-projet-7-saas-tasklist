@@ -103,5 +103,5 @@ export default function Dashboard({ session, tasks }) {
       </section>
       <ProjectCreateModal />
     </>
-  )
+  );
 }

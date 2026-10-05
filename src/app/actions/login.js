@@ -1,8 +1,8 @@
 "use server";
 
-import { SigninFormSchema } from '@/app/lib/definitions'
-import { login } from '@/services/api'
-import { createSession } from '@/app/lib/session'
+import { SigninFormSchema } from '@/app/lib/definitions';
+import { login } from '@/services/api';
+import { createSession } from '@/app/lib/session';
 import { redirect } from 'next/navigation';
 
 export async function signin(state, formData) {
@@ -10,7 +10,7 @@ export async function signin(state, formData) {
   const validatedFields = SigninFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
-  })
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
@@ -26,7 +26,7 @@ export async function signin(state, formData) {
     // }
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Call the provider or db to create a user...
@@ -44,7 +44,7 @@ export async function signin(state, formData) {
       errors: {
         login: [error.message],
       }
-    }
+    };
   }
 
   // 5. Redirect user

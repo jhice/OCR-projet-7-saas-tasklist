@@ -57,5 +57,5 @@ export default function Header({ session }) {
       </div>
     </header>
 
-  )
+  );
 }

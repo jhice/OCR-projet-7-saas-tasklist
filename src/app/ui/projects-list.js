@@ -27,5 +27,5 @@ export function ProjectsList({ projects, projectsTasks }) {
       </div>
       <ProjectCreateModal />
     </>
-  )
+  );
 }

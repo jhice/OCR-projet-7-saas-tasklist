@@ -261,7 +261,7 @@ export default function ProjectFull({ project, tasks, session }) {
       {canEditProject && <ModalEditProject project={project} />}
 
     </>
-  )
+  );
 }
 
 // abonnement aux changements de hash (pour useSyncExternalStore)

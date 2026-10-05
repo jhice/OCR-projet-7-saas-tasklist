@@ -17,5 +17,5 @@ export default async function Account() {
         <AccountForm userData={userData.data.user} />
       </div>
     </main>
-  )
+  );
 }

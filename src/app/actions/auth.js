@@ -1,8 +1,8 @@
 "use server";
 
-import { SignupFormSchema } from '@/app/lib/definitions'
-import { register } from '@/services/api'
-import { createSession } from '@/app/lib/session'
+import { SignupFormSchema } from '@/app/lib/definitions';
+import { register } from '@/services/api';
+import { createSession } from '@/app/lib/session';
 import { redirect } from 'next/navigation';
 
 export async function signup(state, formData) {
@@ -11,13 +11,13 @@ export async function signup(state, formData) {
     name: formData.get('name'),
     email: formData.get('email'),
     password: formData.get('password'),
-  })
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   try {
@@ -36,7 +36,7 @@ export async function signup(state, formData) {
       errors: {
         register: [error.message],
       }
-    }
+    };
   }
   // 5. Redirect user
   redirect('/');

@@ -15,5 +15,5 @@ export default function Forbidden() {
         <Link href="/projects" className="btn-dark mt-4">Retour aux projets</Link>
       </div>
     </main>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
@@ -9,5 +9,5 @@ export default function NotFound() {
         <Link className="btn-dark mt-4" href="/">Retour au tableau de bord</Link>
       </div>
     </main>
-  )
+  );
 }

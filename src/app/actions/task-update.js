@@ -1,6 +1,6 @@
 "use server";
 
-import { updateTaskFormSchema } from '@/app/lib/definitions'
+import { updateTaskFormSchema } from '@/app/lib/definitions';
 import getSessionCookie from '../lib/get-session-cookie';
 import { tasksUpdate } from '@/services/api';
 import { revalidatePath } from 'next/cache';
@@ -21,13 +21,13 @@ export async function updateTask(state, formData) {
     dueDate: formData.get('dueDate'),
     assigneeIds: formData.getAll('assigneeIds'),
     status: formData.get('status'),
-  })
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // get the token from the session

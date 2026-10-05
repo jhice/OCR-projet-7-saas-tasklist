@@ -36,5 +36,5 @@ export default async function ProjectDetail({ params }) {
         <ProjectFull project={project} tasks={tasks} session={session} />
       </div>
     </main>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 "use server";
 
-import { UserUpdateFormSchema, UserUpdateFormSchemaNoPassword } from '@/app/lib/definitions'
+import { UserUpdateFormSchema, UserUpdateFormSchemaNoPassword } from '@/app/lib/definitions';
 import { apiUserPassword, apiUserUpdate } from '@/services/api';
 import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
@@ -29,7 +29,7 @@ export async function userUpdate(state, formData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // get the token from the session
@@ -58,7 +58,7 @@ export async function userUpdate(state, formData) {
         errors: {
           update: [error.message],
         }
-      }
+      };
     }
   } else {
     // no password

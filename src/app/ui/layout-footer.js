@@ -17,5 +17,5 @@ export default function Footer({ session }) {
         <span>Abricot 2026</span>
       </div>
     </footer>
-  )
+  );
 }

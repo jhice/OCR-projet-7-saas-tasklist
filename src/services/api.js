@@ -1,5 +1,4 @@
-// Couche réseau, sans React : utilisable depuis un hook comme depuis un
-// gestionnaire d'évènement (Login), un loader de route, un test, etc.
+// Couche réseau, sans React : utilisable depuis un hook
 
 const BASE_URL = "http://localhost:8000";
 

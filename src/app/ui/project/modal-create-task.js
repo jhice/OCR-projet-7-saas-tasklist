@@ -57,5 +57,5 @@ export default function ModalCreateTask({ project }) {
         </form>
       </div>
     </dialog>
-  )
+  );
 }

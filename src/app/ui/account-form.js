@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { useActionState, useState } from 'react'
-import { userUpdate } from '../actions/user-update'
+import { useActionState, useState } from 'react';
+import { userUpdate } from '../actions/user-update';
 
 export default function AccountForm({ userData }) {
 
-  const [state, action, pending] = useActionState(userUpdate, undefined)
+  const [state, action, pending] = useActionState(userUpdate, undefined);
 
   const [name, setName] = useState(userData.name);
   const [email, setEmail] = useState(userData.email);
@@ -70,5 +70,5 @@ export default function AccountForm({ userData }) {
         </form>
       </section>
     </>
-  )
+  );
 }

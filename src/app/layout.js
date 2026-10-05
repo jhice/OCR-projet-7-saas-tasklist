@@ -10,7 +10,9 @@ const InterSans = Inter({
   subsets: ["latin"],
 });
 
+// CSS globale
 import "./app.css";
+// CSS de test pour les contrates accessibilité
 import "./app-a11y.css";
 import getSessionCookie from "./lib/get-session-cookie";
 import LayoutUi from "./ui/layout";

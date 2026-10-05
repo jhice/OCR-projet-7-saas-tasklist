@@ -32,5 +32,5 @@ export default function AssigneesField({ id, project, initialAssignees = [], err
       hiddenKey="id"
       error={error}
     />
-  )
+  );
 }

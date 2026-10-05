@@ -1,6 +1,6 @@
 "use server";
 
-import {  createTaskFormSchema } from '@/app/lib/definitions'
+import {  createTaskFormSchema } from '@/app/lib/definitions';
 import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
 import { tasksCreate } from '@/services/api';
@@ -19,13 +19,13 @@ export async function createTask(state, formData) {
     description: formData.get('description'),
     dueDate: formData.get('dueDate'),
     assigneeIds: formData.getAll('assigneeIds'),
-  })
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // get the token from the session

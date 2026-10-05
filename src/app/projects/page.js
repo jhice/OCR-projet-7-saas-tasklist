@@ -23,5 +23,5 @@ export default async function Projects() {
         <ProjectsList projects={projectsData} projectsTasks={projectsTasks} />
       </div>
     </main>
-  )
+  );
 }

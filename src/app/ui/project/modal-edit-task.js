@@ -21,7 +21,7 @@ export default function ModalEditTask({ project, taskInModal }) {
         <EditTaskForm key={taskInModal?.id ?? "empty"} project={project} taskInModal={taskInModal} />
       </div>
     </dialog>
-  )
+  );
 }
 
 function EditTaskForm({ project, taskInModal }) {
@@ -99,5 +99,5 @@ function EditTaskForm({ project, taskInModal }) {
       {state?.error && <p role="alert" className="text-[#CC3300] text-sm">{state.error}</p>}
       <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
     </form>
-  )
+  );
 }

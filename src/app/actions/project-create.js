@@ -1,8 +1,8 @@
 "use server";
 
-import { createProjectFormSchema } from '@/app/lib/definitions'
-import { projectsCreate } from '@/services/api'
-import { createSession } from '@/app/lib/session'
+import { createProjectFormSchema } from '@/app/lib/definitions';
+import { projectsCreate } from '@/services/api';
+import { createSession } from '@/app/lib/session';
 import { redirect } from 'next/navigation';
 import getSessionCookie from '../lib/get-session-cookie';
 
@@ -12,13 +12,13 @@ export async function createProject(state, formData) {
     name: formData.get('name'),
     description: formData.get('description'),
     contributors: formData.getAll('contributors'),
-  })
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // get the token from the session

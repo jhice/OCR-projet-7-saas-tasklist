@@ -51,5 +51,5 @@ export default function ModalEditProject({ project }) {
         </form>
       </div>
     </dialog>
-  )
+  );
 }

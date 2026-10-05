@@ -28,5 +28,5 @@ export default function TaskKanbanItem({ task, TASK_STATUS }) {
       </div>
       <Link href={`/projects/${task.project.id}#task-${task.id}`} aria-label={`Voir la tâche ${task.title}`} className="btn-dark mt-4 inline-flex">Voir</Link>
     </article>
-  )
+  );
 }

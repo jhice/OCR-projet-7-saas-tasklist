@@ -40,5 +40,5 @@ export default function ProjectCard({ project, projectTask }) {
         </div>
       </div>
     </article>
-  )
+  );
 }
