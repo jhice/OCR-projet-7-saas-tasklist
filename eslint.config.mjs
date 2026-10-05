@@ -13,7 +13,8 @@ const eslintConfig = defineConfig([
   ]),
   {
     rules: {
-      semi: "error"
+      semi: "error",
+      quotes: "error",
     }
   }
 ]);
