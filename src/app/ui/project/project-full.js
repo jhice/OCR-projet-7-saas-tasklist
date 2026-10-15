@@ -12,15 +12,19 @@ import { createComment } from "@/app/actions/comment-create";
 import { deleteTask } from "@/app/actions/task-delete";
 import { deleteProject } from "@/app/actions/project-delete";
 
-export default function ProjectFull({ project, tasks, session }) {
+/**
+ * Composant page du projet complet
+ * @returns JSX.Element
+ */
+export default function ProjectFull({ project, tasks, userId, userName }) {
 
   const [stateComment, actionComment, pendingComment] = useActionState(createComment, undefined);
 
   const [taskInModal, setTaskInModal] = useState();
 
   // droits sur le projet, calqués sur l'API : modifier = propriétaire ou membre ADMIN, supprimer = propriétaire
-  const isOwner = project.owner.id === session.userId;
-  const canEditProject = isOwner || project.members.some(member => member.user.id === session.userId && member.role === "ADMIN");
+  const isOwner = project.owner.id === userId;
+  const canEditProject = isOwner || project.members.some(member => member.user.id === userId && member.role === "ADMIN");
 
   // tâche ciblée par le hash (#task-xx) : :target ne s'applique pas avec <Link>
   // (navigation via history.pushState), on ajoute donc la classe .is-target
@@ -60,7 +64,6 @@ export default function ProjectFull({ project, tasks, session }) {
       setDeleteProjectError(result?.error);
     });
   }
-  // console.log(project);
 
   return (
     <>
@@ -236,7 +239,7 @@ export default function ProjectFull({ project, tasks, session }) {
                 )}
                 <form className="mt-4 flex flex-col gap-4" action={actionComment}>
                   <div className="flex gap-4">
-                    <span aria-hidden="true" className="avatar-sm brand">{getNameInitials(session.userName)}</span>
+                    <span aria-hidden="true" className="avatar-sm brand">{getNameInitials(userName)}</span>
                     <textarea name="content" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" aria-invalid={stateComment?.taskId === task.id && !!stateComment?.errors?.content} aria-describedby={stateComment?.taskId === task.id && stateComment?.errors?.content ? `comment-error-${task.id}` : undefined} className="auth-input comment-input flex-1"></textarea>
                   </div>
                   {stateComment?.taskId === task.id && stateComment?.errors?.content && <p id={`comment-error-${task.id}`} className="flex-wrap text-[#CC3300] text-right text-sm">{stateComment.errors.content}</p>}

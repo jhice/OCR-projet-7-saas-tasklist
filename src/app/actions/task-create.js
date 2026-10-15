@@ -4,13 +4,14 @@ import {  createTaskFormSchema } from "@/app/lib/definitions";
 import { redirect } from "next/navigation";
 import getSessionCookie from "../lib/get-session-cookie";
 import { tasksCreate } from "@/services/api";
+import z from "zod";
 
-// title,
-// description,
-// priority, NO
-// dueDate,
-// assigneeIds,
-
+/**
+ * Server action : création de tâche
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function createTask(state, formData) {
 
   // Validate form fields
@@ -24,7 +25,7 @@ export async function createTask(state, formData) {
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
@@ -36,7 +37,7 @@ export async function createTask(state, formData) {
   const projectId = formData.get("projectId");
 
   // Call the API provider or db to create a project...
-  const responseData = await tasksCreate(projectId, {
+  await tasksCreate(projectId, {
     title: formData.get("title"),
     description: formData.get("description"),
     dueDate: formData.get("dueDate"),

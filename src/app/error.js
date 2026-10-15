@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 
-// Page d'erreur générique : API injoignable, erreur 500...
-// (en cas de manque de try/catch)
+/**
+ * Page d'erreur générique non capturée par un try/catch
+ */
 export default function Error({ retry }) {
   return (
     <main className="flex-1">

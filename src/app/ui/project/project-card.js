@@ -3,6 +3,10 @@
 import { getNameInitials } from "@/services/helpers";
 import Link from "next/link";
 
+/**
+ * Composant carte de projet de projet
+ * @returns JSX.Element
+ */
 export default function ProjectCard({ project, projectTask }) { 
   return (
     <article className="panel flex flex-col gap-5 p-6">

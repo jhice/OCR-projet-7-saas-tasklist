@@ -2,10 +2,16 @@
 
 import { createProjectFormSchema } from "@/app/lib/definitions";
 import { projectsCreate } from "@/services/api";
-import { createSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
 import getSessionCookie from "../lib/get-session-cookie";
+import z from "zod";
 
+/**
+ * Server action : création de projet
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function createProject(state, formData) {
   // Validate form fields
   const validatedFields = createProjectFormSchema.safeParse({
@@ -17,7 +23,7 @@ export async function createProject(state, formData) {
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 

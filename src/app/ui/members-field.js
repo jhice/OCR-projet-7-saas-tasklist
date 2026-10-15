@@ -4,9 +4,11 @@ import { getNameInitials } from "@/services/helpers";
 import { useState, useTransition } from "react";
 
 /**
+ * Composant gestion des membres (projet et tâches)
  * Liste de membres (avec lien de retrait) + ajout par e-mail.
  * Ne gère pas la liste elle-même : c'est le parent qui décide
  * (liste locale envoyée au submit, ou appel API immédiat).
+ * @returns JSX.Element
  *
  * @param {object[]} members    [{ id, name, email }]
  * @param {Function} onAdd      async (email) => message d'erreur | undefined

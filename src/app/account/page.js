@@ -7,6 +7,10 @@ export const metadata = {
   title: "Mon compte",
 };
 
+/**
+ * Page "Mon compte"
+ * @returns Promise<JSX.Element>
+ */
 export default async function Account() {
 
   const session = await getSessionCookie();

@@ -1,9 +1,13 @@
 "use client";
 
 import { showModal } from "@/services/helpers";
-import ProjectCreateModal from "./project/modal-create-project";
-import ProjectCard from "./project/project-card";
+import ProjectCreateModal from "./modal-create-project";
+import ProjectCard from "./project-card";
 
+/**
+ * Composant liste des projets
+ * @returns JSX.Element
+ */
 export function ProjectsList({ projects, projectsTasks }) {
 
   return (

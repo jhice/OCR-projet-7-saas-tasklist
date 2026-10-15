@@ -4,6 +4,10 @@ import { format } from "date-fns";
 import { useActionState, useEffect, useState } from "react";
 import AssigneesField from "./assignees-field";
 
+/**
+ * Composant modale de modification de tâche
+ * @returns JSX.Element
+ */
 export default function ModalEditTask({ project, taskInModal }) {
   return (
     <dialog id="modal-edit-task" aria-labelledby="modal-edit-task-title" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
@@ -24,6 +28,10 @@ export default function ModalEditTask({ project, taskInModal }) {
   );
 }
 
+/**
+ * Composant formulaire modification de tâche
+ * @returns JSX.Element
+ */
 function EditTaskForm({ project, taskInModal }) {
 
   const [state, action, pending] = useActionState(updateTask);

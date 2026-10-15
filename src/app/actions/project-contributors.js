@@ -5,8 +5,8 @@ import { projectsAddContributor, projectsRemoveContributor, usersSearch } from "
 import { revalidatePath } from "next/cache";
 import getSessionCookie from "../lib/get-session-cookie";
 
-// Appelées directement depuis les composants (pas via un <form>),
-// elles renvoient { error } ou un résultat, sans redirect.
+// Fonctions appelées directement depuis les composants (pas via un <form>),
+// elles renvoient { error } ou un résultat, sans redirection.
 
 /**
  * Recherche un utilisateur existant par son email exact
@@ -17,7 +17,9 @@ export async function findUserByEmail(email) {
   // Validate email
   const validatedFields = contributorFormSchema.safeParse({ email });
   if (!validatedFields.success) {
-    return { error: validatedFields.error.flatten().fieldErrors.email[0] };
+    return {
+      errors: z.flattenError(validatedFields.error).fieldErrors.email[0],
+    };
   }
 
   // get the token from the session
@@ -50,7 +52,9 @@ export async function addContributor(projectId, email) {
   // Validate email
   const validatedFields = contributorFormSchema.safeParse({ email });
   if (!validatedFields.success) {
-    return { error: validatedFields.error.flatten().fieldErrors.email[0] };
+    return {
+      errors: z.flattenError(validatedFields.error).fieldErrors.email[0],
+    };
   }
 
   // get the token from the session

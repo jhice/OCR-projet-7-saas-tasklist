@@ -4,11 +4,13 @@ import { createCommentFormSchema } from "@/app/lib/definitions";
 import { revalidatePath } from "next/cache";
 import getSessionCookie from "../lib/get-session-cookie";
 import { commentsCreate } from "@/services/api";
+import z from "zod";
 
-// content
-// task
-// author
-
+/**
+ * Server action : création de commentaire
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ */
 export async function createComment(state, formData) {
 
   // get the session (token + auteur du commentaire)
@@ -31,15 +33,14 @@ export async function createComment(state, formData) {
   if (!validatedFields.success) {
     return {
       taskId,
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
   // Call the API provider or db to create a comment...
   // l'API déduit la tâche de l'URL et l'auteur du token : seul content est envoyé
-  let responseData;
   try {
-    responseData = await commentsCreate(projectId, taskId, {
+    await commentsCreate(projectId, taskId, {
       content: validatedFields.data.content,
     }, token);
   } catch (error) {

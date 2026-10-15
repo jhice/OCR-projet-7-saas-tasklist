@@ -4,8 +4,16 @@ import { SignupFormSchema } from "@/app/lib/definitions";
 import { register } from "@/services/api";
 import { createSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
+import z from "zod";
 
+/**
+ * Server action : inscription
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function signup(state, formData) {
+
   // Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
     name: formData.get("name"),
@@ -16,7 +24,7 @@ export async function signup(state, formData) {
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
@@ -25,7 +33,7 @@ export async function signup(state, formData) {
     // Call the API provider or db to create a user...
     const responseData = await register({
       "email": formData.get("email"),
-      "password": formData.get("password"), // P@ssword123
+      "password": formData.get("password"),
       "name": formData.get("name"),
     });
 

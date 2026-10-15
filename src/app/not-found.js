@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/**
+ * Page 404 : rendue par notFound()
+ */
 export default function NotFound() {
   return (
     <main className="flex-1">

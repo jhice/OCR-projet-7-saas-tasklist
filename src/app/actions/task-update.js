@@ -4,14 +4,14 @@ import { updateTaskFormSchema } from "@/app/lib/definitions";
 import getSessionCookie from "../lib/get-session-cookie";
 import { tasksUpdate } from "@/services/api";
 import { revalidatePath } from "next/cache";
+import z from "zod";
 
-// title,
-// description,
-// status,
-// priority, NO
-// dueDate,
-// assigneeIds,
-
+/**
+ * Server action : mise à jour d'une tâche
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function updateTask(state, formData) {
 
   // Validate form fields
@@ -26,7 +26,7 @@ export async function updateTask(state, formData) {
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 

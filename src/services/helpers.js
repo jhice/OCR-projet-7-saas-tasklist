@@ -5,7 +5,7 @@
 import { projectsIdTasks } from "./api";
 
 /**
- * returns user name initials
+ * Retourne les initiales d'un utilisateurs
  */
 export function getNameInitials(name) {
   const splitName = name.split(" ");
@@ -16,7 +16,7 @@ export function getNameInitials(name) {
 }
 
 /**
- * task status
+ * Statuts des tâches
  */
 export const TASK_STATUS = {
   "TODO": "À faire",
@@ -25,11 +25,10 @@ export const TASK_STATUS = {
 };
 
 /**
- * modals
+ * Modales
  */
 
 export function showModal(e) {
-  // console.log(e.currentTarget);
   // useRef ? Hook problem
   const dialog = document.getElementById(e.currentTarget.dataset.modalOpen);
   if (dialog) dialog.showModal();
@@ -37,14 +36,12 @@ export function showModal(e) {
 }
 
 export function closeModal(e) {
-  // console.log(e.currentTarget);
   const dialog = document.getElementById(e.currentTarget.dataset.modalClose);
   if (dialog) dialog.close();
   // setModalOpened(false);
 }
 
 export function cardCloseModal(e) {
-  // console.log(e.target.className);
   if (e.target.className === "modal-card") {
     const dialog = document.getElementById(e.currentTarget.dataset.modalClose);
     if (dialog) {
@@ -54,9 +51,12 @@ export function cardCloseModal(e) {
   }
 }
 
-// click on document body
+/**
+ * Options des tâches (dropdown géré par HTML/details)
+ */
+
+// Fermeture des menus au clic sur le document
 export function closeOptionsMenu(e) {
-  // console.log(e.target.className);
   document.querySelectorAll("details.dropdown[open]").forEach((dropdown) => {
     if (!dropdown.contains(e.target) || e.target.closest(".dropdown-item")) {
       dropdown.removeAttribute("open");
@@ -64,7 +64,7 @@ export function closeOptionsMenu(e) {
   });
 }
 
-// clavier : Échap ferme le menu et rend le focus au bouton d'options
+// Clavier : Échap ferme le menu et rend le focus au bouton d'options
 export function closeOptionsMenuOnEscape(e) {
   const dropdown = e.currentTarget;
   if (e.key === "Escape" && dropdown.open) {
@@ -73,7 +73,7 @@ export function closeOptionsMenuOnEscape(e) {
   }
 }
 
-// clavier : le focus quitte le menu (Tab) => fermeture
+// Clavier : le focus quitte le menu (Tab) => fermeture
 // relatedTarget null (clic souris sans focus, ex. Safari) : on laisse closeOptionsMenu gérer
 export function closeOptionsMenuOnBlur(e) {
   const dropdown = e.currentTarget;
@@ -81,6 +81,7 @@ export function closeOptionsMenuOnBlur(e) {
     dropdown.removeAttribute("open");
   }
 }
+
 /**
  * Personnes assignables à une tâche : propriétaire + membres du projet, sans doublon
  * @returns {object[]} [{ id, name, email }]
@@ -94,7 +95,7 @@ export function getProjectMembers(project) {
 }
 
 /**
- * progression des projets fournis (total tâches, tâches terminées, pourcentage de progression)
+ * Progression des projets fournis (total tâches, tâches terminées, pourcentage de progression)
  */
 export async function getProjectsStats(projectsData, apiToken) {
   // objet qui contiendra les données finales
@@ -102,7 +103,6 @@ export async function getProjectsStats(projectsData, apiToken) {
   // pour chaque projet fourni
   for (const project of projectsData) {
     const projectData = await projectsIdTasks(project.id, apiToken);
-    // console.log(projectData);
     // nombre de tâches totales
     const totalTasks = projectData.data.tasks.length;
     // nombre de tâches terminées

@@ -7,6 +7,9 @@ export const metadata = {
   title: "Tableau de bord",
 };
 
+/**
+ * Composant correspondant à la route "/" (dashboard)
+ */
 export default async function Home() {
 
   const session = await getSessionCookie();
@@ -22,7 +25,7 @@ export default async function Home() {
       {/* Main */}
       <main className="flex-1">
         <div className="page-container">
-          <Dashboard tasks={tasksResponse.data.tasks} session={session} />
+          <Dashboard tasks={tasksResponse.data.tasks} userName={session.userName} />
         </div>
       </main>
     </>

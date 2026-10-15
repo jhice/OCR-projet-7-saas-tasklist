@@ -2,6 +2,10 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
 
+/**
+ * Composant élément de liste de tâche standard (dashboard)
+ * @returns JSX.Element
+ */
 export default function TaskListItem({ task, TASK_STATUS }) {
   return (
     <article className="task-card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

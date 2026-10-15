@@ -1,5 +1,5 @@
 /**
- * Script lu en amont de toutes les routes du projet.
+ * Middleware exécuté en amont de toutes les routes du projet.
  * Permet de gérer l'authentification.
  * (documentation Next.js)
  */
@@ -12,6 +12,9 @@ import { cookies } from "next/headers";
 const publicRoutes = ["/login", "/register"];
 const protectedRoutes = [/^\/$/, /^\/projects\/.+$/, /^\/projects$/, /^\/account$/, /^\/logout$/];
 
+/**
+ * Le middleware "proxy" exécuté en amont des routes du projet.
+ */
 export default async function proxy(req) {
   // Vérifie si la route courante est publique ou privée
   const path = req.nextUrl.pathname;
@@ -19,10 +22,16 @@ export default async function proxy(req) {
   // Test des routes privées à base de regex
   // .some() retourne un booléen au lieu de l'élément trouvé
   const isProtectedRoute = protectedRoutes.some(route => route.test(path));
-  
-  // Décrypte la session depuis le cookie
+
+  // Déchiffre la session depuis le cookie
   const cookie = (await cookies()).get("session")?.value;
-  const session = await decrypt(cookie);
+  // Cookie absent ?
+  let session;
+  if (cookie === undefined) {
+    session = null;
+  } else {
+    session = await decrypt(cookie);
+  }
 
   // Redirige vers la page de login si utilisateur non connecté sur une route protégée
   if (isProtectedRoute && !session?.userId) {
@@ -41,7 +50,7 @@ export default async function proxy(req) {
   return NextResponse.next();
 }
 
-// Routes exclues du proxy (les assets notamment)
+// Routes exclues du proxy (les assets, les routes API)
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

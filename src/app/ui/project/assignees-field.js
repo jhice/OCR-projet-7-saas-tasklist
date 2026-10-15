@@ -5,8 +5,9 @@ import { useState } from "react";
 import MembersField from "../members-field";
 
 /**
- * Assignés d'une tâche : liste locale, envoyée en assigneeIds au submit.
+ * Composant assignés d'une tâche : liste locale, envoyée en assigneeIds au submit.
  * L'API n'accepte que des membres du projet : l'e-mail saisi est cherché parmi eux.
+ * @returns JSX.Element
  */
 export default function AssigneesField({ id, project, initialAssignees = [], error }) {
 

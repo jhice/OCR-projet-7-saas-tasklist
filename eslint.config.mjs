@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     rules: {
       semi: "error",
       quotes: "error",
+      "no-unused-vars": "error",
     }
   }
 ]);

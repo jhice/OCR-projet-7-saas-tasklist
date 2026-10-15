@@ -4,6 +4,10 @@ import { useActionState, useState } from "react";
 import { findUserByEmail } from "@/app/actions/project-contributors";
 import MembersField from "../members-field";
 
+/**
+ * Composant modale de création de projet
+ * @returns JSX.Element
+ */
 export default function ProjectCreateModal() {
 
   const [state, action, pending] = useActionState(createProject, undefined);

@@ -71,7 +71,7 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
   return response.json();
 }
 
-// Fonctions dédiées par endpoint : le reste de l'app ne manipule plus d'URL.
+// Fonctions dédiées par endpoint API backend : le reste de l'application ne manipule plus d'URL.
 
 /**
  * User
@@ -96,9 +96,13 @@ export function apiUserPassword(userData, token) {
   return request("/auth/password", { method: "PUT", body: userData, token });
 }
 
-export function assignedTasks(token) {
-  return request("/dashboard/assigned-tasks", { token });
+export function usersSearch(query, token) {
+  return request(`/users/search?query=${encodeURIComponent(query)}`, { token });
 }
+
+/**
+ * Projects
+ */
 
 export function projects(token) {
   return request("/projects", { token });
@@ -120,18 +124,6 @@ export function projectsUpdate(id, data, token) {
   return request("/projects/" + id, { method: "PUT", body: data, token });
 }
 
-export function tasksCreate(projectId, data, token) {
-  return request(`/projects/${projectId}/tasks`, { method: "POST", body: data, token });
-}
-
-export function tasksUpdate(projectId, taskId, data, token) {
-  return request("/projects/" + projectId + "/tasks/" + taskId, { method: "PUT", body: data, token });
-}
-
-export function commentsCreate(projectId, taskId, data, token) {
-  return request(`/projects/${projectId}/tasks/${taskId}/comments`, { method: "POST", body: data, token });
-}
-
 export function projectsAddContributor(projectId, data, token) {
   return request(`/projects/${projectId}/contributors`, { method: "POST", body: data, token });
 }
@@ -140,14 +132,34 @@ export function projectsRemoveContributor(projectId, userId, token) {
   return request(`/projects/${projectId}/contributors/${userId}`, { method: "DELETE", token });
 }
 
-export function usersSearch(query, token) {
-  return request(`/users/search?query=${encodeURIComponent(query)}`, { token });
+export function projectsDelete(projectId, token) {
+  return request(`/projects/${projectId}`, { method: "DELETE", token });
+}
+
+/**
+ * Comments
+ */
+
+export function commentsCreate(projectId, taskId, data, token) {
+  return request(`/projects/${projectId}/tasks/${taskId}/comments`, { method: "POST", body: data, token });
+}
+
+/**
+ * Tasks
+ */
+
+export function assignedTasks(token) {
+  return request("/dashboard/assigned-tasks", { token });
+}
+
+export function tasksCreate(projectId, data, token) {
+  return request(`/projects/${projectId}/tasks`, { method: "POST", body: data, token });
+}
+
+export function tasksUpdate(projectId, taskId, data, token) {
+  return request("/projects/" + projectId + "/tasks/" + taskId, { method: "PUT", body: data, token });
 }
 
 export function tasksDelete(projectId, taskId, token) {
   return request(`/projects/${projectId}/tasks/${taskId}`, { method: "DELETE", token });
-}
-
-export function projectsDelete(projectId, token) {
-  return request(`/projects/${projectId}`, { method: "DELETE", token });
 }

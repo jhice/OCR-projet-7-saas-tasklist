@@ -1,7 +1,8 @@
 import * as z from "zod";
 
-// P@ssword123
-
+/**
+ * Schéma de validation inscription
+ */
 export const SignupFormSchema = z.object({
   name: z
     .string({ error: "Le nom est requis." })
@@ -22,6 +23,9 @@ export const SignupFormSchema = z.object({
     }),
 });
 
+/**
+ * Schéma de validation connexion
+ */
 export const SigninFormSchema = z.object({
   email: z
     .string({ error: "L'e-mail est requis." })
@@ -34,6 +38,9 @@ export const SigninFormSchema = z.object({
     .trim()
 });
 
+/**
+ * Schéma de validation mise à jour utilisateur (avec mot de passe)
+ */
 export const UserUpdateFormSchema = z.object({
   name: z
     .string({ error: "Le nom est requis." })
@@ -54,6 +61,9 @@ export const UserUpdateFormSchema = z.object({
     }),
 });
 
+/**
+ * Schéma de validation mise à jour utilisateur (sans mot de passe)
+ */
 export const UserUpdateFormSchemaNoPassword = z.object({
   name: z
     .string({ error: "Le nom est requis." })
@@ -65,6 +75,9 @@ export const UserUpdateFormSchemaNoPassword = z.object({
     .pipe(z.email({ error: "Veuillez saisir une e-mail valide." })),
 });
 
+/**
+ * Schéma de validation création de projet
+ */
 export const createProjectFormSchema = z.object({
   name: z
     .string({ error: "Le nom du projet est requis." })
@@ -78,7 +91,10 @@ export const createProjectFormSchema = z.object({
     .array(z.email(), { error: "Liste de contributeurs invalide." }),
 });
 
-// les contributeurs d'un projet existant sont gérés à part (POST/DELETE /contributors)
+/**
+ * Schéma de validation mise à jour d'un projet
+ * Les contributeurs d'un projet existant sont gérés à part (POST/DELETE /contributors)
+ */
 export const updateProjectFormSchema = z.object({
   name: z
     .string({ error: "Le nom du projet est requis." })
@@ -90,6 +106,9 @@ export const updateProjectFormSchema = z.object({
     .nonempty({ error: "La description est requise." }),
 });
 
+/**
+ * Schéma de validation mise à jour d'un contributeur
+ */
 export const contributorFormSchema = z.object({
   email: z
     .string({ error: "L'e-mail est requis." })
@@ -97,6 +116,9 @@ export const contributorFormSchema = z.object({
     .pipe(z.email({ error: "Veuillez saisir une e-mail valide." })),
 });
 
+/**
+ * Schéma de validation création de tâche
+ */
 export const createTaskFormSchema = z.object({
   title: z
     .string({ error: "Le titre est requis." })
@@ -113,6 +135,9 @@ export const createTaskFormSchema = z.object({
     .array(z.string(), { error: "Liste des personnes assignées invalide." }),
 });
 
+/**
+ * Schéma de validation mise à jour d'une tâche
+ */
 export const updateTaskFormSchema = z.object({
   title: z
     .string({ error: "Le titre est requis." })
@@ -131,6 +156,9 @@ export const updateTaskFormSchema = z.object({
     .array(z.string(), { error: "Liste des personnes assignées invalide." }),
 });
 
+/**
+ * Schéma de validation crétion de commentaire
+ */
 export const createCommentFormSchema = z.object({
   content: z
     .string({ error: "Le commentaire est requis." })

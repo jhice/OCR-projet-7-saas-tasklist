@@ -4,6 +4,10 @@ import { format } from "date-fns";
 import { useActionState, useState } from "react";
 import AssigneesField from "./assignees-field";
 
+/**
+ * Composant modale de création de tâche
+ * @returns JSX.Element
+ */
 export default function ModalCreateTask({ project }) {
 
   const [state, action, pending] = useActionState(createTask);

@@ -7,6 +7,10 @@ import { useActionState, useState } from "react";
 import logoImage from "../ui/images/logo.png";
 import loginImage from "../ui/images/auth-login.jpg";
 
+/**
+ * Composant formulaire de connexion
+ * @returns JSX.Element
+ */
 export default function LoginForm() {
 
   const [state, action, pending] = useActionState(signin, null);

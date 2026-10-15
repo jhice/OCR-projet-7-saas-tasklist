@@ -4,7 +4,9 @@ export const metadata = {
   title: "Accès refusé",
 };
 
-// Page 403 : rendue par forbidden() (ex. projet dont on n'est ni admin ni contributeur)
+/**
+ * Page 403 : rendue par forbidden() (ex. projet dont on n'est ni admin ni contributeur)
+ */
 export default function Forbidden() {
   return (
     <main className="flex-1">

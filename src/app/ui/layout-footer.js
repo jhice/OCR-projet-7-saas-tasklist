@@ -3,10 +3,14 @@
 import Image from "next/image";
 import logoBlack from "../ui/images/logo-black.png";
 
-export default function Footer({ session }) {
+/**
+ * Composant pied de page
+ * @returns JSX.Element
+ */
+export default function Footer({ hasSession }) {
 
   // pas de header sur les pages user non connecté
-  if (session === undefined) {
+  if (!hasSession) {
     return;
   }
 

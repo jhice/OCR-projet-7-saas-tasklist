@@ -4,6 +4,10 @@ import { cardCloseModal, closeModal, getProjectMembers } from "@/services/helper
 import { useActionState, useState } from "react";
 import MembersField from "../members-field";
 
+/**
+ * Composant modale de modification de projet
+ * @returns JSX.Element
+ */
 export default function ModalEditProject({ project }) {
 
   const [state, action, pending] = useActionState(updateProject, undefined);

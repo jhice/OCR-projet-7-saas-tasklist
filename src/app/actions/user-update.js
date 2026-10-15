@@ -4,7 +4,14 @@ import { UserUpdateFormSchema, UserUpdateFormSchemaNoPassword } from "@/app/lib/
 import { apiUserPassword, apiUserUpdate } from "@/services/api";
 import { redirect } from "next/navigation";
 import getSessionCookie from "../lib/get-session-cookie";
+import z from "zod";
 
+/**
+ * Server action : mise à jour compte utilisateur
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function userUpdate(state, formData) {
 
   // With or without a password
@@ -28,7 +35,7 @@ export async function userUpdate(state, formData) {
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
@@ -37,21 +44,20 @@ export async function userUpdate(state, formData) {
   const token = session.apiToken;
 
   // Call the API provider or db to update a user...
-  let responseData;
   // With or without a password
   if (formData.get("newPassword")) {
     // password
     // user info
-    responseData = await apiUserUpdate({
+    await apiUserUpdate({
       "email": formData.get("email"),
       "name": formData.get("name"),
     }, token);
 
     try {
       // password
-      responseData = await apiUserPassword({
-        "currentPassword": formData.get("password"), // P@ssword123
-        "newPassword": formData.get("newPassword"), // P@ssword123!!!
+      await apiUserPassword({
+        "currentPassword": formData.get("password"),
+        "newPassword": formData.get("newPassword"),
       }, token);
     } catch (error) {
       return {
@@ -62,7 +68,7 @@ export async function userUpdate(state, formData) {
     }
   } else {
     // no password
-    responseData = await apiUserUpdate({
+    await apiUserUpdate({
       "email": formData.get("email"),
       "name": formData.get("name"),
     }, token);

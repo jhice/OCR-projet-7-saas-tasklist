@@ -3,6 +3,10 @@
 import { useActionState, useState } from "react";
 import { userUpdate } from "../actions/user-update";
 
+/**
+ * Composant de formulaire compte utilisateur
+ * @returns JSX.Element
+ */
 export default function AccountForm({ userData }) {
 
   const [state, action, pending] = useActionState(userUpdate, undefined);

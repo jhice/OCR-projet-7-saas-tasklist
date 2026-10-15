@@ -4,7 +4,14 @@ import { SigninFormSchema } from "@/app/lib/definitions";
 import { login } from "@/services/api";
 import { createSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
+import z from "zod";
 
+/**
+ * Server action : connexion
+ * @param {object} state Etat de l'action, utile pour les erreurs remontées au formulaire
+ * @param {object} formData Les données reçues du formulaire
+ * @returns RedirectType|{errors}
+ */
 export async function signin(state, formData) {
   // Validate form fields
   const validatedFields = SigninFormSchema.safeParse({
@@ -26,7 +33,7 @@ export async function signin(state, formData) {
     //   }
     // }
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
@@ -35,7 +42,7 @@ export async function signin(state, formData) {
 
     const responseData = await login({
       "email": formData.get("email"),
-      "password": formData.get("password"), // P@ssword123
+      "password": formData.get("password"),
     });
 
     await createSession(responseData.data.user.id, responseData.data.user.name, responseData.data.user.email, responseData.data.token);

@@ -7,10 +7,14 @@ import logoImage from "./images/logo.png";
 import { getNameInitials } from "@/services/helpers";
 import { usePathname } from "next/navigation";
 
-export default function Header({ session }) {
+/**
+ * Composant en-tête de page
+ * @returns JSX.Element
+ */
+export default function Header({ hasSession, userName }) {
 
   // pas de header sur les pages user non connecté
-  if (session === undefined) {
+  if (!hasSession) {
     return;
   }
 
@@ -35,7 +39,7 @@ export default function Header({ session }) {
             Projets
           </Link>
         </nav>
-        <Link href="/account" className={`avatar nav-link ${pathname.startsWith("/account") ? "active" : ""}`} aria-label="Mon compte" aria-current={pathname === "/account" ? "page" : undefined}>{getNameInitials(session.userName)}</Link>
+        <Link href="/account" className={`avatar nav-link ${pathname.startsWith("/account") ? "active" : ""}`} aria-label="Mon compte" aria-current={pathname === "/account" ? "page" : undefined}>{getNameInitials(userName)}</Link>
       </div>
     </header>
 

@@ -2,6 +2,10 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
 
+/**
+ * Composant élément de liste de tâche kanban (dashboard)
+ * @returns JSX.Element
+ */
 export default function TaskKanbanItem({ task, TASK_STATUS }) {
   return (
     <article key={task.id} className="task-card">

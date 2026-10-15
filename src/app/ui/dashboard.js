@@ -6,14 +6,17 @@ import TaskKanbanItem from "./task/task-list-kanban";
 import ProjectCreateModal from "./project/modal-create-project";
 import { showModal, TASK_STATUS } from "@/services/helpers";
 
-export default function Dashboard({ session, tasks }) {
+/**
+ * Composant tableau de bord
+ * @returns JSX.Element
+ */
+export default function Dashboard({ userName, tasks }) {
 
   const [showKanban, setShowKanban] = useState(false);
   /* tasks */
   const todoTasks = tasks.filter(t => t.status === "TODO");
   const inProgressTasks = tasks.filter(t => t.status === "IN_PROGRESS");
   const doneTasks = tasks.filter(t => t.status === "DONE");
-  // console.log(todoTasks, inProgressTasks, doneTasks);
 
   return (
     <>
@@ -21,7 +24,7 @@ export default function Dashboard({ session, tasks }) {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-heading text-3xl font-bold text-ink">Tableau de bord</h1>
-          <p className="mt-2 text-gray-500">Bonjour {session.userName}, voici un aperçu de vos projets et tâches</p>
+          <p className="mt-2 text-gray-500">Bonjour {userName}, voici un aperçu de vos projets et tâches</p>
         </div>
         <button type="button" className="btn-dark" data-modal-open="modal-create-project" onClick={(e) => showModal(e)}>
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">

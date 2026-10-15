@@ -1,16 +1,18 @@
 "use client";
 
 import { signup } from "@/app/actions/auth";
-import Link from "next/link";
 import { useActionState } from "react";
-
 import logoImage from "../ui/images/logo.png";
 import registerImage from "../ui/images/auth-signin.jpg";
 import Image from "next/image";
 
+/**
+ * Composant formulaire d'inscription
+ * @returns JSX.Element
+ */
 export default function SignupForm() {
 
-  const [state, action, pending] = useActionState(signup, undefined);
+  const [state, action] = useActionState(signup, undefined);
 
   return (
     <>
