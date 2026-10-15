@@ -1,0 +1,111 @@
+import { updateTask } from "../../actions/task-update";
+import { cardCloseModal, closeModal } from "../../lib/helpers";
+import { format } from "date-fns";
+import { useActionState, useEffect, useState } from "react";
+import AssigneesField from "./assignees-field";
+
+/**
+ * Composant modale de modification de tâche
+ * @returns JSX.Element
+ */
+export default function ModalEditTask({ project, taskInModal }) {
+  return (
+    <dialog id="modal-edit-task" aria-labelledby="modal-edit-task-title" data-modal-close="modal-edit-task" className="modal-card" onClick={(e) => cardCloseModal(e)}>
+      <div className="relative p-6 sm:p-8">
+        <button type="button" className="absolute right-5 top-5 text-gray-400 hover:text-gray-600" data-modal-close="modal-edit-task" aria-label="Fermer" onClick={(e) => closeModal(e)}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+
+        <h2 id="modal-edit-task-title" className="font-heading text-2xl font-bold text-ink">Modifier une tâche</h2>
+        <p className="mt-2 text-sm text-gray-500">Les champs marqués d&apos;un astérisque (*) sont obligatoires.</p>
+
+        {/* key : remonte le formulaire (et réinitialise ses états) à chaque nouvelle tâche */}
+        <EditTaskForm key={taskInModal?.id ?? "empty"} project={project} taskInModal={taskInModal} />
+      </div>
+    </dialog>
+  );
+}
+
+/**
+ * Composant formulaire modification de tâche
+ * @returns JSX.Element
+ */
+function EditTaskForm({ project, taskInModal }) {
+
+  const [state, action, pending] = useActionState(updateTask);
+
+  // tâche enregistrée : on ferme la modale (la page est rafraîchie par revalidatePath)
+  useEffect(() => {
+    if (state?.success) document.getElementById("modal-edit-task")?.close();
+  }, [state]);
+
+  const [title, setTitle] = useState(taskInModal?.title || "");
+  const [description, setdescription] = useState(taskInModal?.description || "");
+  const [dueDate, setDueDate] = useState(taskInModal ? format(taskInModal.dueDate, "yyyy-MM-dd") : "");
+  const [status, setStatus] = useState(taskInModal?.status || "TODO");
+
+  return (
+    <form className="mt-6 flex flex-col gap-6" action={action}>
+        <div>
+          <label htmlFor="et-title" className="auth-label">Titre<span aria-hidden="true">*</span></label>
+          <input id="et-title" aria-required="true" aria-invalid={!!state?.errors?.title} aria-describedby={state?.errors?.title ? "et-title-error" : undefined} name="title" value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder="ex. Authentification JWT" autoFocus className="auth-input" />
+          {state?.errors?.title && <p id="et-title-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.title}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="et-desc" className="auth-label">Description<span aria-hidden="true">*</span></label>
+          <textarea id="et-desc" aria-required="true" aria-invalid={!!state?.errors?.description} aria-describedby={state?.errors?.description ? "et-desc-error" : undefined} name="description" value={description} onChange={e => setdescription(e.target.value)} rows="2" placeholder="Implémenter le système d'authentification avec tokens JWT" className="auth-input"></textarea>
+          {state?.errors?.description && <p id="et-desc-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.description}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="dueDate" className="auth-label">Échéance<span aria-hidden="true">*</span></label>
+          <div className="search-input-wrap">
+            <input id="dueDate" aria-required="true" aria-invalid={!!state?.errors?.dueDate} aria-describedby={state?.errors?.dueDate ? "dueDate-error" : undefined} name="dueDate" value={dueDate} onChange={e => setDueDate(e.target.value)} type="date" placeholder="9 mars" className="search-input date-input" />
+          </div>
+          {state?.errors?.dueDate && <p id="dueDate-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.dueDate}</p>}
+        </div>
+
+      <AssigneesField id="et-assignees" project={project}
+        initialAssignees={taskInModal?.assignees?.map(assignee => assignee.user) ?? []}
+        error={state?.errors?.assigneeIds}
+      />
+
+
+      <fieldset aria-describedby={state?.errors?.status ? "et-status-error" : undefined}>
+        <legend className="auth-label">Statut :</legend>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <label className="cursor-pointer">
+            <input type="radio" name="status" value="TODO" className="peer sr-only"
+              checked={status === "TODO"}
+              onChange={() => setStatus("TODO")}
+            />
+            <span className="badge badge-todo peer-checked:ring-2 peer-checked:ring-red-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">À faire</span>
+          </label>
+          <label className="cursor-pointer">
+            <input type="radio" name="status" value="IN_PROGRESS" className="peer sr-only"
+              checked={status === "IN_PROGRESS"}
+              onChange={() => setStatus("IN_PROGRESS")}
+            />
+            <span className="badge badge-progress peer-checked:ring-2 peer-checked:ring-amber-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">En cours</span>
+          </label>
+          <label className="cursor-pointer">
+            <input type="radio" name="status" value="DONE" className="peer sr-only"
+              checked={status === "DONE"}
+              onChange={() => setStatus("DONE")}
+            />
+            <span className="badge badge-done peer-checked:ring-2 peer-checked:ring-emerald-300 peer-checked:ring-offset-1 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">Terminée</span>
+          </label>
+        </div>
+        {state?.errors?.status && <p id="et-status-error" className="text-[#CC3300] mt-2 ml-2 text-sm">{state.errors.status}</p>}
+      </fieldset>
+
+      <input type="hidden" name="projectId" defaultValue={taskInModal?.projectId} />
+      <input type="hidden" name="taskId" defaultValue={taskInModal?.id} />
+      {state?.error && <p role="alert" className="text-[#CC3300] text-sm">{state.error}</p>}
+      <button disabled={pending} type="submit" className="btn-dark">Enregistrer</button>
+    </form>
+  );
+}

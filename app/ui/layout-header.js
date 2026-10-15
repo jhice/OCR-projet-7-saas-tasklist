@@ -1,0 +1,47 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+
+import logoImage from "./images/logo.png";
+import { getNameInitials } from "../lib/helpers";
+import { usePathname } from "next/navigation";
+
+/**
+ * Composant en-tête de page
+ * @returns JSX.Element
+ */
+export default function Header({ hasSession, userName }) {
+
+  // pas de header sur les pages user non connecté
+  if (!hasSession) {
+    return;
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const pathname = usePathname();
+
+  return (
+    <header className="app-header">
+      <div className="app-header-inner">
+        <Image src={logoImage} alt="Abricot" width="253" height="33" className="h-6 w-auto" loading="eager" />
+        <nav className="app-nav" aria-label="Navigation principale">
+          <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`} aria-current={pathname === "/" ? "page" : undefined}>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM11 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V4zM3 11a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H4a1 1 0 01-1-1v-5zM11 9a1 1 0 00-1 1v6a1 1 0 001 1h4a1 1 0 001-1v-6a1 1 0 00-1-1h-4z" />
+            </svg>
+            Tableau de bord
+          </Link>
+          <Link href="/projects" className={`nav-link ${pathname.startsWith("/projects") ? "active" : ""}`} aria-current={pathname === "/projects" ? "page" : undefined}>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path d="M2 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+            </svg>
+            Projets
+          </Link>
+        </nav>
+        <Link href="/account" className={`avatar nav-link ${pathname.startsWith("/account") ? "active" : ""}`} aria-label="Mon compte" aria-current={pathname === "/account" ? "page" : undefined}>{getNameInitials(userName)}</Link>
+      </div>
+    </header>
+
+  );
+}

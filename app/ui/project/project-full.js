@@ -1,0 +1,274 @@
+"use client";
+
+import { closeOptionsMenuOnBlur, closeOptionsMenuOnEscape, getNameInitials, showModal, TASK_STATUS } from "../../lib/helpers";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
+import Link from "next/link";
+import ModalCreateTask from "./modal-create-task";
+import ModalEditTask from "./modal-edit-task";
+import ModalEditProject from "./modal-edit-project";
+import { useActionState, useState, useSyncExternalStore, useTransition } from "react";
+import { createComment } from "../../actions/comment-create";
+import { deleteTask } from "../../actions/task-delete";
+import { deleteProject } from "../../actions/project-delete";
+
+/**
+ * Composant page du projet complet
+ * @returns JSX.Element
+ */
+export default function ProjectFull({ project, tasks, userId, userName }) {
+
+  const [stateComment, actionComment, pendingComment] = useActionState(createComment, undefined);
+
+  const [taskInModal, setTaskInModal] = useState();
+
+  // droits sur le projet, calqués sur l'API : modifier = propriétaire ou membre ADMIN, supprimer = propriétaire
+  const isOwner = project.owner.id === userId;
+  const canEditProject = isOwner || project.members.some(member => member.user.id === userId && member.role === "ADMIN");
+
+  // tâche ciblée par le hash (#task-xx) : :target ne s'applique pas avec <Link>
+  // (navigation via history.pushState), on ajoute donc la classe .is-target
+  const targetId = useSyncExternalStore(subscribeHash, () => window.location.hash.slice(1), () => "");
+
+  function showModalEditTask(e, task) {
+    setTaskInModal(task);
+    showModal(e);
+  }
+
+  // suppression d'une tâche : { taskId, message } si l'API renvoie une erreur
+  const [deleteError, setDeleteError] = useState();
+  const [pendingDelete, startDelete] = useTransition();
+
+  function handleDeleteTask(e, task) {
+    e.preventDefault();
+    if (!window.confirm(`Supprimer la tâche « ${task.title} » ?`)) {
+      return;
+    }
+    startDelete(async () => {
+      const { error } = await deleteTask(project.id, task.id);
+      setDeleteError(error ? { taskId: task.id, message: error } : undefined);
+    });
+  }
+
+  // suppression du projet : message si l'API renvoie une erreur, sinon redirection vers /projects
+  const [deleteProjectError, setDeleteProjectError] = useState();
+  const [pendingDeleteProject, startDeleteProject] = useTransition();
+
+  function handleDeleteProject(e) {
+    e.preventDefault();
+    if (!window.confirm(`Supprimer le projet « ${project.name} » et toutes ses tâches ?`)) {
+      return;
+    }
+    startDeleteProject(async () => {
+      const result = await deleteProject(project.id);
+      setDeleteProjectError(result?.error);
+    });
+  }
+
+  return (
+    <>
+      {/* En-tête projet */}
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex items-start gap-4">
+          <Link href="/projects" className="icon-btn shrink-0" aria-label="Retour aux projets">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
+            </svg>
+          </Link>
+          <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="font-heading text-2xl font-bold text-ink">{project.name}</h1>
+              {canEditProject && <button type="button" className="auth-link text-sm mt-[5px]" data-modal-open="modal-edit-project" onClick={(e) => showModal(e)}>Modifier</button>}
+              {isOwner && <button type="button" className="auth-link text-sm mt-[5px]" disabled={pendingDeleteProject} onClick={handleDeleteProject}>Supprimer</button>}
+            </div>
+            <p className="mt-2 text-gray-500">{project.description}</p>
+            {deleteProjectError && <p role="alert" className="text-[#CC3300] mt-2 text-sm">{deleteProjectError}</p>}
+          </div>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-3">
+          <button type="button" className="btn-dark" data-modal-open="modal-create-task" onClick={(e) => showModal(e)}>Créer une tâche</button>
+          {/* <button type="button" className="btn-accent">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path d="M10 2c.4 2.4 1.5 3.9 4 4.3-2.5.4-3.6 1.9-4 4.3-.4-2.4-1.5-3.9-4-4.3 2.5-.4 3.6-1.9 4-4.3z" />
+              <path d="M15.5 12c.24 1.36.86 2.2 2.3 2.43-1.44.23-2.06 1.07-2.3 2.43-.24-1.36-.86-2.2-2.3-2.43 1.44-.23 2.06-1.07 2.3-2.43z" />
+            </svg>
+            IA
+          </button> */}
+        </div>
+      </div>
+
+      {/* Contributeurs */}
+      <div className="contributors-panel mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <span className="font-semibold text-ink">Contributeurs</span>
+          <span className="ml-2 text-sm text-gray-500">{project.members.length} personne(s)</span>
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="avatar-sm brand" role="img" aria-label={project.owner.name} title={project.owner.name}>{getNameInitials(project.owner.name)}</span>
+          <span className="name-pill brand">Propriétaire</span>
+          {project.members.map(member =>
+            <span key={member.id} className="inline-flex items-center">
+              <>
+                <span aria-hidden="true" className="avatar-sm">{getNameInitials(member.user.name)}</span>
+                <span className="name-pill">{member.user.name}</span>
+              </>
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Tâches */}
+      <section className="panel mt-6 p-6 sm:p-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="text-lg font-bold text-ink">Tâches</h2>
+            <p className="text-sm text-gray-500">Par ordre de priorité</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            {/* <div className="segmented" role="tablist">
+              <button type="button" className="segmented-btn active" role="tab" aria-selected="true">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                  <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                </svg>
+                Liste
+              </button>
+              <button type="button" className="segmented-btn" role="tab" aria-selected="false">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                  <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" />
+                </svg>
+                Calendrier
+              </button>
+            </div> */}
+
+            {/* <div className="select-wrap">
+              <select className="select-field">
+                <option value="">Statut</option>
+                <option value="todo">À faire</option>
+                <option value="progress">En cours</option>
+                <option value="done">Terminée</option>
+              </select>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="select-caret h-4 w-4">
+                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
+              </svg>
+            </div> */}
+
+            {/* <div className="search-input-wrap w-full sm:w-64">
+              <input type="search" placeholder="Rechercher une tâche" className="search-input" />
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="search-icon h-4 w-4">
+                <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
+              </svg>
+            </div> */}
+
+          </div>
+        </div>
+
+        {/* Liste des tâches */}
+        <div className="mt-6 flex flex-col gap-4">
+
+          {/* Tâche (répétée) */}
+          {tasks.map(task =>
+            <article key={task.id} className={"task-card" + (targetId === `task-${task.id}` ? " is-target" : "")} id={`task-${task.id}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="font-semibold text-ink">{task.title}</h3>
+                    <span className={"badge badge-" + task.status.toLowerCase()}>{TASK_STATUS[task.status]}</span>
+                  </div>
+                  <p className="mt-1 text-sm text-gray-500">{task.description}</p>
+                </div>
+                {/* Options */}
+                <details className="dropdown shrink-0" onKeyDown={closeOptionsMenuOnEscape} onBlur={closeOptionsMenuOnBlur}>
+                  <summary className="icon-btn h-10 w-10" aria-label={`Options de la tâche ${task.title}`}>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                      <path d="M3 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM8.5 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM14 10a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                    </svg>
+                  </summary>
+                  <div className="dropdown-menu">
+                    <button type="button" className="dropdown-item" data-modal-open="modal-edit-task" onClick={(e) => showModalEditTask(e, task)}>Modifier</button>
+                    <button type="button" className="dropdown-item text-red-600" disabled={pendingDelete} onClick={(e) => handleDeleteTask(e, task)}>Supprimer</button>
+                  </div>
+                </details>
+
+              </div>
+
+              {deleteError?.taskId === task.id && <p role="alert" className="text-[#CC3300] mt-2 text-sm">{deleteError.message}</p>}
+
+              <div className="task-meta mt-4">
+                <span>Échéance :</span>
+                <span className="task-meta-item">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.5A2.25 2.25 0 0117.75 6.25v8.5A2.25 2.25 0 0115.5 17h-11a2.25 2.25 0 01-2.25-2.25v-8.5A2.25 2.25 0 014.5 4H5V2.75A.75.75 0 015.75 2zM4.5 8.5v6.25c0 .414.336.75.75.75h11a.75.75 0 00.75-.75V8.5h-12.5z" clipRule="evenodd" /></svg>
+                  {format(task.dueDate, "d LLLL y", { locale: fr })}
+                </span>
+              </div>
+
+              {/* Contributors */}
+              <div className="task-meta mt-3">
+                <span>Assigné à :</span>
+                {task.assignees.map(assignee =>
+                  <span key={assignee.id} className="inline-flex items-center">
+                    <span aria-hidden="true" className="avatar-sm">{getNameInitials(assignee.user.name)}</span>
+                    <span className="name-pill">{assignee.user.name}</span>
+                  </span>
+                )}
+              </div>
+
+              {/* Comments */}
+              <details className="comments mt-4 border-t border-gray-100 pt-3" open={stateComment?.taskId === task.id}>
+                <summary className="flex w-full items-center justify-between text-sm font-medium text-ink">
+                  Commentaires ({task.comments.length})
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="comments-caret h-4 w-4 text-gray-400">
+                    <path fillRule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-.02 1.08z" clipRule="evenodd" />
+                  </svg>
+                </summary>
+                {task.comments.map(comment =>
+                  <div key={comment.id}>
+                    <ul className="mt-4 flex flex-col gap-4">
+                      <li className="flex gap-4">
+                        <span aria-hidden="true" className="avatar-sm">{getNameInitials(comment.author.name)}</span>
+                        <div className="comment-bubble flex-1">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm font-medium text-ink">{comment.author.name}</span>
+                            <span className="text-xs text-gray-500">{format(comment.createdAt, "d LLLL y", { locale: fr })}</span>
+                          </div>
+                          <p className="mt-2 text-sm text-ink">{comment.content}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                <form className="mt-4 flex flex-col gap-4" action={actionComment}>
+                  <div className="flex gap-4">
+                    <span aria-hidden="true" className="avatar-sm brand">{getNameInitials(userName)}</span>
+                    <textarea name="content" rows="3" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire" aria-invalid={stateComment?.taskId === task.id && !!stateComment?.errors?.content} aria-describedby={stateComment?.taskId === task.id && stateComment?.errors?.content ? `comment-error-${task.id}` : undefined} className="auth-input comment-input flex-1"></textarea>
+                  </div>
+                  {stateComment?.taskId === task.id && stateComment?.errors?.content && <p id={`comment-error-${task.id}`} className="flex-wrap text-[#CC3300] text-right text-sm">{stateComment.errors.content}</p>}
+                  <input type="hidden" name="projectId" defaultValue={project.id} />
+                  <input type="hidden" name="taskId" defaultValue={task.id} />
+                  <button type="submit" className="btn-dark self-end" disabled={pendingComment}>Envoyer</button>
+                </form>
+              </details>
+
+            </article>
+          )}
+        </div>
+      </section>
+
+      {/* Modale : créer une tâche */}
+      <ModalCreateTask project={project} />
+
+      {/* Modale : modifier une tâche */}
+      <ModalEditTask project={project} taskInModal={taskInModal} />
+
+      {/* Modale : modifier un projet */}
+      {canEditProject && <ModalEditProject project={project} />}
+
+    </>
+  );
+}
+
+// abonnement aux changements de hash (pour useSyncExternalStore)
+function subscribeHash(callback) {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
+}
