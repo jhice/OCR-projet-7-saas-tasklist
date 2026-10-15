@@ -5,7 +5,7 @@
  */
 
 import { NextResponse } from "next/server";
-import { decrypt } from "./lib/session";
+import { decrypt } from "./app/lib/session";
 import { cookies } from "next/headers";
 
 // Routes publiques et privées
