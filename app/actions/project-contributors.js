@@ -11,6 +11,7 @@ import getSessionCookie from "../lib/get-session-cookie";
 /**
  * Recherche un utilisateur existant par son email exact
  * (création de projet : les contributeurs ne sont envoyés qu'au submit)
+ * @param {string} email user email
  */
 export async function findUserByEmail(email) {
 

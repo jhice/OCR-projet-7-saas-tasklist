@@ -4,7 +4,13 @@ import { revalidatePath } from "next/cache";
 import getSessionCookie from "../lib/get-session-cookie";
 import { tasksDelete } from "../lib/api-bridge";
 
-// Appelée directement depuis project-full (pas via un <form>) : renvoie { error } ou { success }
+/**
+ * Suppression de tâche
+ * Appelée directement depuis project-full (pas via un <form>) : renvoie { error } ou { success }
+ * @param {string} projectId 
+ * @param {string} taskId 
+ * @returns 
+ */
 export async function deleteTask(projectId, taskId) {
 
   // get the token from the session

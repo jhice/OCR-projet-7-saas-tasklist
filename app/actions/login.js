@@ -21,17 +21,6 @@ export async function signin(state, formData) {
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
-    // exemple de retour généré/attendu
-    // {
-    //   errors: {
-    //     email: [ 'Veuillez saisir une e-mail valide.' ],
-    //     password: [
-    //       'Au moins 8 caractères.',
-    //       'Au moins un chiffre.',
-    //       'Au moins un caractère spécial.'
-    //     ]
-    //   }
-    // }
     return {
       errors: z.flattenError(validatedFields.error).fieldErrors,
     };

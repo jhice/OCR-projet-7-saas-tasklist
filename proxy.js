@@ -5,8 +5,7 @@
  */
 
 import { NextResponse } from "next/server";
-import { decrypt } from "./app/lib/session";
-import { cookies } from "next/headers";
+import getSessionCookie from "./app/lib/get-session-cookie";
 
 // Routes publiques et privées
 const publicRoutes = ["/login", "/register"];
@@ -24,16 +23,9 @@ export default async function proxy(req) {
   const isProtectedRoute = protectedRoutes.some(route => route.test(path));
 
   // Déchiffre la session depuis le cookie
-  const cookie = (await cookies()).get("session")?.value;
-  // Cookie absent ?
-  let session;
-  if (cookie === undefined) {
-    session = null;
-  } else {
-    session = await decrypt(cookie);
-  }
+  const session = await getSessionCookie();
 
-  // Redirige vers la page de login si utilisateur non connecté sur une route protégée
+  // Redirige vers la page de login si utilisateur non connecté demande une route protégée
   if (isProtectedRoute && !session?.userId) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }

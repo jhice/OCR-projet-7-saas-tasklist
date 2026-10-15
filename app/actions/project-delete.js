@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 import getSessionCookie from "../lib/get-session-cookie";
 import { projectsDelete } from "../lib/api-bridge";
 
-// Appelée directement depuis project-full (pas via un <form>) : renvoie { error } ou redirige
+/**
+ * Suppression projet
+ * Appelée directement depuis project-full (pas via un <form>) : renvoie { error } ou redirige
+ * @param {string} projectId ID du projet
+ */
 export async function deleteProject(projectId) {
 
   // get the token from the session

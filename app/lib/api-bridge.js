@@ -76,6 +76,7 @@ export async function request(pathOrUrl, { method = "GET", body, token } = {}) {
 /**
  * User
  */
+
 export function register(credentials) {
   return request("/auth/register", { method: "POST", body: credentials });
 }
