@@ -7,10 +7,47 @@
 .nav-link {
   color: var(--color-brand);
 }
+
 /* focus clavier */
 
 .dropdown-item:focus-visible {
   background-color: #f9fafb;
   outline: 2px solid var(--color-brand);
   outline-offset: -2px;
+}
+
+.name-pill.brand {
+  color: #AF4808;
+}
+
+.avatar {
+  color: #af4808;
+}
+
+.avatar.active {
+  background-color: #8D3A07;
+}
+
+.avatar-sm.brand {
+  color: #AF4808;
+}
+
+.badge-todo {
+  color: #990B0B;
+}
+
+.badge-in_progress {
+  color: #60410B;
+}
+
+.badge-done {
+  color: #156040;
+}
+
+.segmented-btn.active {
+  color: #7F3406;
+}
+
+.task-meta-sep {
+  color: #525252;
 }
